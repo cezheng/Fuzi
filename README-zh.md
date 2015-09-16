@@ -6,15 +6,15 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cocoadocs.org/docsets/Fuzi)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-**A fast & lightweight XML/HTML parser in Swift that makes your life easier.**
+**Swift实现的轻量快速的 XML/HTML 解析器。**
 
-Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt/Ono)(斧), using most of its low level implementaions with moderate class & interface redesign following standard Swift conventions, along with several bug fixes.
+Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平台上非常好用的一个XML/HTML 解析库。用ObjectiveC实现的Ono在Swift的应用里虽然可以使用，却有诸多不便。因此鄙人参照了Ono对libxml2的封装方式，对类和方法进行了重新设计弄出了这个小库。同时修正了Ono存在的一些逻辑上和内存管理方面的bug。
 
-> Fuzi(斧子) means "axe", in homage to [Ono](https://github.com/mattt/Ono)(斧), which in turn is inspired by [Nokogiri](http://nokogiri.org) (鋸), which means "saw".
+> Fuzi(斧子) 大家都懂是啥意思，[Ono](https://github.com/mattt/Ono)(斧)则是`斧`这个汉字的日语读法, 因为Mattt神写出Ono是受了 [Nokogiri](http://nokogiri.org) (鋸)的启发，取了一个同类的名词向其致敬。
 
-[简体中文](https://github.com/cezheng/Fuzi/blob/master/README-zh.md)
+[English](https://github.com/cezheng/Fuzi/blob/master/README.md)
 [日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
-## A Quick Look
+## 一个简单的例子
 ```swift
 let xml = "..."
 do {
@@ -46,33 +46,33 @@ do {
 }
 ```
 
-## Features
-### Inherited from Ono
-- Extremely performant document parsing and traversal, powered by `libxml2`
-- Support for both [XPath](http://en.wikipedia.org/wiki/XPath) and [CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) queries
-- Automatic conversion of date and number values
-- Correct, common-sense handling of XML namespaces for elements and attributes
-- Ability to load HTML and XML documents from either `String` or `NSData` or `[CChar]`
-- Comprehensive test suite
-- Full documentation
+## 特性
+### 继承自Ono
+- 借助`libxml2`实现的快速解析 
+- [XPath](http://en.wikipedia.org/wiki/XPath) 和 [CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) 查询
+- 日期和数字的自动转换
+- 支持XML命名空间
+- 能从`String`，`NSData` 或 `[CChar]`构建XML文档
+- 全面的自动测试
+- 文档覆盖率100%
 
-### Improved in Fuzi
-- Simple, modern API following standard Swift conventions, no more return types like `AnyObject!` that cause unnecessary type casts
-- Customizable date and number formatters
-- Some bugs fixes
-- Support for more CSS selectors (yet to come)
-- More convinience methods for HTML Documents (yet to come)
+### Fuzi的改进
+- 遵循Swift规范的命名和API重新设计，避免了在Swift中使用Ono的很多不便
+- 可以规定自动转换日期和数字的格式了
+- 修正了一些bug
+- 支持更多的CSS查询类型 (今后将会支持)
+- 增加更多常用的HTML处理方法 (今后将会增加)
 
 
-## Requirements
+## 环境
 
 - iOS 8.0+ / Mac OS X 10.9+
 - Xcode 7.0
 
 
-## Installation
+## 导入
 ### CocoaPods
-You can use [Cocoapods](http://cocoapods.org/) to install `Fuzi` by adding it to your to your `Podfile`:
+您可以通过 [Cocoapods](http://cocoapods.org/) 来将 `Fuzi` 添加到您的项目中。 下面是一个示例的`Podfile`:
 
 ```ruby
 platform :ios, '8.0'
@@ -83,32 +83,32 @@ target 'MyApp' do
 end
 ```
 
-Then, run the following command:
+配置好Podfile后执行如下命令:
 
 ```bash
 $ pod install
 ```
 ### Carthage
-Adding the following line to your `Cartfile` or `Cartfile.private`:
+往 `Cartfile` 或 `Cartfile.private` 中加入如下一行:
 
 ```
-github "cezheng/Fuzi"
+github "cezheng/Fuzi" ~> 0.1.0
 ```
-Then, run the following command:
+然后执行如下命令:
 
 ```
 $ carthage update
 ```
-### Manual
-1. Add all `*.swift` files in `Fuzi` directory into your project.
-2. Copy `libxml2` folder into somewhere in your project's directory, say `/path/to/somewhere`.
-3. In your Xcode project `Build Settings`:
-   1. Find `Swift Compiler - Search Paths`, add `/path/to/somewhere/libxml2` to `Import Paths`.
-   2. Find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
-   3. Find `Linking`, add `lxml2` to `Other Linker Flags`.
 
+### 手动导入
+1. 将`Fuzi`文件夹下所有`*.swift`文件添加到您的Xcode项目中。
+2. 将`libxml2`文件夹拷到你的项目路径下的某处，下称`/path/to/somewhere`。
+3. 修改Xcode项目的`Build Settings`:
+   1. 向`Swift Compiler - Search Paths`的`Import Paths`条目下添加`/path/to/somewhere/libxml2`。
+   2. 向`Search Paths`的`Header Search Paths`条目下添加`$(SDKROOT)/usr/include/libxml2`。
+   3. 向`Linking`的`Other Linker Flags`条目下添加`lxml2`。
 
-##Usage
+##例子
 ###XML
 ```swift
 import Fuzi
@@ -142,7 +142,7 @@ do {
 }
 ```
 ###HTML
-`HTMLDocument` is a subclass of `XMLDocument`.
+`HTMLDocument` 是 `XMLDocument` 的子类。
 
 ```swift
 import Fuzi
@@ -173,7 +173,7 @@ do {
 }
 ```
 
-###I don't care about error handling
+###如果觉得没必要处理异常
 
 ```swift
 import Fuzi
@@ -192,14 +192,14 @@ let doc2 = try! HTMLDocument(string: html)
 //...
 ```
 
-##Migrating From Ono?
-Looking at example programs is the swiftest way to know the difference. The following 2 examples do exactly the same thing.
+##从Ono转移到Fuzi
+下面两个示例程序做的事情是完全一样的，通过比较能很快了解两者的异同。
 
-[Ono Example](https://github.com/mattt/Ono/blob/master/Example/main.m)
+[Ono示例](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuzi Example](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuzi示例](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
 
-###Accessing children
+###访问子节点
 **Ono**
 
 ```objc
@@ -222,10 +222,10 @@ for element in parent.children {
 }
 doc.children(tag: tag, inNamespace:namespace)
 ```
-###Iterate through query results
+###迭代查询结果
 **Ono**
 
-Conforms to `NSFastEnumeration`.
+查询结果实现了`NSFastEnumeration`协议。
 
 ```objc
 // simply iterating through the results
@@ -248,7 +248,7 @@ NSUInteger count = [(NSEnumerator*)[document XPath:xpath] allObjects].count;
 
 **Fuzi**
 
-Conforms to Swift's `SequenceType` and `Indexable`.
+查询结果的集合实现了Swift的 `SequenceType` 与 `Indexable`协议。
 
 ```swift
 // simply iterating through the results
@@ -273,6 +273,6 @@ if let nthElement = doc.css(css)[n] {
 let count = doc.xpath(xpath).count
 ```
 
-## License
+## 开源协议
 
-`Fuzi` is released under the MIT license. See [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) for details.
+`Fuzi` 使用MIT许可协议。详见 [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) 。
