@@ -106,7 +106,7 @@ $ carthage update
 3. Xcode プロジェクトの `Build Settings` で:
    1. `Swift Compiler - Search Paths`の`Import Paths`に`/path/to/somewhere/libxml2`を追加してください。
    2. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
-   3. `Linking`の`Other Linker Flags`に`lxml2`を追加してください。
+   3. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
 
 ##用例
 ###XML
