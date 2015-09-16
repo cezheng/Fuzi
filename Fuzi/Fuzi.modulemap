@@ -1,0 +1,12 @@
+framework module Fuzi {
+  umbrella header "Fuzi.h"
+
+  export *
+  module * { export * }
+}
+
+module libxml2 [system] {
+  header "$SDKROOT/usr/include/libxml2/libxml/xmlreader.h"
+  export *
+  module * { export * }
+}
