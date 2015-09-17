@@ -92,7 +92,7 @@ $ pod install
 Adding the following line to your `Cartfile` or `Cartfile.private`:
 
 ```
-github "cezheng/Fuzi"
+github "cezheng/Fuzi" ~> 0.1.0
 ```
 Then, run the following command:
 
@@ -167,6 +167,11 @@ do {
   }
   for paragraph in doc.xpath(".//body/descendant::p") {
     print(meta["class"])
+  }
+  
+  // Evaluate XPath functions
+  if let result = document.eval(xpath: "count(/*/a)") {
+    print("anchor count : \(result.doubleValue)")
   }
 } catch let error {
   print(error)
@@ -271,6 +276,26 @@ if let nthElement = doc.css(css)[n] {
 
 // total element count
 let count = doc.xpath(xpath).count
+```
+
+###Evaluating XPath Functions
+**Ono**
+
+```objc
+ONOXPathFunctionResult *result = [doc functionResultByEvaluatingXPath:xpath];
+result.boolValue;    //BOOL
+result.numericValue; //double
+result.stringValue;  //NSString
+```
+
+**Fuzi**
+
+```swift
+if let result = doc.eval(xpath: xpath) {
+  result.boolValue   //Bool
+  result.doubleValue //Double
+  result.stringValue //String
+}
 ```
 
 ## License
