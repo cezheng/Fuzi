@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>XMLDocument Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/XMLDocument" class="dashAnchor"></a>
+    <a title="XMLDocument Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html"> Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        XMLDocument Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+          <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/HTMLDocument.html">HTMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/NodeSet.html">NodeSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/XMLDocument.html">XMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/XMLElement.html">XMLElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/XPathFunctionResult.html">XPathFunctionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C4Fuzi12XPathNodeSet">XPathNodeSet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/XMLError.html">XMLError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/NodeSet.html">NodeSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/XMLDocument.html">XMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/XMLElement.html">XMLElement</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF4Fuzioi2eeFTCS_11XMLDocumentS0__Sb">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:ZF4Fuzioi2eeFTCS_10XMLElementS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Queryable.html">Queryable</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>XMLDocument</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">XMLDocument</span></code></pre>
+
+                </div>
+              </div>
+            <p>XML document which can be searched and queried.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Document%20Attributes"></a>
+                  <a name="//apple_ref/swift/Section/Document Attributes" class="dashAnchor"></a>
+                  <a href="#/Document%20Attributes">
+                    <h3 class="section-name">Document Attributes</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC4Fuzi11XMLDocument7versionGSqSS_"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC4Fuzi11XMLDocument7versionGSqSS_">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The XML version.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC4Fuzi11XMLDocument8encodingSu"></a>
+                    <a name="//apple_ref/swift/Property/encoding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC4Fuzi11XMLDocument8encodingSu">encoding</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The string encoding for the document. This is 0 if no encoding is set, or it cannot be calculated.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Accessing%20the%20Root%20Element"></a>
+                  <a name="//apple_ref/swift/Section/Accessing the Root Element" class="dashAnchor"></a>
+                  <a href="#/Accessing%20the%20Root%20Element">
+                    <h3 class="section-name">Accessing the Root Element</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC4Fuzi11XMLDocument4rootGSqCS_10XMLElement_"></a>
+                    <a name="//apple_ref/swift/Property/root" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC4Fuzi11XMLDocument4rootGSqCS_10XMLElement_">root</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The root element of the document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">private(set)</span> <span class="k">var</span> <span class="nv">root</span><span class="p">:</span> <span class="kt">XMLElement</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Accessing%20&amp;%20Setting%20Document%20Formatters"></a>
+                  <a name="//apple_ref/swift/Section/Accessing &amp; Setting Document Formatters" class="dashAnchor"></a>
+                  <a href="#/Accessing%20&amp;%20Setting%20Document%20Formatters">
+                    <h3 class="section-name">Accessing &amp; Setting Document Formatters</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC4Fuzi11XMLDocument15numberFormatterCSo17NSNumberFormatter"></a>
+                    <a name="//apple_ref/swift/Property/numberFormatter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC4Fuzi11XMLDocument15numberFormatterCSo17NSNumberFormatter">numberFormatter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The formatter used to determine <code>numberValue</code> for elements in the document. By default, this is an <code>NSNumberFormatter</code> instance with <code>NSNumberFormatterDecimalStyle</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">numberFormatter</span><span class="p">:</span> <span class="kt">NSNumberFormatter</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC4Fuzi11XMLDocument13dateFormatterCSo15NSDateFormatter"></a>
+                    <a name="//apple_ref/swift/Property/dateFormatter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC4Fuzi11XMLDocument13dateFormatterCSo15NSDateFormatter">dateFormatter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The formatter used to determine <code>dateValue</code> for elements in the document. By default, this is an <code>NSDateFormatter</code> instance configured to accept ISO 8601 formatted timestamps.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">lazy</span> <span class="k">var</span> <span class="nv">dateFormatter</span><span class="p">:</span> <span class="kt">NSDateFormatter</span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Creating%20XML%20Documents"></a>
+                  <a name="//apple_ref/swift/Section/Creating XML Documents" class="dashAnchor"></a>
+                  <a href="#/Creating%20XML%20Documents">
+                    <h3 class="section-name">Creating XML Documents</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC4Fuzi11XMLDocumentcFMS0_FzT6stringSS8encodingSu_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(string:encoding:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC4Fuzi11XMLDocumentcFMS0_FzT6stringSS8encodingSu_S0_">init(string:encoding:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns an instance of XMLDocument from an XML string, throwing XMLError if an error occured while parsing the XML.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSStringEncoding</span> <span class="o">=</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">)</span> <span class="n">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>string</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The XML string.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>encoding</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string encoding.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code>XMLDocument</code> with the contents of the specified XML string.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC4Fuzi11XMLDocumentcFMS0_FzT4dataCSo6NSData_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(data:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC4Fuzi11XMLDocumentcFMS0_FzT4dataCSo6NSData_S0_">init(data:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns an instance of XMLDocument from XML data, throwing XMLError if an error occured while parsing the XML.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">NSData</span><span class="p">)</span> <span class="n">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>data</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The XML data.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code>XMLDocument</code> with the contents of the specified XML string.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC4Fuzi11XMLDocumentcFMS0_FzT6cCharsGSaVSs4Int8__S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(cChars:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC4Fuzi11XMLDocumentcFMS0_FzT6cCharsGSaVSs4Int8__S0_">init(cChars:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates and returns an instance of XMLDocument from C char array, throwing XMLError if an error occured while parsing the XML.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="nv">cChars</span><span class="p">:</span> <span class="p">[</span><span class="kt">CChar</span><span class="p">])</span> <span class="n">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cChars</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>cChars The XML data as C char array</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An <code>XMLDocument</code> with the contents of the specified XML string.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/XML%20Namespaces"></a>
+                  <a name="//apple_ref/swift/Section/XML Namespaces" class="dashAnchor"></a>
+                  <a href="#/XML%20Namespaces">
+                    <h3 class="section-name">XML Namespaces</h3>
+                  </a>
+                </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC4Fuzi11XMLDocument12definePrefixFS0_FTSS16defaultNamespaceSS_T_"></a>
+                    <a name="//apple_ref/swift/Method/definePrefix(_:defaultNamespace:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC4Fuzi11XMLDocument12definePrefixFS0_FTSS16defaultNamespaceSS_T_">definePrefix(_:defaultNamespace:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Define a prefix for a default namespace.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">definePrefix</span><span class="p">(</span><span class="nv">prefix</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">defaultNamespace</span> <span class="nv">ns</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>prefix</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The prefix name</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ns</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The default namespace URI that declared in XML Document</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

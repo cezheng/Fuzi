@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (100% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+          <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/HTMLDocument.html">HTMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/NodeSet.html">NodeSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/XMLDocument.html">XMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/XMLElement.html">XMLElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/XPathFunctionResult.html">XPathFunctionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes.html#/s:C4Fuzi12XPathNodeSet">XPathNodeSet</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/XMLError.html">XMLError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/NodeSet.html">NodeSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/XMLDocument.html">XMLDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/XMLElement.html">XMLElement</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:ZF4Fuzioi2eeFTCS_11XMLDocumentS0__Sb">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:ZF4Fuzioi2eeFTCS_10XMLElementS0__Sb">==(_:_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/Queryable.html">Queryable</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#fuzi' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='fuzi'>Fuzi (斧子)</h1>
+
+<p><a href="https://cocoapods.org/pods/Fuzi"><img src="https://img.shields.io/cocoapods/v/Fuzi.svg" alt="Cocoapods Compatible"></a>
+<a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&amp;color=gray" alt="License"></a>
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
+<a href="http://cocoadocs.org/docsets/Fuzi"><img src="https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat" alt="Platform"></a>
+<a href="http://twitter.com/AdamoCheng"><img src="https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat" alt="Twitter"></a></p>
+
+<p><strong>A fast &amp; lightweight XML/HTML parser in Swift that makes your life easier.</strong></p>
+
+<p>Fuzi is based on a Swift port of Mattt Thompson&rsquo;s <a href="https://github.com/mattt/Ono">Ono</a>(斧), using most of its low level implementaions with moderate class &amp; interface redesign following standard Swift conventions, along with several bug fixes.</p>
+
+<blockquote>
+<p>Fuzi(斧子) means <q>axe</q>, in homage to <a href="https://github.com/mattt/Ono">Ono</a>(斧), which in turn is inspired by <a href="http://nokogiri.org">Nokogiri</a> (鋸), which means <q>saw</q>.</p>
+</blockquote>
+
+<p><a href="https://github.com/cezheng/Fuzi/blob/master/README-zh.md">简体中文</a>
+<a href="https://github.com/cezheng/Fuzi/blob/master/README-ja.md">日本語</a></p>
+<a href='#a_quick_look' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='a_quick_look'>A Quick Look</h2>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">xml</span> <span class="o">=</span> <span class="s">"..."</span>
+<span class="k">do</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">document</span> <span class="o">=</span> <span class="n">try</span> <span class="kt">XMLDocument</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">xml</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">root</span> <span class="p">{</span>
+    <span class="c1">// Accessing all child nodes of root element</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">attributes</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Getting child element by tag &amp; accessing attributes</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">length</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">tag</span><span class="p">:</span><span class="s">"Length"</span><span class="p">,</span> <span class="nv">inNamespace</span><span class="p">:</span> <span class="s">"dc"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">length</span><span class="p">[</span><span class="s">"unit"</span><span class="p">])</span>     <span class="c1">// `unit` attribute</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">length</span><span class="o">.</span><span class="n">attributes</span><span class="p">)</span>  <span class="c1">// all attributes</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// XPath &amp; CSS queries</span>
+  <span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">document</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">attributes</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">firstLink</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">css</span><span class="p">:</span> <span class="s">"a, link"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">firstLink</span><span class="p">[</span><span class="s">"href"</span><span class="p">])</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="n">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
+<a href='#inherited_from_ono' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='inherited_from_ono'>Inherited from Ono</h3>
+
+<ul>
+<li>Extremely performant document parsing and traversal, powered by <code>libxml2</code></li>
+<li>Support for both <a href="http://en.wikipedia.org/wiki/XPath">XPath</a> and <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> queries</li>
+<li>Automatic conversion of date and number values</li>
+<li>Correct, common-sense handling of XML namespaces for elements and attributes</li>
+<li>Ability to load HTML and XML documents from either <code>String</code> or <code>NSData</code> or <code>[CChar]</code></li>
+<li>Comprehensive test suite</li>
+<li>Full documentation</li>
+</ul>
+<a href='#improved_in_fuzi' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='improved_in_fuzi'>Improved in Fuzi</h3>
+
+<ul>
+<li>Simple, modern API following standard Swift conventions, no more return types like <code>AnyObject!</code> that cause unnecessary type casts</li>
+<li>Customizable date and number formatters</li>
+<li>Some bugs fixes</li>
+<li>Support for more CSS selectors (yet to come)</li>
+<li>More convinience methods for HTML Documents (yet to come)</li>
+</ul>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<ul>
+<li>iOS 8.0+ / Mac OS X 10.9+</li>
+<li>Xcode 7.0</li>
+</ul>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='cocoapods'>CocoaPods</h3>
+
+<p>You can use <a href="http://cocoapods.org/">Cocoapods</a> to install <code>Fuzi</code> by adding it to your to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">platform</span> <span class="ss">:ios</span><span class="p">,</span> <span class="s1">'8.0'</span>
+<span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'Fuzi'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1.0'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Then, run the following command:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>pod install
+</code></pre>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='carthage'>Carthage</h3>
+
+<p>Adding the following line to your <code>Cartfile</code> or <code>Cartfile.private</code>:</p>
+<pre class="highlight plaintext"><code>github "cezheng/Fuzi"
+</code></pre>
+
+<p>Then, run the following command:</p>
+<pre class="highlight plaintext"><code>$ carthage update
+</code></pre>
+<a href='#manual' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='manual'>Manual</h3>
+
+<ol>
+<li>Add all <code>*.swift</code> files in <code>Fuzi</code> directory into your project.</li>
+<li>Copy <code>libxml2</code> folder into somewhere in your project&rsquo;s directory, say <code>/path/to/somewhere</code>.</li>
+<li>In your Xcode project <code>Build Settings</code>:
+
+<ol>
+<li>Find <code>Swift Compiler - Search Paths</code>, add <code>/path/to/somewhere/libxml2</code> to <code>Import Paths</code>.</li>
+<li>Find <code>Search Paths</code>, add <code>$(SDKROOT)/usr/include/libxml2</code> to <code>Header Search Paths</code>.</li>
+<li>Find <code>Linking</code>, add <code>-lxml2</code> to <code>Other Linker Flags</code>.</li>
+</ol></li>
+</ol>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+<a href='#xml' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='xml'>XML</h3>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Fuzi</span>
+
+<span class="k">let</span> <span class="nv">xml</span> <span class="o">=</span> <span class="s">"..."</span>
+<span class="k">do</span> <span class="p">{</span>
+  <span class="c1">// if encoding is omitted, it defaults to NSUTF8StringEncoding</span>
+  <span class="k">let</span> <span class="nv">doc</span> <span class="o">=</span> <span class="n">try</span> <span class="kt">XMLDocument</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">html</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">)</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">root</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">root</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+
+    <span class="c1">// define a prefix for a namespace</span>
+    <span class="n">document</span><span class="o">.</span><span class="nf">definePrefix</span><span class="p">(</span><span class="s">"atom"</span><span class="p">,</span> <span class="n">defaultNamespace</span><span class="p">:</span> <span class="s">"http://www.w3.org/2005/Atom"</span><span class="p">)</span>
+
+    <span class="c1">// get first child element with given tag in namespace(optional)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">tag</span><span class="p">:</span> <span class="s">"title"</span><span class="p">,</span> <span class="nv">inNamespace</span><span class="p">:</span> <span class="s">"atom"</span><span class="p">)</span>
+
+    <span class="c1">// iterate through all children</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">root</span><span class="o">.</span><span class="n">children</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">index</span><span class="se">)</span><span class="s"> </span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">attributes</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// you can also use CSS selector against XMLDocument when you feels it makes sense</span>
+<span class="p">}</span> <span class="n">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="k">as</span> <span class="kt">XMLError</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="n">error</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="o">.</span><span class="kt">NoError</span><span class="p">:</span> <span class="nf">print</span><span class="p">(</span><span class="s">"wth this should not appear"</span><span class="p">)</span>
+  <span class="k">case</span> <span class="o">.</span><span class="kt">ParserFailure</span><span class="p">,</span> <span class="o">.</span><span class="kt">InvalidData</span><span class="p">:</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+  <span class="k">case</span> <span class="o">.</span><span class="kt">LibXMLError</span><span class="p">(</span><span class="k">let</span> <span class="nv">code</span><span class="p">,</span> <span class="k">let</span> <span class="nv">message</span><span class="p">):</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"libxml error code: </span><span class="se">\(</span><span class="n">code</span><span class="se">)</span><span class="s">, message: </span><span class="se">\(</span><span class="n">message</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#html' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='html'>HTML</h3>
+
+<p><code>HTMLDocument</code> is a subclass of <code>XMLDocument</code>.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Fuzi</span>
+
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="s">"&lt;html&gt;...&lt;/html&gt;"</span>
+<span class="k">do</span> <span class="p">{</span>
+  <span class="c1">// if encoding is omitted, it defaults to NSUTF8StringEncoding</span>
+  <span class="k">let</span> <span class="nv">doc</span> <span class="o">=</span> <span class="n">try</span> <span class="kt">HTMLDocument</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">html</span><span class="p">,</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">NSUTF8StringEncoding</span><span class="p">)</span>
+
+  <span class="c1">// CSS queries</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">elementById</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">css</span><span class="p">(</span><span class="s">"#id"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">elementById</span><span class="o">.</span><span class="n">stringValue</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="n">link</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">css</span><span class="p">(</span><span class="s">"a, link"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="nf">dump</span><span class="p">())</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s">"href"</span><span class="p">]</span>
+  <span class="p">}</span>
+
+  <span class="c1">// XPath queries</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">title</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="s">"//head/title"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">stringValue</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="k">for</span> <span class="n">paragraph</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">".//body/descendant::p"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s">"class"</span><span class="p">])</span>
+  <span class="p">}</span>
+<span class="p">}</span> <span class="n">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#i_don_39_t_care_about_error_handling' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='i_don_39_t_care_about_error_handling'>I don&rsquo;t care about error handling</h3>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Fuzi</span>
+
+<span class="k">let</span> <span class="nv">xml</span> <span class="o">=</span> <span class="s">"..."</span>
+
+<span class="c1">// Don't show me the errors, just don't crash</span>
+<span class="k">if</span> <span class="k">let</span> <span class="nv">doc1</span> <span class="o">=</span> <span class="n">try</span><span class="p">?</span> <span class="kt">XMLDocument</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">xml</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">html</span> <span class="o">=</span> <span class="s">"&lt;html&gt;...&lt;/html&gt;"</span>
+
+<span class="c1">// I'm sure this won't crash</span>
+<span class="k">let</span> <span class="nv">doc2</span> <span class="o">=</span> <span class="n">try</span><span class="o">!</span> <span class="kt">HTMLDocument</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="n">html</span><span class="p">)</span>
+<span class="c1">//...</span>
+</code></pre>
+<a href='#migrating_from_ono' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='migrating_from_ono'>Migrating From Ono?</h2>
+
+<p>Looking at example programs is the swiftest way to know the difference. The following 2 examples do exactly the same thing.</p>
+
+<p><a href="https://github.com/mattt/Ono/blob/master/Example/main.m">Ono Example</a></p>
+
+<p><a href="https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift">Fuzi Example</a></p>
+<a href='#accessing_children' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='accessing_children'>Accessing children</h3>
+
+<p><strong>Ono</strong></p>
+<pre class="highlight objective_c"><code><span class="p">[</span><span class="n">doc</span> <span class="nf">firstChildWithTag</span><span class="p">:</span><span class="n">tag</span> <span class="nf">inNamespace</span><span class="p">:</span><span class="n">namespace</span><span class="p">];</span>
+<span class="p">[</span><span class="n">doc</span> <span class="nf">firstChildWithXPath</span><span class="p">:</span><span class="n">xpath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">doc</span> <span class="nf">firstChildWithXPath</span><span class="p">:</span><span class="n">css</span><span class="p">];</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">ONOXMLElement</span> <span class="o">*</span><span class="n">element</span> <span class="k">in</span> <span class="n">parent</span><span class="p">.</span><span class="n">children</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//...
+</span><span class="p">}</span>
+<span class="p">[</span><span class="n">doc</span> <span class="nf">childrenWithTag</span><span class="p">:</span><span class="n">tag</span> <span class="nf">inNamespace</span><span class="p">:</span><span class="n">namespace</span><span class="p">];</span>
+</code></pre>
+
+<p><strong>Fuzi</strong></p>
+<pre class="highlight swift"><code><span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">tag</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span> <span class="nv">inNamespace</span><span class="p">:</span> <span class="n">namespace</span><span class="p">)</span>
+<span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="n">xpath</span><span class="p">)</span>
+<span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">css</span><span class="p">:</span> <span class="n">css</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">parent</span><span class="o">.</span><span class="n">children</span> <span class="p">{</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+<span class="n">doc</span><span class="o">.</span><span class="nf">children</span><span class="p">(</span><span class="nv">tag</span><span class="p">:</span> <span class="n">tag</span><span class="p">,</span> <span class="nv">inNamespace</span><span class="p">:</span><span class="n">namespace</span><span class="p">)</span>
+</code></pre>
+<a href='#iterate_through_query_results' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='iterate_through_query_results'>Iterate through query results</h3>
+
+<p><strong>Ono</strong></p>
+
+<p>Conforms to <code>NSFastEnumeration</code>.</p>
+<pre class="highlight objective_c"><code><span class="c1">// simply iterating through the results
+// mark `__unused` to unused params `idx` and `stop`
+</span><span class="p">[</span><span class="n">doc</span> <span class="nf">enumerateElementsWithXPath</span><span class="p">:</span><span class="n">xpath</span> <span class="nf">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">ONOXMLElement</span> <span class="o">*</span><span class="n">element</span><span class="p">,</span> <span class="n">__unused</span> <span class="n">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="n">__unused</span> <span class="n">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">NSLog</span><span class="p">(</span><span class="s">@"%@"</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span><span class="err">;</span>
+<span class="p">}];</span>
+
+<span class="c1">// stop the iteration at second element
+</span><span class="p">[</span><span class="n">doc</span> <span class="nf">enumerateElementsWithXPath</span><span class="p">:</span><span class="n">XPath</span> <span class="nf">usingBlock</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">ONOXMLElement</span> <span class="o">*</span><span class="n">element</span><span class="p">,</span> <span class="n">NSUInteger</span> <span class="n">idx</span><span class="p">,</span> <span class="n">BOOL</span> <span class="o">*</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">*</span><span class="n">stop</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="err">;</span>
+<span class="p">}];</span>
+
+<span class="c1">// getting element by index 
+</span><span class="n">ONOXMLDocument</span> <span class="o">*</span><span class="n">nthElement</span> <span class="o">=</span> <span class="p">[(</span><span class="n">NSEnumerator</span><span class="o">*</span><span class="p">)[</span><span class="n">doc</span> <span class="nf">CSS</span><span class="p">:</span><span class="n">css</span><span class="p">]</span> <span class="nf">allObjects</span><span class="p">][</span><span class="nf">n</span><span class="p">];</span>
+
+<span class="c1">// total element count
+</span><span class="n">NSUInteger</span> <span class="n">count</span> <span class="o">=</span> <span class="p">[(</span><span class="n">NSEnumerator</span><span class="o">*</span><span class="p">)[</span><span class="n">document</span> <span class="nf">XPath</span><span class="p">:</span><span class="n">xpath</span><span class="p">]</span> <span class="nf">allObjects</span><span class="p">].</span><span class="n">count</span><span class="p">;</span>
+</code></pre>
+
+<p><strong>Fuzi</strong></p>
+
+<p>Conforms to Swift&rsquo;s <code>SequenceType</code> and <code>Indexable</code>.</p>
+<pre class="highlight swift"><code><span class="c1">// simply iterating through the results</span>
+<span class="c1">// no need to write the unused `idx` or `stop` params</span>
+<span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="n">xpath</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// stop the iteration at second element</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="n">xpath</span><span class="p">)</span><span class="o">.</span><span class="nf">enumerate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+    <span class="k">break</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// getting element by index </span>
+<span class="k">if</span> <span class="k">let</span> <span class="nv">nthElement</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">css</span><span class="p">(</span><span class="n">css</span><span class="p">)[</span><span class="n">n</span><span class="p">]</span> <span class="p">{</span>
+  <span class="c1">//...</span>
+<span class="p">}</span>
+
+<span class="c1">// total element count</span>
+<span class="k">let</span> <span class="nv">count</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="n">xpath</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</code></pre>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p><code>Fuzi</code> is released under the MIT license. See <a href="https://github.com/cezheng/Fuzi/blob/master/LICENSE">LICENSE</a> for details.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-09-17)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
