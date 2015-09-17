@@ -170,7 +170,7 @@ do {
   }
   
   // Evaluate XPath functions
-  if let result = document.eval(xpath: "count(/*/a)") {
+  if let result = doc.eval(xpath: "count(/*/a)") {
     print("anchor count : \(result.doubleValue)")
   }
 } catch let error {
