@@ -3,10 +3,10 @@
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Fuzi.svg)](https://cocoapods.org/pods/Fuzi)
 [![License](https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cocoadocs.org/docsets/Fuzi)
+[![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-**軽くて、素早くて、 Swift の XML/HTML パーサー。**
+**軽くて、素早くて、 Swift の XML/HTML パーサー。** [[ドキュメント]](http://cezheng.github.io/Fuzi/)
 
 Fuzi は Mattt Thompson氏の [Ono](https://github.com/mattt/Ono)(斧) に参照し Swift 言語で実装した XML/HTML パーサーである。
 

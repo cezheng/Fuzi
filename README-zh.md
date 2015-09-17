@@ -3,10 +3,10 @@
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Fuzi.svg)](https://cocoapods.org/pods/Fuzi)
 [![License](https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cocoadocs.org/docsets/Fuzi)
+[![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-**Swift实现的轻量快速的 XML/HTML 解析器。**
+**Swift实现的轻量快速的 XML/HTML 解析器。** [[文档]](http://cezheng.github.io/Fuzi/)
 
 Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平台上非常好用的一个XML/HTML 解析库。用ObjectiveC实现的Ono在Swift的应用里虽然可以使用，却有诸多不便。因此鄙人参照了Ono对libxml2的封装方式，对类和方法进行了重新设计弄出了这个小库。同时修正了Ono存在的一些逻辑上和内存管理方面的bug。
 
@@ -14,6 +14,7 @@ Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平�
 
 [English](https://github.com/cezheng/Fuzi/blob/master/README.md)
 [日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
+
 ## 一个简单的例子
 ```swift
 let xml = "..."
