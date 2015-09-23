@@ -23,6 +23,8 @@ import Foundation
 import libxml2
 
 // Public Helpers
+
+/// For printing an `XMLElement`
 extension XMLElement: CustomStringConvertible, CustomDebugStringConvertible {
   /// String printed by `print` function
   public var description: String {
@@ -32,6 +34,19 @@ extension XMLElement: CustomStringConvertible, CustomDebugStringConvertible {
   /// String printed by `debugPrint` function
   public var debugDescription: String {
     return self.rawXML
+  }
+}
+
+/// For printing an `XMLDocument`
+extension XMLDocument: CustomStringConvertible, CustomDebugStringConvertible {
+  /// String printed by `print` function
+  public var description: String {
+    return self.root?.rawXML ?? ""
+  }
+  
+  /// String printed by `debugPrint` function
+  public var debugDescription: String {
+    return self.root?.rawXML ?? ""
   }
 }
 
@@ -45,7 +60,7 @@ internal extension String {
   }
 }
 
-// Just a smiling helper operator making frequest UnsafePointer -> String cast
+// Just a smiling helper operator making frequent UnsafePointer -> String cast
 
 prefix operator ^-^ {}
 internal prefix func ^-^ <T> (ptr: UnsafePointer<T>) -> String? {
