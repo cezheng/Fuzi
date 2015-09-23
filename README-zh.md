@@ -158,7 +158,7 @@ do {
     print(elementById.stringValue)
   }
   for link in doc.css("a, link") {
-      print(link.dump())
+      print(link.rawXML)
       print(link["href"]
   }
   
