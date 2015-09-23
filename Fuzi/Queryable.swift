@@ -185,10 +185,7 @@ extension XMLElement: Queryable {
   - returns: The child element.
   */
   public func firstChild(xpath xpath: String) -> XMLElement? {
-    for element in self.xpath(xpath) {
-      return element
-    }
-    return nil
+    return self.xpath(xpath).first
   }
   
   /**
@@ -210,10 +207,7 @@ extension XMLElement: Queryable {
   - returns: The child element.
   */
   public func firstChild(css css: String) -> XMLElement? {
-    for element in self.css(css) {
-      return element
-    }
-    return nil
+    return self.css(css).first
   }
   
   /**
