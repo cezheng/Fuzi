@@ -76,8 +76,10 @@ public class XMLElement {
   - returns: The child element.
   */
   public func firstChild(tag tag: String, inNamespace ns: String? = nil) -> XMLElement? {
-    for nodePtr in LinkedCNodes(head: cNode.memory.children) where cXMLNodeMatchesTagInNamespace(nodePtr, tag: tag, ns: ns) {
-      return XMLElement(cNode: nodePtr, document: self.document)
+    for var nodePtr = cNode.memory.children; nodePtr != nil; nodePtr = nodePtr.memory.next {
+      if cXMLNodeMatchesTagInNamespace(nodePtr, tag: tag, ns: ns) {
+        return XMLElement(cNode: nodePtr, document: self.document)
+      }
     }
     return nil
   }
