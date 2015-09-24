@@ -88,6 +88,15 @@ end
 ```bash
 $ pod install
 ```
+
+### 手動
+1. `Fuzi`フォルダの `*.swift` ファイルをプロジェクトに追加してください。
+2. `libxml2`フォルダをプロジェクトのフォルダのどこか（ `/path/to/somewhere`）にコピペしてください。
+3. Xcode プロジェクトの `Build Settings` で:
+   1. `Swift Compiler - Search Paths`の`Import Paths`に`/path/to/somewhere/libxml2`を追加してください。
+   2. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
+   3. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
+
 ### Carthage
 下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
 
@@ -99,14 +108,11 @@ github "cezheng/Fuzi" ~> 0.1.0
 ```
 $ carthage update
 ```
+最後に、下記のようにXcodeのtargetを設定してください：
 
-### 手動
-1. `Fuzi`フォルダの `*.swift` ファイルをプロジェクトに追加してください。
-2. `libxml2`フォルダをプロジェクトのフォルダのどこか（ `/path/to/somewhere`）にコピペしてください。
-3. Xcode プロジェクトの `Build Settings` で:
-   1. `Swift Compiler - Search Paths`の`Import Paths`に`/path/to/somewhere/libxml2`を追加してください。
-   2. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
-   3. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
+1. ビルドターゲットの`General` -> `Embedded Binaries`に、Carthageがビルドした`Fuzi.framework`を追加してください。
+2. `Build Settings`で`Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
+
 
 ##用例
 ###XML

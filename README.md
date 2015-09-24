@@ -88,17 +88,7 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
-### Carthage
-Adding the following line to your `Cartfile` or `Cartfile.private`:
 
-```
-github "cezheng/Fuzi" ~> 0.1.0
-```
-Then, run the following command:
-
-```
-$ carthage update
-```
 ### Manual
 1. Add all `*.swift` files in `Fuzi` directory into your project.
 2. Copy `libxml2` folder into somewhere in your project's directory, say `/path/to/somewhere`.
@@ -106,6 +96,22 @@ $ carthage update
    1. Find `Swift Compiler - Search Paths`, add `/path/to/somewhere/libxml2` to `Import Paths`.
    2. Find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
    3. Find `Linking`, add `-lxml2` to `Other Linker Flags`.
+
+### Carthage
+Adding the following line to your `Cartfile` or `Cartfile.private`:
+
+```
+github "cezheng/Fuzi" ~> 0.1.0
+```
+Run the following command:
+
+```
+$ carthage update
+```
+Then do the followings in Xcode:
+
+1. Drag the `Fuzi.framework` built by Carthage into your target's `General` -> `Embedded Binaries`.
+2. In `Build Settings`, find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
 
 
 ##Usage
