@@ -100,10 +100,10 @@
 <p><a href="https://cocoapods.org/pods/Fuzi"><img src="https://img.shields.io/cocoapods/v/Fuzi.svg" alt="Cocoapods Compatible"></a>
 <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&amp;color=gray" alt="License"></a>
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
-<a href="http://cocoadocs.org/docsets/Fuzi"><img src="https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat" alt="Platform"></a>
+<a href="http://cezheng.github.io/Fuzi/"><img src="https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat" alt="Platform"></a>
 <a href="http://twitter.com/AdamoCheng"><img src="https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat" alt="Twitter"></a></p>
 
-<p><strong>A fast &amp; lightweight XML/HTML parser in Swift that makes your life easier.</strong></p>
+<p><strong>A fast &amp; lightweight XML/HTML parser in Swift that makes your life easier.</strong> <a href="http://cezheng.github.io/Fuzi/">[Documentation]</a></p>
 
 <p>Fuzi is based on a Swift port of Mattt Thompson&rsquo;s <a href="https://github.com/mattt/Ono">Ono</a>(斧), using most of its low level implementaions with moderate class &amp; interface redesign following standard Swift conventions, along with several bug fixes.</p>
 
@@ -185,15 +185,6 @@
 <p>Then, run the following command:</p>
 <pre class="highlight shell"><code><span class="gp">$ </span>pod install
 </code></pre>
-<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='carthage'>Carthage</h3>
-
-<p>Adding the following line to your <code>Cartfile</code> or <code>Cartfile.private</code>:</p>
-<pre class="highlight plaintext"><code>github "cezheng/Fuzi"
-</code></pre>
-
-<p>Then, run the following command:</p>
-<pre class="highlight plaintext"><code>$ carthage update
-</code></pre>
 <a href='#manual' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='manual'>Manual</h3>
 
 <ol>
@@ -206,6 +197,22 @@
 <li>Find <code>Search Paths</code>, add <code>$(SDKROOT)/usr/include/libxml2</code> to <code>Header Search Paths</code>.</li>
 <li>Find <code>Linking</code>, add <code>-lxml2</code> to <code>Other Linker Flags</code>.</li>
 </ol></li>
+</ol>
+<a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='carthage'>Carthage</h3>
+
+<p>Adding the following line to your <code>Cartfile</code> or <code>Cartfile.private</code>:</p>
+<pre class="highlight plaintext"><code>github "cezheng/Fuzi" ~&gt; 0.1.0
+</code></pre>
+
+<p>Run the following command:</p>
+<pre class="highlight plaintext"><code>$ carthage update
+</code></pre>
+
+<p>Then do the followings in Xcode:</p>
+
+<ol>
+<li>Drag the <code>Fuzi.framework</code> built by Carthage into your target&rsquo;s <code>General</code> -&gt; <code>Embedded Binaries</code>.</li>
+<li>In <code>Build Settings</code>, find <code>Search Paths</code>, add <code>$(SDKROOT)/usr/include/libxml2</code> to <code>Header Search Paths</code>.</li>
 </ol>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
 <a href='#xml' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='xml'>XML</h3>
@@ -254,7 +261,7 @@
     <span class="nf">print</span><span class="p">(</span><span class="n">elementById</span><span class="o">.</span><span class="n">stringValue</span><span class="p">)</span>
   <span class="p">}</span>
   <span class="k">for</span> <span class="n">link</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">css</span><span class="p">(</span><span class="s">"a, link"</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nf">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="nf">dump</span><span class="p">())</span>
+      <span class="nf">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">rawXML</span><span class="p">)</span>
       <span class="nf">print</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s">"href"</span><span class="p">]</span>
   <span class="p">}</span>
 
@@ -264,6 +271,11 @@
   <span class="p">}</span>
   <span class="k">for</span> <span class="n">paragraph</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">".//body/descendant::p"</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s">"class"</span><span class="p">])</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Evaluate XPath functions</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="s">"count(/*/a)"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"anchor count : </span><span class="se">\(</span><span class="n">result</span><span class="o">.</span><span class="n">doubleValue</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="n">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
   <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
@@ -360,6 +372,22 @@
 <span class="c1">// total element count</span>
 <span class="k">let</span> <span class="nv">count</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="n">xpath</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
 </code></pre>
+<a href='#evaluating_xpath_functions' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='evaluating_xpath_functions'>Evaluating XPath Functions</h3>
+
+<p><strong>Ono</strong></p>
+<pre class="highlight objective_c"><code><span class="n">ONOXPathFunctionResult</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">doc</span> <span class="nf">functionResultByEvaluatingXPath</span><span class="p">:</span><span class="n">xpath</span><span class="p">];</span>
+<span class="n">result</span><span class="p">.</span><span class="n">boolValue</span><span class="p">;</span>    <span class="c1">//BOOL
+</span><span class="n">result</span><span class="p">.</span><span class="n">numericValue</span><span class="p">;</span> <span class="c1">//double
+</span><span class="n">result</span><span class="p">.</span><span class="n">stringValue</span><span class="p">;</span>  <span class="c1">//NSString
+</span></code></pre>
+
+<p><strong>Fuzi</strong></p>
+<pre class="highlight swift"><code><span class="k">if</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="n">xpath</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">result</span><span class="o">.</span><span class="n">boolValue</span>   <span class="c1">//Bool</span>
+  <span class="n">result</span><span class="o">.</span><span class="n">doubleValue</span> <span class="c1">//Double</span>
+  <span class="n">result</span><span class="o">.</span><span class="n">stringValue</span> <span class="c1">//String</span>
+<span class="p">}</span>
+</code></pre>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
 
 <p><code>Fuzi</code> is released under the MIT license. See <a href="https://github.com/cezheng/Fuzi/blob/master/LICENSE">LICENSE</a> for details.</p>
@@ -367,8 +395,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-09-17)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-09-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
