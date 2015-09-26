@@ -25,7 +25,7 @@ import libxml2
 /// Represents an element in `XMLDocument` or `HTMLDocument`
 public class XMLElement {
   /// The document containing the element.
-  public let document: XMLDocument
+  public unowned let document: XMLDocument
   
   /// The element's namespace.
   public private(set) lazy var namespace: String? = {
