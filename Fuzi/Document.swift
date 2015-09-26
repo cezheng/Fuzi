@@ -30,7 +30,7 @@ public class XMLDocument {
     return self.cDocument != nil ?(^-^self.cDocument.memory.version) :nil
   }()
   
-  /// The string encoding for the document. This is 0 if no encoding is set, or it cannot be calculated.
+  /// The string encoding for the document. This is NSUTF8StringEncoding if no encoding is set, or it cannot be calculated.
   public private(set) lazy var encoding: NSStringEncoding = {
     if self.cDocument != nil && self.cDocument.memory.encoding != nil {
       let encodingName = ^-^self.cDocument.memory.encoding
@@ -39,7 +39,7 @@ public class XMLDocument {
         return CFStringConvertEncodingToNSStringEncoding(encoding)
       }
     }
-    return 0
+    return NSUTF8StringEncoding
   }()
   // MARK: - Accessing the Root Element
   /// The root element of the document.

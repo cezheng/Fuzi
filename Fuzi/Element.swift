@@ -166,12 +166,12 @@ public class XMLElement {
   */
   public func attr(name: String, namespace ns: String? = nil) -> String? {
     var value: String? = nil
-    guard let attrChars = name.cStringUsingEncoding(NSUTF8StringEncoding) else {
+    guard let attrChars = name.cStringUsingEncoding(document.encoding) else {
       return nil
     }
     
     let xmlValue: UnsafeMutablePointer<xmlChar>
-    if let ns = ns, let nsChars = ns.cStringUsingEncoding(NSUTF8StringEncoding) {
+    if let ns = ns, let nsChars = ns.cStringUsingEncoding(document.encoding) {
       xmlValue = xmlGetNsProp(cNode, UnsafePointer(attrChars), UnsafePointer(nsChars))
     } else {
       xmlValue = xmlGetProp(cNode, UnsafePointer(attrChars))
