@@ -221,7 +221,7 @@ extension XMLElement: Queryable {
     return XPathFunctionResult(cXPath: cXPathWithXPathString(xpath))
   }
   
-  private func cXPathWithXPathString(XPath: String) -> xmlXPathObjectPtr {
+  private func cXPathWithXPathString(xpath: String) -> xmlXPathObjectPtr {
     let context = xmlXPathNewContext(cNode.memory.doc)
     if context != nil {
       context.memory.node = cNode
@@ -242,8 +242,7 @@ extension XMLElement: Queryable {
           }
         }
       }
-      let cXPathChars = XPath.cStringUsingEncoding(NSUTF8StringEncoding) ?? []
-      let xmlXPath = xmlXPathEvalExpression(UnsafePointer(cXPathChars), context)
+      let xmlXPath = xmlXPathEvalExpression(xpath, context)
       
       xmlXPathFreeContext(context)
       return xmlXPath

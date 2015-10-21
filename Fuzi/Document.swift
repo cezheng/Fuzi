@@ -91,7 +91,7 @@ public class XMLDocument {
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
   public convenience init(data: NSData) throws {
-    try self.init(cChars: [CChar](UnsafeBufferPointer(start: UnsafePointer<CChar>(data.bytes), count: data.length)))
+    try self.init(cChars: [CChar](UnsafeBufferPointer(start: UnsafePointer(data.bytes), count: data.length)))
   }
   
   /**
@@ -113,8 +113,7 @@ public class XMLDocument {
   }
   
   private convenience init(parseFunction: (UnsafePointer<Int8>, Int32, UnsafePointer<Int8>, UnsafePointer<Int8>, Int32) -> xmlDocPtr, cChars: [CChar], options: Int32) throws {
-    let url = UnsafePointer<Int8>("".cStringUsingEncoding(NSUTF8StringEncoding))
-    let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), url, UnsafePointer(nil), options)
+    let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), "", nil, options)
     if document == nil {
       throw XMLError.lastError(.ParserFailure)
     } else {
@@ -193,7 +192,7 @@ public class HTMLDocument: XMLDocument {
   - returns: An `HTMLDocument` with the contents of the specified HTML string.
   */
   public convenience init(data: NSData) throws {
-    try self.init(cChars: [CChar](UnsafeBufferPointer(start: UnsafePointer<CChar>(data.bytes), count: data.length)))
+    try self.init(cChars: [CChar](UnsafeBufferPointer(start: UnsafePointer(data.bytes), count: data.length)))
   }
   
   /**
