@@ -34,7 +34,7 @@ do {
   }
   
   // XPath & CSS queries
-  for element in document.xpath("") {
+  for element in document.xpath("//element") {
     print("\(element.tag): \(element.attributes)")
   }
   
@@ -67,7 +67,7 @@ do {
 ## 環境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0
+- Xcode 7.0+
 
 
 ## インストール
@@ -79,7 +79,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.1.0'
+	pod 'Fuzi', '~> 0.2.0'
 end
 ```
 
@@ -101,7 +101,7 @@ $ pod install
 下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
 
 ```
-github "cezheng/Fuzi" ~> 0.1.0
+github "cezheng/Fuzi" ~> 0.2.0
 ```
 そして、下記のコマンドを実行してください:
 
@@ -168,17 +168,23 @@ do {
   }
   
   // XPath queries
-  if let title = doc.firstChild(xpath: "//head/title") {
-    print(title.stringValue)
+  if let firstAnchor = doc.firstChild(xpath: "//body/a") {
+    print(firstAnchor["href"])
   }
-  for paragraph in doc.xpath(".//body/descendant::p") {
-    print(meta["class"])
+  for script in doc.xpath("//head/script") {
+    print(script["src"]
   }
-    
+  
   // Evaluate XPath functions
   if let result = doc.eval(xpath: "count(/*/a)") {
     print("anchor count : \(result.doubleValue)")
   }
+  
+  // Convenient HTML methods
+  print(doc.title) // gets <title>'s innerHTML in <head>
+  print(doc.head)  // gets <head> element
+  print(doc.body)  // gets <body> element
+  
 } catch let error {
   print(error)
 }
