@@ -132,7 +132,7 @@
   <span class="p">}</span>
 
   <span class="c1">// XPath &amp; CSS queries</span>
-  <span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">document</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">element</span> <span class="k">in</span> <span class="n">document</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">"//element"</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="n">element</span><span class="o">.</span><span class="n">attributes</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
   <span class="p">}</span>
 
@@ -161,14 +161,14 @@
 <li>Simple, modern API following standard Swift conventions, no more return types like <code>AnyObject!</code> that cause unnecessary type casts</li>
 <li>Customizable date and number formatters</li>
 <li>Some bugs fixes</li>
+<li>More convinience methods for HTML Documents</li>
 <li>Support for more CSS selectors (yet to come)</li>
-<li>More convinience methods for HTML Documents (yet to come)</li>
 </ul>
 <a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
 
 <ul>
 <li>iOS 8.0+ / Mac OS X 10.9+</li>
-<li>Xcode 7.0</li>
+<li>Xcode 7.0+</li>
 </ul>
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#cocoapods' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='cocoapods'>CocoaPods</h3>
@@ -178,7 +178,7 @@
 <span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'Fuzi'</span><span class="p">,</span> <span class="s1">'~&gt; 0.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'Fuzi'</span><span class="p">,</span> <span class="s1">'~&gt; 0.2.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -201,7 +201,7 @@
 <a href='#carthage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='carthage'>Carthage</h3>
 
 <p>Adding the following line to your <code>Cartfile</code> or <code>Cartfile.private</code>:</p>
-<pre class="highlight plaintext"><code>github "cezheng/Fuzi" ~&gt; 0.1.0
+<pre class="highlight plaintext"><code>github "cezheng/Fuzi" ~&gt; 0.2.0
 </code></pre>
 
 <p>Run the following command:</p>
@@ -266,17 +266,23 @@
   <span class="p">}</span>
 
   <span class="c1">// XPath queries</span>
-  <span class="k">if</span> <span class="k">let</span> <span class="nv">title</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="s">"//head/title"</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">stringValue</span><span class="p">)</span>
+  <span class="k">if</span> <span class="k">let</span> <span class="nv">firstAnchor</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">firstChild</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="s">"//body/a"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">firstAnchor</span><span class="p">[</span><span class="s">"href"</span><span class="p">])</span>
   <span class="p">}</span>
-  <span class="k">for</span> <span class="n">paragraph</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">".//body/descendant::p"</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s">"class"</span><span class="p">])</span>
+  <span class="k">for</span> <span class="n">script</span> <span class="k">in</span> <span class="n">doc</span><span class="o">.</span><span class="nf">xpath</span><span class="p">(</span><span class="s">"//head/script"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">script</span><span class="p">[</span><span class="s">"src"</span><span class="p">]</span>
   <span class="p">}</span>
 
   <span class="c1">// Evaluate XPath functions</span>
   <span class="k">if</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="nf">eval</span><span class="p">(</span><span class="nv">xpath</span><span class="p">:</span> <span class="s">"count(/*/a)"</span><span class="p">)</span> <span class="p">{</span>
     <span class="nf">print</span><span class="p">(</span><span class="s">"anchor count : </span><span class="se">\(</span><span class="n">result</span><span class="o">.</span><span class="n">doubleValue</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
   <span class="p">}</span>
+
+  <span class="c1">// Convenient HTML methods</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">title</span><span class="p">)</span> <span class="c1">// gets &lt;title&gt;'s innerHTML in &lt;head&gt;</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>  <span class="c1">// gets &lt;head&gt; element</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>  <span class="c1">// gets &lt;body&gt; element</span>
+
 <span class="p">}</span> <span class="n">catch</span> <span class="k">let</span> <span class="nv">error</span> <span class="p">{</span>
   <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
@@ -395,8 +401,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-09-26)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.1</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-22)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
