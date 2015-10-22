@@ -23,7 +23,7 @@ import XCTest
 import Fuzi
 
 class HTMLTests: XCTestCase {
-  var document: XMLDocument!
+  var document: HTMLDocument!
   override func setUp() {
     super.setUp()
     let filePath = NSBundle(forClass: HTMLTests.self).pathForResource("web", ofType: "html")!
@@ -85,5 +85,28 @@ class HTMLTests: XCTestCase {
     } catch {
       XCTAssertFalse(true, "error type should be ParserFailure")
     }
+  }
+  
+  func testTitle() {
+    XCTAssertEqual(document.title, "mattt/Ono", "title is not correct")
+  }
+  
+  func testHead() {
+    let head = document.head
+    XCTAssertNotNil(head)
+    XCTAssertEqual(head?.children(tag: "link").count, 13, "link element count is incorrect")
+    XCTAssertEqual(head?.children(tag: "meta").count, 38, "meta element count is incorrect")
+    let scripts = head?.children(tag: "script")
+    XCTAssertEqual(scripts?.count, 2, "scripts count is incorrect")
+    XCTAssertEqual(scripts?.first?["src"], "https://github.global.ssl.fastly.net/assets/frameworks-3d18c504ea97dc018d44d64d8fce147a96a944b8.js", "script 1's src is incorrect")
+    XCTAssertEqual(scripts?.last?["src"], "https://github.global.ssl.fastly.net/assets/github-602f74794536bf3e30e883a2cf268ca8e05b651d.js", "script 2's src is incorrect")
+    XCTAssertEqual(head?["prefix"], "og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#", "prefix attribute value is incorrect")
+  }
+  
+  func testBody() {
+    let body = document.body
+    XCTAssertNotNil(body)
+    XCTAssertEqual(body?["class"], "logged_in  env-production macintosh vis-public", "body class is incorrect")
+    XCTAssertEqual(body?.children(tag: "div").count, 4, "div count is incorrect")
   }
 }

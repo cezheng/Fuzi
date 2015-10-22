@@ -164,6 +164,23 @@ public func ==(lhs: XMLDocument, rhs: XMLDocument) -> Bool {
 
 /// HTML document which can be searched and queried.
 public class HTMLDocument: XMLDocument {
+  // MARK: - Convenience Accessors
+  
+  /// HTML title of current document
+  public var title: String? {
+    return firstChild(xpath: "//head/title")?.stringValue
+  }
+  
+  /// HTML head element of current document
+  public var head: XMLElement? {
+    return firstChild(xpath: "//head")
+  }
+  
+  /// HTML body element of current document
+  public var body: XMLElement? {
+    return firstChild(xpath: "//body")
+  }
+  
   // MARK: - Creating HTML Documents
   /**
   Creates and returns an instance of HTMLDocument from an HTML string, throwing XMLError if an error occured while parsing the HTML.
