@@ -62,8 +62,8 @@ public class XMLElement {
   
   /// The element's children elements.
   public var children: [XMLElement] {
-    return LinkedCNodes(head: cNode.memory.children).map {
-      XMLElement(cNode: $0, document: self.document)!
+    return LinkedCNodes(head: cNode.memory.children).flatMap {
+      XMLElement(cNode: $0, document: self.document)
     }
   }
   
@@ -93,10 +93,9 @@ public class XMLElement {
   - returns: The children elements.
   */
   public func children(tag tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
-    return LinkedCNodes(head: cNode.memory.children).filter {
+    return LinkedCNodes(head: cNode.memory.children).flatMap {
       cXMLNodeMatchesTagInNamespace($0, tag: tag, ns: ns)
-    }.map {
-      XMLElement(cNode: $0, document: self.document)!
+        ? XMLElement(cNode: $0, document: self.document) : nil
     }
   }
   

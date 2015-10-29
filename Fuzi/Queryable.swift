@@ -280,10 +280,8 @@ internal func XPathFromCSS(css: String) -> String {
           var xpathComponent = token.substringToIndex(symbolRange.startIndex)
           let nsrange = NSRange(location: 0, length: token.characters.count)
           
-          do {
-            if let result = RegexConstants.idRegex.firstMatchInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-              xpathComponent += "\(symbol)[@id = '\(token[result.rangeAtIndex(1)])']"
-            }
+          if let result = RegexConstants.idRegex.firstMatchInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
+            xpathComponent += "\(symbol)[@id = '\(token[result.rangeAtIndex(1)])']"
           }
           
           for result in RegexConstants.classRegex.matchesInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
