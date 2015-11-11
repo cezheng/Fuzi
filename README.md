@@ -71,7 +71,10 @@ do {
 
 
 ## Installation
-### CocoaPods
+
+There are 3 ways you can install Fuzi to your project.
+
+### Using [Cocoapods](http://cocoapods.org/)
 You can use [Cocoapods](http://cocoapods.org/) to install `Fuzi` by adding it to your to your `Podfile`:
 
 ```ruby
@@ -89,7 +92,7 @@ Then, run the following command:
 $ pod install
 ```
 
-### Manual
+### Manually
 1. Add all `*.swift` files in `Fuzi` directory into your project.
 2. Copy `libxml2` folder into somewhere in your project's directory, say `/path/to/somewhere`.
 3. In your Xcode project `Build Settings`:
@@ -97,8 +100,8 @@ $ pod install
    2. Find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
    3. Find `Linking`, add `-lxml2` to `Other Linker Flags`.
 
-### Carthage
-Adding the following line to your `Cartfile` or `Cartfile.private`:
+### Using [Carthage](https://github.com/Carthage/Carthage)
+Create a `Cartfile` or `Cartfile.private` in the root directory of your project, and add the following line:
 
 ```
 github "cezheng/Fuzi" ~> 0.2.0

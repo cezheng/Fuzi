@@ -71,7 +71,7 @@ do {
 
 
 ## インストール
-### CocoaPods
+### CocoaPodsで
 [Cocoapods](http://cocoapods.org/) で簡単に `Fuzi` をインストールできます。 下記のように`Podfile`を編集してください:
 
 ```ruby
@@ -89,7 +89,7 @@ end
 $ pod install
 ```
 
-### 手動
+### 手動で
 1. `Fuzi`フォルダの `*.swift` ファイルをプロジェクトに追加してください。
 2. `libxml2`フォルダをプロジェクトのフォルダのどこか（ `/path/to/somewhere`）にコピペしてください。
 3. Xcode プロジェクトの `Build Settings` で:
@@ -97,8 +97,8 @@ $ pod install
    2. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
    3. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
 
-### Carthage
-下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
+### Carthageで
+プロダクトのディレクトリに`Cartfile` か `Cartfile.private`のファイルを作成し、下記の行を追加してください:
 
 ```
 github "cezheng/Fuzi" ~> 0.2.0

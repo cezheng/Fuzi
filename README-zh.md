@@ -72,7 +72,7 @@ do {
 
 
 ## 导入
-### CocoaPods
+### 通过[Cocoapods](http://cocoapods.org/)
 您可以通过 [Cocoapods](http://cocoapods.org/) 来将 `Fuzi` 添加到您的项目中。 下面是一个示例的`Podfile`:
 
 ```ruby
@@ -98,8 +98,8 @@ $ pod install
    2. 向`Search Paths`的`Header Search Paths`条目下添加`$(SDKROOT)/usr/include/libxml2`。
    3. 向`Linking`的`Other Linker Flags`条目下添加`-lxml2`。
 
-### Carthage
-往 `Cartfile` 或 `Cartfile.private` 中加入如下一行:
+### 通过[Carthage](https://github.com/Carthage/Carthage)
+在项目的根目录下创建名为 `Cartfile` 或 `Cartfile.private`的文件，并加入如下一行:
 
 ```
 github "cezheng/Fuzi" ~> 0.2.0
