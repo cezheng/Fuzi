@@ -109,4 +109,12 @@ class HTMLTests: XCTestCase {
     XCTAssertEqual(body?["class"], "logged_in  env-production macintosh vis-public", "body class is incorrect")
     XCTAssertEqual(body?.children(tag: "div").count, 4, "div count is incorrect")
   }
+
+  func testChildNodesWithElementsAndTextNodes() {
+    let mixedNode = document.firstChild(css: "#ajax-error-message")
+    let childNodes = mixedNode?.childNodes(ofTypes: [XMLNodeType.Element, XMLNodeType.Text])
+    XCTAssertEqual(childNodes?.count, 5, "should have 5 child nodes")
+    XCTAssertEqual(childNodes?.flatMap { $0.type == .Element ? $0 : nil }.count, 2)
+    XCTAssertEqual(childNodes?.flatMap { $0.type == .Text ? $0 : nil }.count, 3)
+  }
 }
