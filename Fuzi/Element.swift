@@ -23,9 +23,7 @@ import Foundation
 import libxml2
 
 /// Represents an element in `XMLDocument` or `HTMLDocument`
-public class XMLElement {
-  /// The document containing the element.
-  public unowned let document: XMLDocument
+public class XMLElement: XMLNode {
   
   /// The element's namespace.
   public private(set) lazy var namespace: String? = {
@@ -35,11 +33,6 @@ public class XMLElement {
   /// The element's tag.
   public private(set) lazy var tag: String? = {
     return ^-^self.cNode.memory.name
-  }()
-  
-  /// The element's line number.
-  public private(set) lazy var lineNumber: Int = {
-    return xmlGetLineNo(self.cNode)
   }()
   
   // MARK: - Accessing Attributes
@@ -55,15 +48,23 @@ public class XMLElement {
   }()
   
   // MARK: - Accessing Parent, Child, and Sibling Elements
-  /// The element's parent element.
-  public private(set) lazy var parent: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.parent, document: self.document)
-  }()
   
   /// The element's children elements.
   public var children: [XMLElement] {
     return LinkedCNodes(head: cNode.memory.children).flatMap {
       XMLElement(cNode: $0, document: self.document)
+    }
+  }
+  
+  /// The element's child nodes of specified types
+  public func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
+    return LinkedCNodes(head: cNode.memory.children, types: types).flatMap { node in
+      switch node.memory.type {
+      case XMLNodeType.Element:
+        return XMLElement(cNode: node, document: self.document)
+      default:
+        return XMLNode(cNode: node, document: self.document, type: node.memory.type)
+      }
     }
   }
   
@@ -99,29 +100,11 @@ public class XMLElement {
     }
   }
   
-  /// The element's next sibling.
-  public private(set) lazy var previousSibling: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.prev, document: self.document)
-  }()
-  
-  /// The element's previous sibling.
-  public private(set) lazy var nextSibling: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.next, document: self.document)
-  }()
-  
   // MARK: - Accessing Content
   /// Whether the element has a value.
   public var isBlank: Bool {
     return stringValue.isEmpty
   }
-  
-  /// A string representation of the element's value.
-  public private(set) lazy var stringValue : String = {
-    let key = xmlNodeGetContent(self.cNode)
-    let stringValue = ^-^key ?? ""
-    xmlFree(key)
-    return stringValue
-  }()
   
   /// A number representation of the element's value, which is generated from the document's `numberFormatter` property.
   public private(set) lazy var numberValue: NSNumber? = {
@@ -180,23 +163,8 @@ public class XMLElement {
     return value
   }
   
-  /// The raw XML string of the element.
-  public private(set) lazy var rawXML: String = {
-    let buffer = xmlBufferCreate()
-    xmlNodeDump(buffer, self.cNode.memory.doc, self.cNode, 0, 0)
-    let dumped = ^-^xmlBufferContent(buffer) ?? ""
-    xmlBufferFree(buffer)
-    return dumped
-  }()
-  
-  internal let cNode: xmlNodePtr
-  
   internal init?(cNode: xmlNodePtr, document: XMLDocument) {
-    self.cNode = cNode
-    self.document = document
-    if cNode == nil {
-      return nil
-    }
+    super.init(cNode: cNode, document: document, type: .Element)
   }
 }
 

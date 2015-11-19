@@ -74,11 +74,12 @@ internal prefix func ^-^ <T> (ptr: UnsafeMutablePointer<T>) -> String? {
 internal struct LinkedCNodes: SequenceType {
   typealias Generator = AnyGenerator<xmlNodePtr>
   static let end: xmlNodePtr? = nil
+  internal var types: [xmlElementType]
   func generate() -> Generator {
     var node = head
     return anyGenerator {
       var ret = node
-      while ret != nil && ret.memory.type != XML_ELEMENT_NODE {
+      while ret != nil && !self.types.contains({ $0 == ret.memory.type }) {
         ret = ret.memory.next
       }
       node = ret != nil ?ret.memory.next :nil
@@ -87,8 +88,9 @@ internal struct LinkedCNodes: SequenceType {
   }
   
   let head: xmlNodePtr
-  init(head: xmlNodePtr) {
+  init(head: xmlNodePtr, types: [xmlElementType] = [XML_ELEMENT_NODE]) {
     self.head = head
+    self.types = types
   }
 }
 

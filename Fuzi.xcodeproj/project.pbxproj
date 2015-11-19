@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C3EA20D1B9311C900F681B5 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3EA20C1B9311C900F681B5 /* Queryable.swift */; };
+		0C8F4D121BFE266F00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
+		0C8F4D131BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
+		0C8F4D141BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
+		0CC7532F1BFE436500266564 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
 		791391811B53B09F00BC07C3 /* Fuzi.h in Headers */ = {isa = PBXBuildFile; fileRef = 791391801B53B09F00BC07C3 /* Fuzi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		791391881B53B09F00BC07C3 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7913917D1B53B09F00BC07C3 /* Fuzi.framework */; };
 		792500BC1BA6CFBB0011671B /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792500AB1BA6CF6B0011671B /* Fuzi.framework */; };
@@ -102,6 +106,7 @@
 
 /* Begin PBXFileReference section */
 		0C3EA20C1B9311C900F681B5 /* Queryable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queryable.swift; sourceTree = "<group>"; };
+		0C8F4D111BFE266F00944629 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		7913917D1B53B09F00BC07C3 /* Fuzi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuzi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		791391801B53B09F00BC07C3 /* Fuzi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuzi.h; sourceTree = "<group>"; };
 		791391821B53B09F00BC07C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -215,6 +220,7 @@
 			children = (
 				791391801B53B09F00BC07C3 /* Fuzi.h */,
 				791391971B53B0AF00BC07C3 /* NodeSet.swift */,
+				0C8F4D111BFE266F00944629 /* Node.swift */,
 				799F46171B8DC49500E4CE2C /* Element.swift */,
 				799F46191B8DC4E200E4CE2C /* Document.swift */,
 				0C3EA20C1B9311C900F681B5 /* Queryable.swift */,
@@ -551,6 +557,7 @@
 				799F46161B8DC2CA00E4CE2C /* NodeSet.swift in Sources */,
 				793BCED11BA14AB2009695D6 /* Error.swift in Sources */,
 				799F46181B8DC49500E4CE2C /* Element.swift in Sources */,
+				0C8F4D121BFE266F00944629 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +585,7 @@
 				792500C21BA6CFD00011671B /* NodeSet.swift in Sources */,
 				792500C61BA6CFD00011671B /* Error.swift in Sources */,
 				792500C41BA6CFD00011671B /* Document.swift in Sources */,
+				0C8F4D131BFE39CD00944629 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +613,7 @@
 				793050A61BD89B350040127B /* NodeSet.swift in Sources */,
 				793050AA1BD89B350040127B /* Error.swift in Sources */,
 				793050A81BD89B350040127B /* Document.swift in Sources */,
+				0CC7532F1BFE436500266564 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +641,7 @@
 				7932B1251BA7F279008CA6F5 /* NodeSet.swift in Sources */,
 				7932B1291BA7F279008CA6F5 /* Error.swift in Sources */,
 				7932B1271BA7F279008CA6F5 /* Document.swift in Sources */,
+				0C8F4D141BFE39CD00944629 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1092,7 @@
 				793050A11BD89A3E0040127B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		793050A51BD89A3E0040127B /* Build configuration list for PBXNativeTarget "Fuzi-tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1090,6 +1101,7 @@
 				793050A31BD89A3E0040127B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7932B1231BA7F25B008CA6F5 /* Build configuration list for PBXNativeTarget "Fuzi-WatchOS" */ = {
 			isa = XCConfigurationList;
