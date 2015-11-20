@@ -41,6 +41,9 @@
                 <a href="Classes/XMLElement.html">XMLElement</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/XMLNode.html">XMLNode</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/XPathFunctionResult.html">XPathFunctionResult</a>
               </li>
               <li class="nav-group-task">
@@ -68,6 +71,12 @@
               <li class="nav-group-task">
                 <a href="Extensions/XMLElement.html">XMLElement</a>
               </li>
+              <li class="nav-group-task">
+                <a href="Extensions/XMLNode.html">XMLNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/XMLNodeType.html">XMLNodeType</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -77,7 +86,10 @@
                 <a href="Functions.html#/s:ZF4Fuzioi2eeFTCS_11XMLDocumentS0__Sb">==(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="Functions.html#/s:ZF4Fuzioi2eeFTCS_10XMLElementS0__Sb">==(_:_:)</a>
+                <a href="Functions.html#/s:ZF4Fuzioi2eeFTCS_7XMLNodeS0__Sb">==(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:ZF4Fuzioi2teFTVSC14xmlElementTypeS0__Sb">~=(_:_:)</a>
               </li>
             </ul>
           </li>
@@ -86,6 +98,14 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Protocols/Queryable.html">Queryable</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:4Fuzi11XMLNodeType">XMLNodeType</a>
               </li>
             </ul>
           </li>
@@ -169,13 +189,20 @@
               </ul>
             </div>
             <div class="task-group">
+                <div class="task-name-container">
+                  <a name="/Give%20a%20Swifty%20name%20to%20each%20enum%20case%20of%20XMLNodeType"></a>
+                  <a name="//apple_ref/swift/Section/Give a Swifty name to each enum case of XMLNodeType" class="dashAnchor"></a>
+                  <a href="#/Give%20a%20Swifty%20name%20to%20each%20enum%20case%20of%20XMLNodeType">
+                    <h3 class="section-name">Give a Swifty name to each enum case of XMLNodeType</h3>
+                  </a>
+                </div>
               <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:ZF4Fuzioi2eeFTCS_10XMLElementS0__Sb"></a>
-                    <a name="//apple_ref/swift/Function/==(_:_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:ZF4Fuzioi2eeFTCS_10XMLElementS0__Sb">==(_:_:)</a>
+                    <a name="/s:ZF4Fuzioi2teFTVSC14xmlElementTypeS0__Sb"></a>
+                    <a name="//apple_ref/swift/Function/~=(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZF4Fuzioi2teFTVSC14xmlElementTypeS0__Sb">~=(_:_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -183,14 +210,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Determine whether two element are the same</p>
+                        <p>For supporting pattern matching of those enum case alias getters for XMLNodeType</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">XMLElement</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">XMLElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">~=</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">XMLNodeType</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">XMLNodeType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -206,7 +233,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>XMLElement on the left</p>
+                                  <p>left hand side</p>
 
                                 </div>
                               </td>
@@ -219,7 +246,72 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>XMLElement on the right</p>
+                                  <p>right hand side</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>true if both sides equals</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZF4Fuzioi2eeFTCS_7XMLNodeS0__Sb"></a>
+                    <a name="//apple_ref/swift/Function/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZF4Fuzioi2eeFTCS_7XMLNodeS0__Sb">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Determine whether two nodes are the same</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="o">==</span><span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">XMLNode</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">XMLNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>lhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>XMLNode on the left</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rhs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>XMLNode on the right</p>
 
                                 </div>
                               </td>
@@ -240,7 +332,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-22)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-11-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
