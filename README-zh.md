@@ -61,9 +61,9 @@ do {
 - 遵循Swift规范的命名和API重新设计，避免了在Swift中使用Ono的很多不便
 - 可以规定自动转换日期和数字的格式了
 - 修正了一些bug
+- 增加更多常用的HTML处理方法
+- 支持获取所有类型的节点（包括文字节点，注释节点等）
 - 支持更多的CSS查询类型 (今后将会支持)
-- 增加更多常用的HTML处理方法 (今后将会增加)
-
 
 ## 环境
 
@@ -80,7 +80,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.2.0'
+	pod 'Fuzi', '~> 0.3.0'
 end
 ```
 
@@ -102,7 +102,7 @@ $ pod install
 在项目的根目录下创建名为 `Cartfile` 或 `Cartfile.private`的文件，并加入如下一行:
 
 ```
-github "cezheng/Fuzi" ~> 0.2.0
+github "cezheng/Fuzi" ~> 0.3.0
 ```
 然后执行如下命令:
 
@@ -208,6 +208,15 @@ let html = "<html>...</html>"
 // I'm sure this won't crash
 let doc2 = try! HTMLDocument(string: html)
 //...
+```
+
+###我想访问文字节点
+不仅文字节点，你可以指定你想获取的任何类型的节点。
+
+```swift
+let document = ...
+// 获取所有类型为元素，文字或注释的节点
+document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 ```
 
 ##从Ono转移到Fuzi

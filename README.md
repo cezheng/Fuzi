@@ -61,6 +61,7 @@ do {
 - Customizable date and number formatters
 - Some bugs fixes
 - More convinience methods for HTML Documents
+- Access XML nodes of all types (Including text, comment, etc.)
 - Support for more CSS selectors (yet to come)
 
 
@@ -82,7 +83,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.2.0'
+	pod 'Fuzi', '~> 0.3.0'
 end
 ```
 
@@ -104,7 +105,7 @@ $ pod install
 Create a `Cartfile` or `Cartfile.private` in the root directory of your project, and add the following line:
 
 ```
-github "cezheng/Fuzi" ~> 0.2.0
+github "cezheng/Fuzi" ~> 0.3.0
 ```
 Run the following command:
 
@@ -210,6 +211,15 @@ let html = "<html>...</html>"
 // I'm sure this won't crash
 let doc2 = try! HTMLDocument(string: html)
 //...
+```
+
+###I want to access Text Nodes
+Not only text nodes, you can specify what types of nodes you would like to access.
+
+```swift
+let document = ...
+// Get all child nodes that are Element nodes, Text nodes, or Comment nodes
+document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 ```
 
 ##Migrating From Ono?

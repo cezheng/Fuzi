@@ -60,8 +60,10 @@ do {
 - Swift 言語のネーミングやコーディングルールに沿って、クラスやメソッドを再設計した
 - 日付や数字変換のフォマットを指定できる
 - いくつかのバグ修正
+- より多くのHTML便利メソッド
+- 全種類のXMLノード取得可能（テキストノードやコメントノードなども含め）
 - より多くのCSSクエリ対応 (これから)
-- より多くのHTML便利メソッド (これから)
+
 
 
 ## 環境
@@ -79,7 +81,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.2.0'
+	pod 'Fuzi', '~> 0.3.0'
 end
 ```
 
@@ -101,7 +103,7 @@ $ pod install
 プロダクトのディレクトリに`Cartfile` か `Cartfile.private`のファイルを作成し、下記の行を追加してください:
 
 ```
-github "cezheng/Fuzi" ~> 0.2.0
+github "cezheng/Fuzi" ~> 0.3.0
 ```
 そして、下記のコマンドを実行してください:
 
@@ -208,6 +210,14 @@ let html = "<html>...</html>"
 let doc2 = try! HTMLDocument(string: html)
 //...
 ```
+
+###テキストノードを取得したい
+テキストノードだけではなく、全種類のノードは取得可能。
+
+```swift
+let document = ...
+// すべてのエレメント、テキストとコメント子要素を取得する
+document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 
 ##Onoからの移行?
 下記2つのサンプルコードを見たら、`Ono`と`Fuzi`の違いをわかる。
