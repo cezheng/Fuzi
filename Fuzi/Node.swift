@@ -23,37 +23,69 @@
 import Foundation
 import libxml2
 
+/// Define a Swifty typealias for libxml's node type enum
 public typealias XMLNodeType = xmlElementType
 
+// MARK: - Give a Swifty name to each enum case of XMLNodeType
 extension XMLNodeType {
+  /// Element
   public static var Element: xmlElementType       { return XML_ELEMENT_NODE }
+  /// Attribute
   public static var Attribute: xmlElementType     { return XML_ATTRIBUTE_NODE }
+  /// Text
   public static var Text: xmlElementType          { return XML_TEXT_NODE }
+  /// CData Section
   public static var CDataSection: xmlElementType  { return XML_CDATA_SECTION_NODE }
+  /// Entity Reference
   public static var EntityRef: xmlElementType     { return XML_ENTITY_REF_NODE }
+  /// Entity
   public static var Entity: xmlElementType        { return XML_ENTITY_NODE }
+  /// Pi
   public static var Pi: xmlElementType            { return XML_PI_NODE }
+  /// Comment
   public static var Comment: xmlElementType       { return XML_COMMENT_NODE }
+  /// Document
   public static var Document: xmlElementType      { return XML_DOCUMENT_NODE }
+  /// Document Type
   public static var DocumentType: xmlElementType  { return XML_DOCUMENT_TYPE_NODE }
+  /// Document Fragment
   public static var DocumentFrag: xmlElementType  { return XML_DOCUMENT_FRAG_NODE }
+  /// Notation
   public static var Notation: xmlElementType      { return XML_NOTATION_NODE }
+  /// HTML Document
   public static var HtmlDocument: xmlElementType  { return XML_HTML_DOCUMENT_NODE }
+  /// DTD
   public static var DTD: xmlElementType           { return XML_DTD_NODE }
+  /// Element Declaration
   public static var ElementDecl: xmlElementType   { return XML_ELEMENT_DECL }
+  /// Attribute Declaration
   public static var AttributeDecl: xmlElementType { return XML_ATTRIBUTE_DECL }
+  /// Entity Declaration
   public static var EntityDecl: xmlElementType    { return XML_ENTITY_DECL }
+  /// Namespace Declaration
   public static var NamespaceDecl: xmlElementType { return XML_NAMESPACE_DECL }
+  /// XInclude Start
   public static var XIncludeStart: xmlElementType { return XML_XINCLUDE_START }
+  /// XInclude End
   public static var XIncludeEnd: xmlElementType   { return XML_XINCLUDE_END }
+  /// DocbDocument
   public static var DocbDocument: xmlElementType  { return XML_DOCB_DOCUMENT_NODE }
 }
 
 infix operator ~= {}
+/**
+ For supporting pattern matching of those enum case alias getters for XMLNodeType
+ 
+ - parameter lhs: left hand side
+ - parameter rhs: right hand side
+ 
+ - returns: true if both sides equals
+ */
 public func ~=(lhs: XMLNodeType, rhs: XMLNodeType) -> Bool {
   return lhs.rawValue == rhs.rawValue
 }
 
+/// Base class for all XML nodes
 public class XMLNode {
   /// The document containing the element.
   public unowned let document: XMLDocument
@@ -66,7 +98,7 @@ public class XMLNode {
     return xmlGetLineNo(self.cNode)
   }()
   
-  // MARK: - Accessing Parent, Child, and Sibling Elements
+  // MARK: - Accessing Parent and Sibling Elements
   /// The element's parent element.
   public private(set) lazy var parent: XMLElement? = {
     return XMLElement(cNode: self.cNode.memory.parent, document: self.document)
@@ -82,6 +114,7 @@ public class XMLNode {
     return XMLElement(cNode: self.cNode.memory.next, document: self.document)
   }()
   
+  // MARK: - Accessing Contents
   /// A string representation of the element's value.
   public private(set) lazy var stringValue : String = {
     let key = xmlNodeGetContent(self.cNode)
@@ -99,6 +132,11 @@ public class XMLNode {
     return dumped
   }()
   
+ /// Convert this node to XMLElement if it is an element node
+  public func toElement() -> XMLElement? {
+    return self as? XMLElement
+  }
+  
   internal let cNode: xmlNodePtr
   
   internal init?(cNode: xmlNodePtr, document: XMLDocument, type: XMLNodeType) {
@@ -111,5 +149,16 @@ public class XMLNode {
   }
 }
 
+extension XMLNode: Equatable {}
 
-
+/**
+ Determine whether two nodes are the same
+ 
+ - parameter lhs: XMLNode on the left
+ - parameter rhs: XMLNode on the right
+ 
+ - returns: whether lhs and rhs are equal
+ */
+public func ==(lhs: XMLNode, rhs: XMLNode) -> Bool {
+  return lhs.cNode == rhs.cNode
+}

@@ -114,7 +114,8 @@ class HTMLTests: XCTestCase {
     let mixedNode = document.firstChild(css: "#ajax-error-message")
     let childNodes = mixedNode?.childNodes(ofTypes: [XMLNodeType.Element, XMLNodeType.Text])
     XCTAssertEqual(childNodes?.count, 5, "should have 5 child nodes")
-    XCTAssertEqual(childNodes?.flatMap { $0.type == .Element ? $0 : nil }.count, 2)
-    XCTAssertEqual(childNodes?.flatMap { $0.type == .Text ? $0 : nil }.count, 3)
+    XCTAssertEqual(childNodes?.flatMap { $0.toElement() }.count, 2, "should have 2 element nodes")
+    XCTAssertEqual(childNodes?.flatMap { $0.type == .Element ? $0 : nil }.count, 2, "should have 2 element nodes")
+    XCTAssertEqual(childNodes?.flatMap { $0.type == .Text ? $0 : nil }.count, 3, "should have 3 text nodes")
   }
 }

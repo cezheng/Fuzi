@@ -24,8 +24,8 @@ import libxml2
 
 // Public Helpers
 
-/// For printing an `XMLElement`
-extension XMLElement: CustomStringConvertible, CustomDebugStringConvertible {
+/// For printing an `XMLNode`
+extension XMLNode: CustomStringConvertible, CustomDebugStringConvertible {
   /// String printed by `print` function
   public var description: String {
     return self.rawXML

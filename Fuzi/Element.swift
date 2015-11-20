@@ -47,7 +47,32 @@ public class XMLElement: XMLNode {
     return attributes
   }()
   
-  // MARK: - Accessing Parent, Child, and Sibling Elements
+  /**
+   Returns the value for the attribute with the specified key.
+   
+   - parameter name: The attribute name.
+   - parameter ns:   The namespace, or `nil` by default if not using a namespace
+   
+   - returns: The attribute value, or `nil` if the attribute is not defined.
+   */
+  public func attr(name: String, namespace ns: String? = nil) -> String? {
+    var value: String? = nil
+    
+    let xmlValue: UnsafeMutablePointer<xmlChar>
+    if let ns = ns {
+      xmlValue = xmlGetNsProp(cNode, name, ns)
+    } else {
+      xmlValue = xmlGetProp(cNode, name)
+    }
+    
+    if xmlValue != nil {
+      value = ^-^xmlValue
+      xmlFree(xmlValue)
+    }
+    return value
+  }
+  
+  // MARK: - Accessing Children
   
   /// The element's children elements.
   public var children: [XMLElement] {
@@ -56,7 +81,13 @@ public class XMLElement: XMLNode {
     }
   }
   
-  /// The element's child nodes of specified types
+  /**
+  Get the element's child nodes of specified types
+   
+  - parameter types: type of nodes that should be fetched (e.g. .Element, .Text, .Comment)
+   
+  - returns: all children of specified types
+  */
   public func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
     return LinkedCNodes(head: cNode.memory.children, types: types).flatMap { node in
       switch node.memory.type {
@@ -137,47 +168,8 @@ public class XMLElement: XMLNode {
   public subscript (name: String) -> String? {
     return attr(name)
   }
-
-  /**
-  Returns the value for the attribute with the specified key.
-  
-  - parameter name: The attribute name.
-  - parameter ns:   The namespace, or `nil` by default if not using a namespace
-  
-  - returns: The attribute value, or `nil` if the attribute is not defined.
-  */
-  public func attr(name: String, namespace ns: String? = nil) -> String? {
-    var value: String? = nil
-    
-    let xmlValue: UnsafeMutablePointer<xmlChar>
-    if let ns = ns {
-      xmlValue = xmlGetNsProp(cNode, name, ns)
-    } else {
-      xmlValue = xmlGetProp(cNode, name)
-    }
-    
-    if xmlValue != nil {
-      value = ^-^xmlValue
-      xmlFree(xmlValue)
-    }
-    return value
-  }
   
   internal init?(cNode: xmlNodePtr, document: XMLDocument) {
     super.init(cNode: cNode, document: document, type: .Element)
   }
-}
-
-extension XMLElement: Equatable {}
-
-/**
-Determine whether two element are the same
-
-- parameter lhs: XMLElement on the left
-- parameter rhs: XMLElement on the right
-
-- returns: whether lhs and rhs are equal
-*/
-public func ==(lhs: XMLElement, rhs: XMLElement) -> Bool {
-  return lhs.cNode == rhs.cNode
 }
