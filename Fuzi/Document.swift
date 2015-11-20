@@ -168,17 +168,17 @@ public class HTMLDocument: XMLDocument {
   
   /// HTML title of current document
   public var title: String? {
-    return firstChild(xpath: "//head/title")?.stringValue
+    return root?.firstChild(tag: "head")?.firstChild(tag: "title")?.stringValue
   }
   
   /// HTML head element of current document
   public var head: XMLElement? {
-    return firstChild(xpath: "//head")
+    return root?.firstChild(tag: "head")
   }
   
   /// HTML body element of current document
   public var body: XMLElement? {
-    return firstChild(xpath: "//body")
+    return root?.firstChild(tag: "body")
   }
   
   // MARK: - Creating HTML Documents
