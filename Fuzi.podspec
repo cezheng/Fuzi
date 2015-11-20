@@ -1,8 +1,8 @@
 Pod::Spec.new do |s|
   s.name         = "Fuzi"
-  s.version      = "0.2.0"
+  s.version      = "0.3.0"
   s.license      = "MIT"
-  s.summary      = "A fast & lightweight XML & HTML parser in Swift that makes your life easier"
+  s.summary      = "A fast & lightweight XML & HTML parser in Swift with XPath & CSS support"
   s.homepage     = "https://github.com/cezheng/Fuzi"
   s.social_media_url   = "https://twitter.com/AdamoCheng"
   s.author             = { "Ce Zheng" => "cezheng.cs@gmail.com" }
