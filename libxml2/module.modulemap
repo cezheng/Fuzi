@@ -1,5 +1,6 @@
 module libxml2 [system] {
-  umbrella header "libxml2-umbrella.h"
+  link "xml2"
+  umbrella header "libxml2-fuzi.h"
   export *
   module * { export * }
 }

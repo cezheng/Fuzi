@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C3EA20D1B9311C900F681B5 /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3EA20C1B9311C900F681B5 /* Queryable.swift */; };
-		0C8F4D121BFE266F00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
-		0C8F4D131BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
-		0C8F4D141BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
-		0CC7532F1BFE436500266564 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; settings = {ASSET_TAGS = (); }; };
+		0C8F4D121BFE266F00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; };
+		0C8F4D131BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; };
+		0C8F4D141BFE39CD00944629 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; };
+		0CC7532F1BFE436500266564 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8F4D111BFE266F00944629 /* Node.swift */; };
 		791391811B53B09F00BC07C3 /* Fuzi.h in Headers */ = {isa = PBXBuildFile; fileRef = 791391801B53B09F00BC07C3 /* Fuzi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		791391881B53B09F00BC07C3 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7913917D1B53B09F00BC07C3 /* Fuzi.framework */; };
 		792500BC1BA6CFBB0011671B /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792500AB1BA6CF6B0011671B /* Fuzi.framework */; };
@@ -711,10 +711,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-lxml2",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.Fuzi;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
@@ -763,10 +759,6 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-lxml2",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.Fuzi;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
@@ -785,11 +777,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(SRCROOT)/Fuzi",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -807,11 +794,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-					"$(SRCROOT)/Fuzi",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -863,10 +845,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
@@ -886,10 +864,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
@@ -1001,10 +975,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1023,10 +993,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
 				INFOPLIST_FILE = Fuzi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
