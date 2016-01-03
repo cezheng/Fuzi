@@ -134,8 +134,8 @@ do {
     document.definePrefix("atom", defaultNamespace: "http://www.w3.org/2005/Atom")
     
     // get first child element with given tag in namespace(optional)
-    print(root.firstChild(tag: "title", inNamespace: "atom")
-    
+    print(root.firstChild(tag: "title", inNamespace: "atom"))
+
     // iterate through all children
     for element in root.children {
       print("\(index) \(element.tag): \(element.attributes)")
