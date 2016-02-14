@@ -1,6 +1,6 @@
 # Fuzi (斧子)
 
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Fuzi.svg)](https://cocoapods.org/pods/Fuzi)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Fuzi.svg)](https://cocoapods.org/pods/Fuzi)
 [![License](https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
@@ -75,8 +75,8 @@ do {
 
 There are 3 ways you can install Fuzi to your project.
 
-### Using [Cocoapods](http://cocoapods.org/)
-You can use [Cocoapods](http://cocoapods.org/) to install `Fuzi` by adding it to your to your `Podfile`:
+### Using [CocoaPods](http://cocoapods.org/)
+You can use [CocoaPods](http://cocoapods.org/) to install `Fuzi` by adding it to your to your `Podfile`:
 
 ```ruby
 platform :ios, '8.0'
