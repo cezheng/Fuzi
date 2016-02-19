@@ -168,7 +168,7 @@ do {
   }
   for link in doc.css("a, link") {
       print(link.rawXML)
-      print(link["href"]
+      print(link["href"])
   }
   
   // XPath queries
@@ -176,7 +176,7 @@ do {
     print(firstAnchor["href"])
   }
   for script in doc.xpath("//head/script") {
-    print(script["src"]
+    print(script["src"])
   }
   
   // Evaluate XPath functions
