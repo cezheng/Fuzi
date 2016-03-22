@@ -51,7 +51,7 @@ class HTMLTests: XCTestCase {
     for element in document.xpath("//head/title") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element.stringValue, "mattt/Ono", "title mismatch")
-      idx++
+      idx += 1
     }
     XCTAssertEqual(idx, 1, "should be exactly 1 element")
   }
@@ -61,7 +61,7 @@ class HTMLTests: XCTestCase {
     for element in document.css("head title") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element.stringValue, "mattt/Ono", "title mismatch")
-      idx++
+      idx += 1
     }
     XCTAssertEqual(idx, 1, "should be exactly 1 element")
   }
@@ -71,7 +71,7 @@ class HTMLTests: XCTestCase {
     for element in document.css("#account_settings") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element["href"], "/settings/profile", "href mismatch")
-      idx++
+      idx += 1
     }
     XCTAssertEqual(idx, 1, "should be exactly 1 element")
   }

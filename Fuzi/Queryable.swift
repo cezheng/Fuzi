@@ -225,8 +225,10 @@ extension XMLElement: Queryable {
     let context = xmlXPathNewContext(cNode.memory.doc)
     if context != nil {
       context.memory.node = cNode
-      for var node = cNode; node.memory.parent != nil; node = node.memory.parent {
-        for var ns = node.memory.nsDef; ns != nil; ns = ns.memory.next {
+      var node = cNode
+      while node.memory.parent != nil {
+        var ns = node.memory.nsDef
+        while ns != nil {
           var prefix = ns.memory.prefix
           var prefixChars = [CChar]()
           if prefix == nil && !document.defaultNamespaces.isEmpty {
@@ -240,7 +242,9 @@ extension XMLElement: Queryable {
           if prefix != nil {
             xmlXPathRegisterNs(context, prefix, ns.memory.href)
           }
+          ns = ns.memory.next
         }
+        node = node.memory.parent
       }
       let xmlXPath = xmlXPathEvalExpression(xpath, context)
       

@@ -40,7 +40,7 @@ class DefaultNamespaceXPathTests: XCTestCase {
     var count = 0
     for element in document.xpath(xpath) {
       XCTAssertEqual("rootfile", element.tag, "tag should be `rootfile`")
-      count++
+      count += 1
     }
     XCTAssertEqual(count, 1, "Element should be found at XPath \(xpath)")
   }
@@ -53,7 +53,7 @@ class DefaultNamespaceXPathTests: XCTestCase {
     for absoluteElement in document.xpath(absoluteXPath) {
       for relativeElement in absoluteElement.xpath(relativeXPath) {
         XCTAssertEqual("rootfile", relativeElement.tag, "tag should be rootfile")
-        count++
+        count += 1
       }
     }
     XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'")
