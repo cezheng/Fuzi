@@ -1,10 +1,12 @@
 # Fuzi (斧子)
 
+[![Build Status](https://api.travis-ci.org/cezheng/Fuzi.svg)](https://travis-ci.org/cezheng/Fuzi)
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/Fuzi.svg)](https://cocoapods.org/pods/Fuzi)
 [![License](https://img.shields.io/cocoapods/l/Fuzi.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
+[![Weibo](https://img.shields.io/badge/weibo-Real__Adam-red.svg)](http://weibo.com/cezheng)
 
 **Swift实现的轻量快速的 XML/HTML 解析器。** [[文档]](http://cezheng.github.io/Fuzi/)
 
