@@ -39,7 +39,7 @@ class VMAPTests: XCTestCase {
     var count = 0
     for element in document.xpath(xpath) {
       XCTAssertEqual("unicornOnce", element.tag, "tag should be `unicornOnce`")
-      count++
+      count += 1
     }
     XCTAssertEqual(count, 1, "Element should be found at XPath '\(xpath)'")
   }
@@ -51,7 +51,7 @@ class VMAPTests: XCTestCase {
     for absoluteElement in document.xpath(absoluteXPath) {
       for relativeElement in absoluteElement.xpath(relativeXPath) {
         XCTAssertEqual("unicornOnce", relativeElement.tag, "tag should be `unicornOnce`")
-        count++
+        count += 1
       }
     }
     XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'");

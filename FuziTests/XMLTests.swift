@@ -61,7 +61,7 @@ class XMLTests: XCTestCase {
     var counter = 0
     for elt in elts {
       XCTAssertEqual("title", elt.tag, "tag should be `title`")
-      counter++
+      counter += 1
     }
     XCTAssertEqual(1, counter, "at least one element should have been found at element path '\(path)'")
   }

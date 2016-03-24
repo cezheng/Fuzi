@@ -1,0 +1,22 @@
+language: objective-c
+
+os: osx
+osx_image: xcode7.2
+
+env:
+  global:
+    - XCWORKSPACE="Fuzi.xcworkspace"
+    - IOS_SCHEME="Fuzi-iOS"
+    - OSX_SCHEME="Fuzi-OSX"
+    - TVOS_SCHEME="Fuzi-tvOS"
+    - WATCHOS_SCHEME="Fuzi-WatchOS"
+  matrix:
+    - DESTINATION="platform=OS X,arch=x86_64" SCHEME="$OSX_SCHEME" ACTION="test"
+    - DESTINATION="platform=iOS Simulator,name=iPhone 6s" SCHEME="$IOS_SCHEME" EXTRA="-sdk iphonesimulator" ACTION="test"
+    - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SCHEME="$TVOS_SCHEME" ACTION="test"
+    - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" ACTION="build"
+
+script: 
+  - xcode-select -p
+  - xctool -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION
+

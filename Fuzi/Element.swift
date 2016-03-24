@@ -39,10 +39,12 @@ public class XMLElement: XMLNode {
   /// All attributes for the element.
   public private(set) lazy var attributes: [String : String] = {
     var attributes = [String: String]()
-    for var attribute = self.cNode.memory.properties; attribute != nil; attribute = attribute.memory.next {
+    var attribute = self.cNode.memory.properties
+    while attribute != nil {
       if let key = ^-^attribute.memory.name, let value = self.attr(key) {
         attributes[key] = value
       }
+      attribute = attribute.memory.next
     }
     return attributes
   }()
@@ -108,10 +110,12 @@ public class XMLElement: XMLNode {
   - returns: The child element.
   */
   public func firstChild(tag tag: String, inNamespace ns: String? = nil) -> XMLElement? {
-    for var nodePtr = cNode.memory.children; nodePtr != nil; nodePtr = nodePtr.memory.next {
+    var nodePtr = cNode.memory.children
+    while nodePtr != nil {
       if cXMLNodeMatchesTagInNamespace(nodePtr, tag: tag, ns: ns) {
         return XMLElement(cNode: nodePtr, document: self.document)
       }
+      nodePtr = nodePtr.memory.next
     }
     return nil
   }
