@@ -162,7 +162,7 @@ do {
   let doc = try HTMLDocument(string: html, encoding: NSUTF8StringEncoding)
   
   // CSS queries
-  if let elementById = doc.css("#id") {
+  if let elementById = doc.firstChild(css: "#id") {
     print(elementById.stringValue)
   }
   for link in doc.css("a, link") {
