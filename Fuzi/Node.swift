@@ -101,17 +101,17 @@ public class XMLNode {
   // MARK: - Accessing Parent and Sibling Elements
   /// The element's parent element.
   public private(set) lazy var parent: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.parent, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.parent, document: self.document)
   }()
   
   /// The element's next sibling.
   public private(set) lazy var previousSibling: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.prev, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.prev, document: self.document)
   }()
   
   /// The element's previous sibling.
   public private(set) lazy var nextSibling: XMLElement? = {
-    return XMLElement(cNode: self.cNode.memory.next, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.next, document: self.document)
   }()
   
   // MARK: - Accessing Contents
@@ -126,7 +126,7 @@ public class XMLNode {
   /// The raw XML string of the element.
   public private(set) lazy var rawXML: String = {
     let buffer = xmlBufferCreate()
-    xmlNodeDump(buffer, self.cNode.memory.doc, self.cNode, 0, 0)
+    xmlNodeDump(buffer, self.cNode.pointee.doc, self.cNode, 0, 0)
     let dumped = ^-^xmlBufferContent(buffer) ?? ""
     xmlBufferFree(buffer)
     return dumped
@@ -139,13 +139,13 @@ public class XMLNode {
   
   internal let cNode: xmlNodePtr
   
-  internal init?(cNode: xmlNodePtr, document: XMLDocument, type: XMLNodeType) {
+  internal init?(cNode: xmlNodePtr?, document: XMLDocument, type: XMLNodeType) {
+    guard let cNode = cNode else {
+      return nil
+    }
     self.cNode = cNode
     self.type = type
     self.document = document
-    if cNode == nil {
-      return nil
-    }
   }
 }
 

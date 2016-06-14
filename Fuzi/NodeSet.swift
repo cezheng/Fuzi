@@ -23,35 +23,24 @@ import Foundation
 import libxml2
 
 /// An enumerable set of XML nodes
-public class NodeSet: SequenceType {
+public class NodeSet: Sequence, IteratorProtocol {
   /// Empty node set
   public static let emptySet = XPathNodeSet(cXPath: nil, document: nil)
   
-  /// XMLElement Generator for SequenceType Protocol
-  public typealias Generator = AnyGenerator<XMLElement>
-  
-  /**
-  generate method for SequenceType Protocol
-  
-  - returns: generator
-  */
-  public func generate() -> Generator {
-    var index = 0
-    // TODO: change to AnyGenerator when swift 2.1 gets out of the way
-    return anyGenerator {
-      defer {
-        index += 1
-      }
-      if index < self.count {
-        return self[index]
-      }
-      return nil
+  private var cursor = 0
+  public func next() -> XMLElement? {
+    defer {
+      cursor += 1
     }
+    if cursor < self.count {
+      return self[index]
+    }
+    return nil
   }
 
   /// Number of nodes
   public private(set) lazy var count: Int = {
-    return self.cNodeSet != nil ?Int(self.cNodeSet.memory.nodeNr) :0
+    return Int(self.cNodeSet?.pointee.nodeNr ?? 0)
   }()
   
   /// First Element
@@ -61,13 +50,13 @@ public class NodeSet: SequenceType {
 
   /// if nodeset is empty
   public var isEmpty: Bool {
-    return (cNodeSet == nil) || (cNodeSet.memory.nodeNr == 0) || (cNodeSet.memory.nodeTab == nil)
+    return (cNodeSet == nil) || (cNodeSet!.pointee.nodeNr == 0) || (cNodeSet!.pointee.nodeTab == nil)
   }
   
-  let cNodeSet: xmlNodeSetPtr
+  let cNodeSet: xmlNodeSetPtr?
   let document: XMLDocument?
   
-  init(cNodeSet: xmlNodeSetPtr, document: XMLDocument?) {
+  init(cNodeSet: xmlNodeSetPtr?, document: XMLDocument?) {
     self.cNodeSet = cNodeSet
     self.document = document
   }
@@ -98,17 +87,17 @@ extension NodeSet: Indexable {
     if idx >= count {
       return nil
     }
-    return XMLElement(cNode: cNodeSet.memory.nodeTab[idx], document: document!)
+    return XMLElement(cNode: cNodeSet?.pointee.nodeTab[idx], document: document!)
   }
 }
 
 /// XPath selector result node set
 public class XPathNodeSet: NodeSet {
-  var cXPath: xmlXPathObjectPtr
+  var cXPath: xmlXPathObjectPtr?
   
-  init(cXPath: xmlXPathObjectPtr, document: XMLDocument?) {
+  init(cXPath: xmlXPathObjectPtr?, document: XMLDocument?) {
     self.cXPath = cXPath
-    let nodeSet = cXPath != nil ? cXPath.memory.nodesetval : nil
+    let nodeSet = cXPath?.pointee.nodesetval
     super.init(cNodeSet: nodeSet, document: document)
   }
   

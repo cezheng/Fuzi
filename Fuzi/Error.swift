@@ -25,7 +25,7 @@ import libxml2
 /**
 *  XMLError enumeration.
 */
-public enum XMLError: ErrorType {
+public enum XMLError: ErrorProtocol {
   /// No error
   case NoError
   /// Contains a libxml2 error with error code and message
@@ -36,12 +36,11 @@ public enum XMLError: ErrorType {
   case ParserFailure
   
   internal static func lastError(defaultError: XMLError = .NoError) -> XMLError {
-    let errorPtr = xmlGetLastError()
-    guard errorPtr != nil else {
+    guard let errorPtr = xmlGetLastError() else {
       return defaultError
     }
-    let message = String.fromCString(errorPtr.memory.message)?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    let code = Int(errorPtr.memory.code)
+    let message = (^-^errorPtr.pointee.message)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    let code = Int(errorPtr.pointee.code)
     xmlResetError(errorPtr)
     return .LibXMLError(code: code, message: message ?? "")
   }

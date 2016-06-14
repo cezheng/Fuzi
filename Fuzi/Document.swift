@@ -27,19 +27,19 @@ public class XMLDocument {
   // MARK: - Document Attributes
   /// The XML version.
   public private(set) lazy var version: String? = {
-    return self.cDocument != nil ?(^-^self.cDocument.memory.version) :nil
+    return ^-^self.cDocument.pointee.version
   }()
   
   /// The string encoding for the document. This is NSUTF8StringEncoding if no encoding is set, or it cannot be calculated.
-  public private(set) lazy var encoding: NSStringEncoding = {
-    if self.cDocument != nil && self.cDocument.memory.encoding != nil {
-      let encodingName = ^-^self.cDocument.memory.encoding
+  public private(set) lazy var encoding: String.Encoding = {
+    if let encodingName = ^-^self.cDocument.pointee.encoding  {
+      
       let encoding = CFStringConvertIANACharSetNameToEncoding(encodingName)
       if encoding != kCFStringEncodingInvalidId {
-        return CFStringConvertEncodingToNSStringEncoding(encoding)
+        return String.Encoding(rawValue: UInt(encoding))
       }
     }
-    return NSUTF8StringEncoding
+    return String.Encoding.utf8
   }()
   // MARK: - Accessing the Root Element
   /// The root element of the document.
@@ -47,16 +47,16 @@ public class XMLDocument {
   
   // MARK: - Accessing & Setting Document Formatters
   /// The formatter used to determine `numberValue` for elements in the document. By default, this is an `NSNumberFormatter` instance with `NSNumberFormatterDecimalStyle`.
-  public lazy var numberFormatter: NSNumberFormatter = {
-    let formatter = NSNumberFormatter()
-    formatter.numberStyle = .DecimalStyle
+  public lazy var numberFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
     return formatter
   }()
   
   /// The formatter used to determine `dateValue` for elements in the document. By default, this is an `NSDateFormatter` instance configured to accept ISO 8601 formatted timestamps.
-  public lazy var dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
-    formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+  public lazy var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     return formatter
   }()
@@ -74,8 +74,8 @@ public class XMLDocument {
   
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
-  public convenience init(string: String, encoding: NSStringEncoding = NSUTF8StringEncoding) throws {
-    guard let cChars = string.cStringUsingEncoding(encoding) else {
+  public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
+    guard let cChars = string.cString(using: encoding) else {
       throw XMLError.InvalidData
     }
     try self.init(cChars: cChars)
@@ -108,17 +108,17 @@ public class XMLDocument {
     try self.init(cChars: cChars, options: options)
   }
   
+  private typealias ParseFunction = (UnsafePointer<Int8>?, Int32, UnsafePointer<Int8>?, UnsafePointer<Int8>?, Int32) -> xmlDocPtr?
+  
   private convenience init(cChars: [CChar], options: Int32) throws {
-    try self.init(parseFunction: xmlReadMemory, cChars: cChars, options: options)
+    try self.init(parseFunction: { xmlReadMemory($0, $1, $2, $3, $4) }, cChars: cChars, options: options)
   }
   
-  private convenience init(parseFunction: (UnsafePointer<Int8>, Int32, UnsafePointer<Int8>, UnsafePointer<Int8>, Int32) -> xmlDocPtr, cChars: [CChar], options: Int32) throws {
-    let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), "", nil, options)
-    if document == nil {
-      throw XMLError.lastError(.ParserFailure)
-    } else {
-      xmlResetLastError()
+  private convenience init(parseFunction: ParseFunction, cChars: [CChar], options: Int32) throws {
+    guard let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), "", nil, options) else {
+      throw XMLError.lastError(defaultError: .ParserFailure)
     }
+    xmlResetLastError()
     self.init(cDocument: document)
   }
   
@@ -129,9 +129,7 @@ public class XMLDocument {
   }
   
   deinit {
-    if cDocument != nil {
-      xmlFreeDoc(cDocument)
-    }
+    xmlFreeDoc(cDocument)
   }
   
   // MARK: - XML Namespaces
@@ -192,8 +190,8 @@ public class HTMLDocument: XMLDocument {
   
   - returns: An `HTMLDocument` with the contents of the specified HTML string.
   */
-  public convenience init(string: String, encoding: NSStringEncoding = NSUTF8StringEncoding) throws {
-    guard let cChars = string.cStringUsingEncoding(encoding) else {
+  public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
+    guard let cChars = string.cString(using: encoding) else {
       throw XMLError.InvalidData
     }
     try self.init(cChars: cChars)
@@ -227,6 +225,6 @@ public class HTMLDocument: XMLDocument {
   }
   
   private convenience init(cChars: [CChar], options: Int32) throws {
-    try self.init(parseFunction: htmlReadMemory, cChars: cChars, options: options)
+    try self.init(parseFunction: { htmlReadMemory($0, $1, $2, $3, $4) }, cChars: cChars, options: options)
   }
 }

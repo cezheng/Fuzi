@@ -54,8 +54,8 @@ extension XMLDocument: CustomStringConvertible, CustomDebugStringConvertible {
 
 internal extension String {
   subscript (nsrange: NSRange) -> String {
-    let start = startIndex.advancedBy(nsrange.location)
-    let end = start.advancedBy(nsrange.length)
+    let start = index(startIndex, offsetBy: nsrange.location)
+    let end = index(start, offsetBy: nsrange.length)
     return self[start..<end]
   }
 }
@@ -63,47 +63,49 @@ internal extension String {
 // Just a smiling helper operator making frequent UnsafePointer -> String cast
 
 prefix operator ^-^ {}
-internal prefix func ^-^ <T> (ptr: UnsafePointer<T>) -> String? {
-  return String.fromCString(UnsafePointer(ptr))
+internal prefix func ^-^ <T> (ptr: UnsafePointer<T>?) -> String? {
+  if let ptr = ptr {
+    return String(validatingUTF8: UnsafePointer(ptr))
+  }
+  return nil
 }
 
-internal prefix func ^-^ <T> (ptr: UnsafeMutablePointer<T>) -> String? {
-  return String.fromCString(UnsafeMutablePointer(ptr))
+internal prefix func ^-^ <T> (ptr: UnsafeMutablePointer<T>?) -> String? {
+  if let ptr = ptr {
+    return String(validatingUTF8: UnsafeMutablePointer(ptr))
+  }
+  return nil
 }
 
-internal struct LinkedCNodes: SequenceType {
-  typealias Generator = AnyGenerator<xmlNodePtr>
-  static let end: xmlNodePtr? = nil
-  internal var types: [xmlElementType]
-  func generate() -> Generator {
-    var node = head
-    // TODO: change to AnyGenerator when swift 2.1 gets out of the way
-    return anyGenerator {
-      var ret = node
-      while ret != nil && !self.types.contains({ $0 == ret.memory.type }) {
-        ret = ret.memory.next
+internal struct LinkedCNodes: Sequence, IteratorProtocol {
+  internal let head: xmlNodePtr?
+  internal let types: [xmlElementType]
+  
+  private var cursor: xmlNodePtr?
+  mutating func next() -> xmlNodePtr? {
+    defer {
+      while let ptr = cursor {
+        cursor = cursor?.pointee.next
       }
-      node = ret != nil ?ret.memory.next :nil
-      return ret != nil ?ret :LinkedCNodes.end
     }
+    return cursor
   }
   
-  let head: xmlNodePtr
-  init(head: xmlNodePtr, types: [xmlElementType] = [XML_ELEMENT_NODE]) {
+  init(head: xmlNodePtr?, types: [xmlElementType] = [XML_ELEMENT_NODE]) {
     self.head = head
+    self.cursor = head
     self.types = types
   }
 }
 
-internal func cXMLNodeMatchesTagInNamespace(node: xmlNodePtr, tag: String, ns: String?) -> Bool {
-  let name = ^-^node.memory.name
-  var matches = name?.compare(tag, options: .CaseInsensitiveSearch) == .OrderedSame
+internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: String, inNamespace ns: String?) -> Bool {
+  let name = ^-^node?.pointee.name
+  var matches = name?.compare(tag, options: .caseInsensitiveSearch) == .orderedSame
   
   if let ns = ns {
-    let cNS = node.memory.ns
-    if cNS != nil && cNS.memory.prefix != nil {
-      let prefix = ^-^cNS.memory.prefix
-      matches = matches && (prefix?.compare(ns, options: .CaseInsensitiveSearch) == .OrderedSame)
+    if let cNS = node?.pointee.ns where cNS.pointee.prefix != nil {
+      let prefix = ^-^cNS.pointee.prefix
+      matches = matches && (prefix?.compare(ns, options: .caseInsensitiveSearch) == .orderedSame)
     }
   }
   return matches

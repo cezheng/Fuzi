@@ -27,24 +27,24 @@ public class XMLElement: XMLNode {
   
   /// The element's namespace.
   public private(set) lazy var namespace: String? = {
-    return ^-^(self.cNode.memory.ns != nil ?self.cNode.memory.ns.memory.prefix :nil)
+    return ^-^(self.cNode.pointee.ns != nil ?self.cNode.pointee.ns.pointee.prefix :nil)
   }()
   
   /// The element's tag.
   public private(set) lazy var tag: String? = {
-    return ^-^self.cNode.memory.name
+    return ^-^self.cNode.pointee.name
   }()
   
   // MARK: - Accessing Attributes
   /// All attributes for the element.
   public private(set) lazy var attributes: [String : String] = {
     var attributes = [String: String]()
-    var attribute = self.cNode.memory.properties
+    var attribute = self.cNode.pointee.properties
     while attribute != nil {
-      if let key = ^-^attribute.memory.name, let value = self.attr(key) {
+      if let key = ^-^attribute?.pointee.name, let value = self.attr(key) {
         attributes[key] = value
       }
-      attribute = attribute.memory.next
+      attribute = attribute?.pointee.next
     }
     return attributes
   }()
@@ -57,17 +57,17 @@ public class XMLElement: XMLNode {
    
    - returns: The attribute value, or `nil` if the attribute is not defined.
    */
-  public func attr(name: String, namespace ns: String? = nil) -> String? {
+  public func attr(_ name: String, namespace ns: String? = nil) -> String? {
     var value: String? = nil
     
-    let xmlValue: UnsafeMutablePointer<xmlChar>
+    let xmlValue: UnsafeMutablePointer<xmlChar>?
     if let ns = ns {
       xmlValue = xmlGetNsProp(cNode, name, ns)
     } else {
       xmlValue = xmlGetProp(cNode, name)
     }
     
-    if xmlValue != nil {
+    if let xmlValue = xmlValue {
       value = ^-^xmlValue
       xmlFree(xmlValue)
     }
@@ -78,7 +78,7 @@ public class XMLElement: XMLNode {
   
   /// The element's children elements.
   public var children: [XMLElement] {
-    return LinkedCNodes(head: cNode.memory.children).flatMap {
+    return LinkedCNodes(head: cNode.pointee.children).flatMap {
       XMLElement(cNode: $0, document: self.document)
     }
   }
@@ -91,12 +91,12 @@ public class XMLElement: XMLNode {
   - returns: all children of specified types
   */
   public func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
-    return LinkedCNodes(head: cNode.memory.children, types: types).flatMap { node in
-      switch node.memory.type {
+    return LinkedCNodes(head: cNode.pointee.children, types: types).flatMap { node in
+      switch node.pointee.type {
       case XMLNodeType.Element:
         return XMLElement(cNode: node, document: self.document)
       default:
-        return XMLNode(cNode: node, document: self.document, type: node.memory.type)
+        return XMLNode(cNode: node, document: self.document, type: node.pointee.type)
       }
     }
   }
@@ -109,13 +109,13 @@ public class XMLElement: XMLNode {
   
   - returns: The child element.
   */
-  public func firstChild(tag tag: String, inNamespace ns: String? = nil) -> XMLElement? {
-    var nodePtr = cNode.memory.children
+  public func firstChild(tag: String, inNamespace ns: String? = nil) -> XMLElement? {
+    var nodePtr = cNode.pointee.children
     while nodePtr != nil {
-      if cXMLNodeMatchesTagInNamespace(nodePtr, tag: tag, ns: ns) {
+      if cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
         return XMLElement(cNode: nodePtr, document: self.document)
       }
-      nodePtr = nodePtr.memory.next
+      nodePtr = nodePtr?.pointee.next
     }
     return nil
   }
@@ -128,9 +128,9 @@ public class XMLElement: XMLNode {
   
   - returns: The children elements.
   */
-  public func children(tag tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
-    return LinkedCNodes(head: cNode.memory.children).flatMap {
-      cXMLNodeMatchesTagInNamespace($0, tag: tag, ns: ns)
+  public func children(tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
+    return LinkedCNodes(head: cNode.pointee.children).flatMap {
+      cXMLNode($0, matchesTag: tag, inNamespace: ns)
         ? XMLElement(cNode: $0, document: self.document) : nil
     }
   }
@@ -143,12 +143,12 @@ public class XMLElement: XMLNode {
   
   /// A number representation of the element's value, which is generated from the document's `numberFormatter` property.
   public private(set) lazy var numberValue: NSNumber? = {
-    return self.document.numberFormatter.numberFromString(self.stringValue)
+    return self.document.numberFormatter.number(from: self.stringValue)
   }()
   
   /// A date representation of the element's value, which is generated from the document's `dateFormatter` property.
   public private(set) lazy var dateValue: NSDate? = {
-    return self.document.dateFormatter.dateFromString(self.stringValue)
+    return self.document.dateFormatter.date(from: self.stringValue)
   }()
   
   /**
@@ -173,7 +173,7 @@ public class XMLElement: XMLNode {
     return attr(name)
   }
   
-  internal init?(cNode: xmlNodePtr, document: XMLDocument) {
+  internal init?(cNode: xmlNodePtr?, document: XMLDocument) {
     super.init(cNode: cNode, document: document, type: .Element)
   }
 }
