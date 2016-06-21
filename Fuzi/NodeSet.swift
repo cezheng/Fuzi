@@ -37,8 +37,7 @@ public class NodeSet: SequenceType {
   */
   public func generate() -> Generator {
     var index = 0
-    // TODO: change to AnyGenerator when swift 2.1 gets out of the way
-    return anyGenerator {
+    return AnyGenerator {
       defer {
         index += 1
       }
