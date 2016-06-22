@@ -84,9 +84,12 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
   private var cursor: xmlNodePtr?
   mutating func next() -> xmlNodePtr? {
     defer {
-      while let ptr = cursor {
-        cursor = cursor?.pointee.next
+      if let ptr = cursor {
+        cursor = ptr.pointee.next
       }
+    }
+    while let ptr = cursor where !types.contains({ $0 == ptr.pointee.type }){
+      cursor = ptr.pointee.next
     }
     return cursor
   }
@@ -99,14 +102,16 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
 }
 
 internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: String, inNamespace ns: String?) -> Bool {
-  let name = ^-^node?.pointee.name
-  var matches = name?.compare(tag, options: .caseInsensitiveSearch) == .orderedSame
+  guard let name = ^-^node?.pointee.name else {
+    return false
+  }
+  var matches = name.compare(tag, options: .caseInsensitiveSearch) == .orderedSame
   
   if let ns = ns {
-    if let cNS = node?.pointee.ns where cNS.pointee.prefix != nil {
-      let prefix = ^-^cNS.pointee.prefix
-      matches = matches && (prefix?.compare(ns, options: .caseInsensitiveSearch) == .orderedSame)
+    guard let prefix = ^-^node?.pointee.ns.pointee.prefix else {
+      return false
     }
+    matches = matches && (prefix.compare(ns, options: .caseInsensitiveSearch) == .orderedSame)
   }
   return matches
 }

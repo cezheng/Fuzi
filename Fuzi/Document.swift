@@ -32,15 +32,15 @@ public class XMLDocument {
   
   /// The string encoding for the document. This is NSUTF8StringEncoding if no encoding is set, or it cannot be calculated.
   public private(set) lazy var encoding: String.Encoding = {
-    if let encodingName = ^-^self.cDocument.pointee.encoding  {
-      
+    if let encodingName = ^-^self.cDocument.pointee.encoding {
       let encoding = CFStringConvertIANACharSetNameToEncoding(encodingName)
       if encoding != kCFStringEncodingInvalidId {
-        return String.Encoding(rawValue: UInt(encoding))
+        return String.Encoding(rawValue: UInt(CFStringConvertEncodingToNSStringEncoding(encoding)))
       }
     }
     return String.Encoding.utf8
   }()
+
   // MARK: - Accessing the Root Element
   /// The root element of the document.
   public private(set) var root: XMLElement?
@@ -141,7 +141,7 @@ public class XMLDocument {
   - parameter prefix: The prefix name
   - parameter ns:     The default namespace URI that declared in XML Document
   */
-  public func definePrefix(prefix: String, defaultNamespace ns: String) {
+  public func definePrefix(_ prefix: String, defaultNamespace ns: String) {
     defaultNamespaces[ns] = prefix
   }
 }
@@ -180,36 +180,6 @@ public class HTMLDocument: XMLDocument {
   }
   
   // MARK: - Creating HTML Documents
-  /**
-  Creates and returns an instance of HTMLDocument from an HTML string, throwing XMLError if an error occured while parsing the HTML.
-  
-  - parameter string:   The HTML string.
-  - parameter encoding: The string encoding.
-  
-  - throws: `XMLError` instance if an error occurred
-  
-  - returns: An `HTMLDocument` with the contents of the specified HTML string.
-  */
-  public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
-    guard let cChars = string.cString(using: encoding) else {
-      throw XMLError.InvalidData
-    }
-    try self.init(cChars: cChars)
-  }
-  
-  /**
-  Creates and returns an instance of HTMLDocument from HTML data, throwing XMLError if an error occured while parsing the HTML.
-  
-  - parameter data: The HTML data.
-  
-  - throws: `XMLError` instance if an error occurred
-  
-  - returns: An `HTMLDocument` with the contents of the specified HTML string.
-  */
-  public convenience init(data: NSData) throws {
-    try self.init(cChars: [CChar](UnsafeBufferPointer(start: UnsafePointer(data.bytes), count: data.length)))
-  }
-  
   /**
   Creates and returns an instance of HTMLDocument from C char array, throwing XMLError if an error occured while parsing the HTML.
   

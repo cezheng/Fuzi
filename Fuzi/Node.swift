@@ -139,10 +139,7 @@ public class XMLNode {
   
   internal let cNode: xmlNodePtr
   
-  internal init?(cNode: xmlNodePtr?, document: XMLDocument, type: XMLNodeType) {
-    guard let cNode = cNode else {
-      return nil
-    }
+  internal init(cNode: xmlNodePtr, document: XMLDocument, type: XMLNodeType) {
     self.cNode = cNode
     self.type = type
     self.document = document

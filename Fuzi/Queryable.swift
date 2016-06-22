@@ -33,7 +33,7 @@ public protocol Queryable {
   
   - returns: An enumerable collection of results.
   */
-  func xpath(_ xpath: String) -> XPathNodeSet
+  func xpath(_ xpath: String) -> NodeSet
   
   /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
@@ -51,7 +51,7 @@ public protocol Queryable {
   
   - returns: An enumerable collection of results.
   */
-  func css(_ css: String) -> XPathNodeSet
+  func css(_ css: String) -> NodeSet
   
   /**
   Returns the first elements matching an CSS selector, or `nil` if there are no results.
@@ -110,7 +110,7 @@ extension XMLDocument: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func xpath(_ xpath: String) -> XPathNodeSet {
+  public func xpath(_ xpath: String) -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :root!.xpath(xpath)
   }
   
@@ -132,7 +132,7 @@ extension XMLDocument: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func css(_ css: String) -> XPathNodeSet {
+  public func css(_ css: String) -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :root!.css(css)
   }
   
@@ -167,7 +167,7 @@ extension XMLElement: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func xpath(_ xpath: String) -> XPathNodeSet {
+  public func xpath(_ xpath: String) -> NodeSet {
     guard let cXPath = self.cXPath(xpathString: xpath) else {
       return XPathNodeSet.emptySet
     }
@@ -192,7 +192,7 @@ extension XMLElement: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func css(_ css: String) -> XPathNodeSet {
+  public func css(_ css: String) -> NodeSet {
     return xpath(XPath(fromCSS:css))
   }
   

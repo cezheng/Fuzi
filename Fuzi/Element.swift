@@ -111,11 +111,11 @@ public class XMLElement: XMLNode {
   */
   public func firstChild(tag: String, inNamespace ns: String? = nil) -> XMLElement? {
     var nodePtr = cNode.pointee.children
-    while nodePtr != nil {
+    while let cNode = nodePtr {
       if cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
-        return XMLElement(cNode: nodePtr, document: self.document)
+        return XMLElement(cNode: cNode, document: self.document)
       }
-      nodePtr = nodePtr?.pointee.next
+      nodePtr = cNode.pointee.next
     }
     return nil
   }
@@ -173,7 +173,7 @@ public class XMLElement: XMLNode {
     return attr(name)
   }
   
-  internal init?(cNode: xmlNodePtr?, document: XMLDocument) {
+  internal init(cNode: xmlNodePtr, document: XMLDocument) {
     super.init(cNode: cNode, document: document, type: .Element)
   }
 }
