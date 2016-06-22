@@ -23,10 +23,10 @@ import XCTest
 import Fuzi
 
 class AtomTests: XCTestCase {
-  var document: XMLDocument!
+  var document: Fuzi.XMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = NSBundle(forClass: AtomTests.self).pathForResource("atom", ofType: "xml")!
+    let filePath = Bundle(for: AtomTests.self).pathForResource("atom", ofType: "xml")!
     do {
       document = try XMLDocument(data: NSData(contentsOfFile: filePath)!)
     } catch {
@@ -40,7 +40,7 @@ class AtomTests: XCTestCase {
   }
   
   func testXMLEncoding() {
-    XCTAssertEqual(document.encoding, NSUTF8StringEncoding, "XML encoding should be UTF-8")
+    XCTAssertEqual(document.encoding, String.Encoding.utf8, "XML encoding should be UTF-8")
   }
   
   func testRoot() {
@@ -71,15 +71,18 @@ class AtomTests: XCTestCase {
   func testUpdated() {
     let updatedElement = document.root!.firstChild(tag: "updated")
     XCTAssertNotNil(updatedElement?.dateValue, "dateValue should not be nil")
-    let dateComponents = NSDateComponents()
-    dateComponents.timeZone = NSTimeZone(abbreviation: "UTC")
-    dateComponents.year = 2003
-    dateComponents.month = 12
-    dateComponents.day = 13
-    dateComponents.hour = 18
-    dateComponents.minute = 30
-    dateComponents.second = 2
-    XCTAssertEqual(updatedElement?.dateValue, NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)?.dateFromComponents(dateComponents), "dateValue should be equal to December 13, 2003 6:30:02 PM")
+    let calendar = Calendar(calendarIdentifier: Calendar.Identifier.gregorian)
+    let dateComponents = DateComponents(
+      calendar: calendar,
+      timeZone: TimeZone(abbreviation: "UTC"),
+      year: 2003,
+      month: 12,
+      day: 13,
+      hour: 18,
+      minute: 30,
+      second: 2
+    )
+    XCTAssertEqual(updatedElement?.dateValue, dateComponents.date, "dateValue should be equal to December 13, 2003 6:30:02 PM")
   }
   
   func testEntries() {
@@ -101,10 +104,10 @@ class AtomTests: XCTestCase {
   
   func testXPathWithNamespaces() {
     var count = 0
-    for (index, element) in document.xpath("//dc:language").enumerate() {
+    for (offset, element) in document.xpath("//dc:language").enumerated() {
       XCTAssertNotNil(element.namespace, "the namespace shouldn't be nil")
       XCTAssertEqual(element.namespace!, "dc", "Namespaces should match")
-      count = index + 1
+      count = offset + 1
     }
     XCTAssertEqual(count, 1, "should be 1 entry element")
   }

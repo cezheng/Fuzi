@@ -26,7 +26,7 @@ class HTMLTests: XCTestCase {
   var document: HTMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = NSBundle(forClass: HTMLTests.self).pathForResource("web", ofType: "html")!
+    let filePath = Bundle(for: HTMLTests.self).pathForResource("web", ofType: "html")!
     do {
       document = try HTMLDocument(data: NSData(contentsOfFile: filePath)!)
     } catch {

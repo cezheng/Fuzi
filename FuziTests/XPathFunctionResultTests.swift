@@ -23,10 +23,10 @@ import XCTest
 import Fuzi
 
 class XPathFunctionResultTests: XCTestCase {
-  var document: XMLDocument!
+  var document: Fuzi.XMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = NSBundle(forClass: AtomTests.self).pathForResource("atom", ofType: "xml")!
+    let filePath = Bundle(for: AtomTests.self).pathForResource("atom", ofType: "xml")!
     do {
       document = try XMLDocument(data: NSData(contentsOfFile: filePath)!)
     } catch {
