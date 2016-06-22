@@ -25,7 +25,7 @@
 
 import Fuzi
 
-let filePath = ((__FILE__ as NSString).stringByDeletingLastPathComponent as NSString).stringByAppendingPathComponent("nutrition.xml")
+let filePath = ((#file as NSString).deletingLastPathComponent as NSString).appendingPathComponent("nutrition.xml")
 do {
   let data = NSData(contentsOfFile: filePath)!
   let document = try XMLDocument(data: data)
@@ -51,7 +51,7 @@ do {
     let css = "food > serving[units]"
     var blockElement:XMLElement? = nil
     print("CSS Search: \(css)")
-    for (index, element) in document.css(css).enumerate() {
+    for (index, element) in document.css(css).enumerated() {
       if index == 1 {
         blockElement = element
         break

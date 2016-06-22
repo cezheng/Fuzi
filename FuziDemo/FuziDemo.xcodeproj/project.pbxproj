@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7932B1151BA7EC67008CA6F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932B1131BA7EC67008CA6F5 /* main.swift */; settings = {ASSET_TAGS = (); }; };
-		7932B15E1BA7FAD4008CA6F5 /* nutrition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */; settings = {ASSET_TAGS = (); }; };
+		7932B1151BA7EC67008CA6F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932B1131BA7EC67008CA6F5 /* main.swift */; };
+		7932B15E1BA7FAD4008CA6F5 /* nutrition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */; };
 		7932B1671BA85C9D008CA6F5 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932B1661BA85C9D008CA6F5 /* Fuzi.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ce Zheng";
 				TargetAttributes = {
 					799EB4DC1BA42D4D00E8F920 = {
@@ -250,6 +250,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.FuzeDemo;
 				PRODUCT_NAME = FuziDemo;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
