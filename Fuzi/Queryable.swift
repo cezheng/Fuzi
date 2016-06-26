@@ -256,7 +256,7 @@ private class RegexConstants {
   
   static let classRegex = try! RegularExpression(pattern: "\\.([^\\.]+)", options: [])
   
-  static let attributeRegex = try! RegularExpression(pattern: "\\[(.+)\\]", options: [])
+  static let attributeRegex = try! RegularExpression(pattern: "\\[([^\\[\\]]+)\\]", options: [])
 }
 
 internal func XPath(fromCSS css: String) -> String {
