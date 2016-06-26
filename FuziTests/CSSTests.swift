@@ -71,6 +71,14 @@ class CSSTests: XCTestCase {
     XCTAssertEqual(XPath(fromCSS:"img[alt]"), ".//img[@alt]")
   }
   
+  func testCSSAttributeValueSelector() {
+    XCTAssertEqual(XPath(fromCSS:"a[rel='next']"), ".//a[@rel='next']")
+  }
+    
+  func testCSSMultipleAttributesSelector() {
+    XCTAssertEqual(XPath(fromCSS:"a[rel='next'][href='/foo/bar']"), ".//a[@rel='next'][@href='/foo/bar']")
+  }
+  
   func testCSSAttributeSelector() {
     XCTAssertEqual(XPath(fromCSS:"ul, ol"), ".//ul | .//ol")
   }
