@@ -8,14 +8,16 @@
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 [![Weibo](https://img.shields.io/badge/weibo-Real__Adam-red.svg)](http://weibo.com/cezheng)
 
+> 需要支持Swift 3的版本? 请使用 [swift-3](../../tree/swift-3) branch。
+
 **Swift实现的轻量快速的 XML/HTML 解析器。** [[文档]](http://cezheng.github.io/Fuzi/)
 
 Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平台上非常好用的一个XML/HTML 解析库。用ObjectiveC实现的Ono在Swift的应用里虽然可以使用，却有诸多不便。因此鄙人参照了Ono对libxml2的封装方式，对类和方法进行了重新设计弄出了这个小库。同时修正了Ono存在的一些逻辑上和内存管理方面的bug。
 
 > Fuzi(斧子) 大家都懂是啥意思，[Ono](https://github.com/mattt/Ono)(斧)则是`斧`这个汉字的日语读法, 因为Mattt神写出Ono是受了 [Nokogiri](http://nokogiri.org) (鋸)的启发，取了一个同类的名词向其致敬。
 
-[English](https://github.com/cezheng/Fuzi/blob/master/README.md)
-[日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
+[English](README.md)
+[日本語](README-ja.md)
 
 ## 一个简单的例子
 ```swift
@@ -226,7 +228,7 @@ document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 
 [Ono示例](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuzi示例](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuzi示例](FuziDemo/FuziDemo/main.swift)
 
 ###访问子节点
 **Ono**
@@ -323,4 +325,4 @@ if let result = doc.eval(xpath: xpath) {
 
 ## 开源协议
 
-`Fuzi` 使用MIT许可协议。详见 [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) 。
+`Fuzi` 使用MIT许可协议。详见 [LICENSE](LICENSE) 。

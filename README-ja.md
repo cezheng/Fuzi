@@ -7,14 +7,16 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
+> Swift 3の対応がほしい？[swift-3](../../tree/swift-3) ブランチをチェックアウトしてください。
+
 **軽くて、素早くて、 Swift の XML/HTML パーサー。** [[ドキュメント]](http://cezheng.github.io/Fuzi/)
 
 Fuzi は Mattt Thompson氏の [Ono](https://github.com/mattt/Ono)(斧) に参照し Swift 言語で実装した XML/HTML パーサーである。
 
 > Fuzi は漢字の`斧子`の中国語発音で、 意味は[Ono](https://github.com/mattt/Ono)(斧)と同じ。Onoは、[Nokogiri](http://nokogiri.org)(鋸)を参照し、創ったもの。
 
-[English](https://github.com/cezheng/Fuzi/blob/master/README.md)
-[简体中文](https://github.com/cezheng/Fuzi/blob/master/README-zh.md)
+[English](README.md)
+[简体中文](README-zh.md)
 ## クイックルック
 ```swift
 let xml = "..."
@@ -225,7 +227,7 @@ document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 
 [Onoサンプル](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuziサンプル](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuziサンプル](FuziDemo/FuziDemo/main.swift)
 
 ###子要素を取得
 **Ono**
@@ -322,4 +324,4 @@ if let result = doc.eval(xpath: xpath) {
 ```
 ## ライセンス
 
-`Fuzi` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) 。
+`Fuzi` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](LICENSE) 。

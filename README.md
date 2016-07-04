@@ -7,14 +7,16 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
+> Looking for Swift 3 support? Checkout the [swift-3](../../tree/swift-3) branch.
+
 **A fast & lightweight XML/HTML parser in Swift that makes your life easier.** [[Documentation]](http://cezheng.github.io/Fuzi/)
 
 Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt/Ono)(斧), using most of its low level implementaions with moderate class & interface redesign following standard Swift conventions, along with several bug fixes.
 
 > Fuzi(斧子) means "axe", in homage to [Ono](https://github.com/mattt/Ono)(斧), which in turn is inspired by [Nokogiri](http://nokogiri.org) (鋸), which means "saw".
 
-[简体中文](https://github.com/cezheng/Fuzi/blob/master/README-zh.md)
-[日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
+[简体中文](README-zh.md)
+[日本語](README-ja.md)
 ## A Quick Look
 ```swift
 let xml = "..."
@@ -228,7 +230,7 @@ Looking at example programs is the swiftest way to know the difference. The foll
 
 [Ono Example](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuzi Example](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuzi Example](FuziDemo/FuziDemo/main.swift)
 
 ###Accessing children
 **Ono**
@@ -326,4 +328,4 @@ if let result = doc.eval(xpath: xpath) {
 
 ## License
 
-`Fuzi` is released under the MIT license. See [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) for details.
+`Fuzi` is released under the MIT license. See [LICENSE](LICENSE) for details.
