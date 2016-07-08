@@ -105,13 +105,13 @@ internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: String, inNamespace 
   guard let name = ^-^node?.pointee.name else {
     return false
   }
-  var matches = name.compare(tag, options: .caseInsensitiveSearch) == .orderedSame
+  var matches = name.compare(tag, options: .caseInsensitive) == .orderedSame
   
   if let ns = ns {
     guard let prefix = ^-^node?.pointee.ns.pointee.prefix else {
       return false
     }
-    matches = matches && (prefix.compare(ns, options: .caseInsensitiveSearch) == .orderedSame)
+    matches = matches && (prefix.compare(ns, options: .caseInsensitive) == .orderedSame)
   }
   return matches
 }
