@@ -115,6 +115,11 @@ public class XMLNode {
   }()
   
   // MARK: - Accessing Contents
+  // Whether this is a HTML node
+  public var isHTML: Bool {
+    return UInt32(self.cNode.memory.doc.memory.properties) & XML_DOC_HTML.rawValue == XML_DOC_HTML.rawValue
+  }
+
   /// A string representation of the element's value.
   public private(set) lazy var stringValue : String = {
     let key = xmlNodeGetContent(self.cNode)
@@ -126,7 +131,11 @@ public class XMLNode {
   /// The raw XML string of the element.
   public private(set) lazy var rawXML: String = {
     let buffer = xmlBufferCreate()
-    xmlNodeDump(buffer, self.cNode.memory.doc, self.cNode, 0, 0)
+    if self.isHTML {
+      htmlNodeDump(buffer, self.cNode.memory.doc, self.cNode)
+    } else {
+      xmlNodeDump(buffer, self.cNode.memory.doc, self.cNode, 0, 0)
+    }
     let dumped = ^-^xmlBufferContent(buffer) ?? ""
     xmlBufferFree(buffer)
     return dumped
