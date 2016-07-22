@@ -2,6 +2,8 @@ language: objective-c
 
 os: osx
 osx_image: xcode8
+before_install:
+- gem install xcpretty
 
 env:
   global:
@@ -18,5 +20,5 @@ env:
 
 script:
   - xcode-select -p
-  - xctool -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION
+  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION | xcpretty
 
