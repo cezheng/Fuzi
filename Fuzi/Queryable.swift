@@ -282,7 +282,7 @@ internal func XPathFromCSS(css: String) -> String {
         if let symbolRange = token.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "#.[]")) {
           let symbol = symbolRange.startIndex == token.startIndex ?"*" :""
           var xpathComponent = token.substringToIndex(symbolRange.startIndex)
-          let nsrange = NSRange(location: 0, length: token.characters.count)
+          let nsrange = NSRange(location: 0, length: token.utf16.count)
           
           if let result = RegexConstants.idRegex.firstMatchInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
             xpathComponent += "\(symbol)[@id = '\(token[result.rangeAtIndex(1)])']"
