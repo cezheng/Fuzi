@@ -275,11 +275,11 @@ internal func XPath(fromCSS css: String) -> String {
         if prefix == nil && idx != 0 {
           prefix = "descendant::"
         }
-        
+
         if let symbolRange = token.rangeOfCharacter(from: CharacterSet(charactersIn: "#.[]")) {
           let symbol = symbolRange.lowerBound == token.startIndex ?"*" :""
           var xpathComponent = token.substring(to: symbolRange.lowerBound)
-          let nsrange = NSRange(location: 0, length: token.characters.count)
+          let nsrange = NSRange(location: 0, length: token.utf16.count)
           
           if let result = RegexConstants.idRegex.firstMatch(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
             xpathComponent += "\(symbol)[@id = '\(token[result.range(at: 1)])']"

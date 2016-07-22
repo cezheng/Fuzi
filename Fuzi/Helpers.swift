@@ -54,9 +54,9 @@ extension XMLDocument: CustomStringConvertible, CustomDebugStringConvertible {
 
 internal extension String {
   subscript (nsrange: NSRange) -> String {
-    let start = index(startIndex, offsetBy: nsrange.location)
-    let end = index(start, offsetBy: nsrange.length)
-    return self[start..<end]
+    let start = utf16.index(utf16.startIndex, offsetBy: nsrange.location)
+    let end = utf16.index(start, offsetBy: nsrange.length)
+    return String(utf16[start..<end])
   }
 }
 
