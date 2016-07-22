@@ -281,7 +281,7 @@ internal func XPath(fromCSS css: String) -> String {
           var xpathComponent = token.substring(to: symbolRange.lowerBound)
           let nsrange = NSRange(location: 0, length: token.utf16.count)
           
-          if let result = RegexConstants.idRegex.firstMatch(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
+          if let result = RegexConstants.idRegex.firstMatch(in: token, options: [], range: nsrange), result.numberOfRanges > 1 {
             xpathComponent += "\(symbol)[@id = '\(token[result.range(at: 1)])']"
           }
           

@@ -76,7 +76,7 @@ class XMLTests: XCTestCase {
     do {
       document = try XMLDocument(cChars: [CChar]())
       XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.ParserFailure {
+    } catch XMLError.parserFailure {
       
     } catch {
       XCTAssertFalse(true, "error type should be ParserFailure")

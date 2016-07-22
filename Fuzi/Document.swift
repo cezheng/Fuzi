@@ -76,7 +76,7 @@ public class XMLDocument {
   */
   public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
     guard let cChars = string.cString(using: encoding) else {
-      throw XMLError.InvalidData
+      throw XMLError.invalidData
     }
     try self.init(cChars: cChars)
   }
@@ -116,7 +116,7 @@ public class XMLDocument {
   
   private convenience init(parseFunction: ParseFunction, cChars: [CChar], options: Int32) throws {
     guard let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), "", nil, options) else {
-      throw XMLError.lastError(defaultError: .ParserFailure)
+      throw XMLError.lastError(defaultError: .parserFailure)
     }
     xmlResetLastError()
     self.init(cDocument: document)

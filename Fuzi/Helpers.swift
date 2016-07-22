@@ -88,7 +88,7 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
         cursor = ptr.pointee.next
       }
     }
-    while let ptr = cursor where !types.contains({ $0 == ptr.pointee.type }){
+    while let ptr = cursor, !types.contains({ $0 == ptr.pointee.type }) {
       cursor = ptr.pointee.next
     }
     return cursor

@@ -80,7 +80,7 @@ class HTMLTests: XCTestCase {
     do {
       document = try HTMLDocument(cChars: [CChar]())
       XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.ParserFailure {
+    } catch XMLError.parserFailure {
       
     } catch {
       XCTAssertFalse(true, "error type should be ParserFailure")

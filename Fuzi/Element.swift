@@ -147,7 +147,7 @@ public class XMLElement: XMLNode {
   }()
   
   /// A date representation of the element's value, which is generated from the document's `dateFormatter` property.
-  public private(set) lazy var dateValue: NSDate? = {
+  public private(set) lazy var dateValue: Date? = {
     return self.document.dateFormatter.date(from: self.stringValue)
   }()
   
