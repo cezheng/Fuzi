@@ -2,8 +2,6 @@ language: objective-c
 
 os: osx
 osx_image: xcode8
-before_install:
-- gem install xcpretty
 
 env:
   global:
@@ -19,6 +17,4 @@ env:
     - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" ACTION="build"
 
 script:
-  - xcode-select -p
-  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION | xcpretty -c
-
+  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION
