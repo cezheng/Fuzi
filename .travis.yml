@@ -13,12 +13,12 @@ env:
     - TVOS_SCHEME="Fuzi-tvOS"
     - WATCHOS_SCHEME="Fuzi-WatchOS"
   matrix:
-    - DESTINATION="platform=OS X,arch=x86_64" SCHEME="$OSX_SCHEME" ACTION="test"
+    - DESTINATION="platform=macOS,arch=x86_64" SCHEME="$OSX_SCHEME" ACTION="test"
     - DESTINATION="platform=iOS Simulator,name=iPhone 6s" SCHEME="$IOS_SCHEME" EXTRA="-sdk iphonesimulator" ACTION="test"
     - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SCHEME="$TVOS_SCHEME" EXTRA="-sdk appletvsimulator" ACTION="test"
     - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" ACTION="build"
 
 script:
   - xcode-select -p
-  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION | xcpretty
+  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION | xcpretty -c
 
