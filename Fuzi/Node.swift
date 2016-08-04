@@ -91,7 +91,9 @@ public class XMLNode {
   public unowned let document: XMLDocument
   
   /// The type of the XMLNode
-  public var type: XMLNodeType
+  public var type: XMLNodeType {
+    return cNode.pointee.type
+  }
   
   /// The element's line number.
   public private(set) lazy var lineNumber: Int = {
@@ -115,7 +117,7 @@ public class XMLNode {
   }()
   
   // MARK: - Accessing Contents
-  // Whether this is a HTML node
+  /// Whether this is a HTML node
   public var isHTML: Bool {
     return UInt32(self.cNode.pointee.doc.pointee.properties) & XML_DOC_HTML.rawValue == XML_DOC_HTML.rawValue
   }
@@ -148,9 +150,8 @@ public class XMLNode {
   
   internal let cNode: xmlNodePtr
   
-  internal init(cNode: xmlNodePtr, document: XMLDocument, type: XMLNodeType) {
+  internal init(cNode: xmlNodePtr, document: XMLDocument) {
     self.cNode = cNode
-    self.type = type
     self.document = document
   }
 }

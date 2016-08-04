@@ -25,7 +25,7 @@ import libxml2
 /**
 *  XMLError enumeration.
 */
-public enum XMLError: ErrorProtocol {
+public enum XMLError: Error {
   /// No error
   case noError
   /// Contains a libxml2 error with error code and message

@@ -96,7 +96,7 @@ public class XMLElement: XMLNode {
       case XMLNodeType.Element:
         return XMLElement(cNode: node, document: self.document)
       default:
-        return XMLNode(cNode: node, document: self.document, type: node.pointee.type)
+        return XMLNode(cNode: node, document: self.document)
       }
     }
   }
@@ -171,9 +171,5 @@ public class XMLElement: XMLNode {
   */
   public subscript (name: String) -> String? {
     return attr(name)
-  }
-  
-  internal init(cNode: xmlNodePtr, document: XMLDocument) {
-    super.init(cNode: cNode, document: document, type: .Element)
   }
 }
