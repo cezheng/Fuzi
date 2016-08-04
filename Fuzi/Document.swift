@@ -56,7 +56,7 @@ public class XMLDocument {
   /// The formatter used to determine `dateValue` for elements in the document. By default, this is an `NSDateFormatter` instance configured to accept ISO 8601 formatted timestamps.
   public lazy var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.locale = Locale(localeIdentifier: "en_US_POSIX")
+    formatter.locale = Locale(identifier: "en_US_POSIX")
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
     return formatter
   }()

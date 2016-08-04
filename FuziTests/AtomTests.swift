@@ -26,7 +26,7 @@ class AtomTests: XCTestCase {
   var document: Fuzi.XMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = Bundle(for: AtomTests.self).pathForResource("atom", ofType: "xml")!
+    let filePath = Bundle(for: AtomTests.self).path(forResource: "atom", ofType: "xml")!
     do {
       document = try XMLDocument(data: NSData(contentsOfFile: filePath)!)
     } catch {
@@ -71,7 +71,7 @@ class AtomTests: XCTestCase {
   func testUpdated() {
     let updatedElement = document.root!.firstChild(tag: "updated")
     XCTAssertNotNil(updatedElement?.dateValue, "dateValue should not be nil")
-    let calendar = Calendar(calendarIdentifier: Calendar.Identifier.gregorian)
+    let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
     let dateComponents = DateComponents(
       calendar: calendar,
       timeZone: TimeZone(abbreviation: "UTC"),
