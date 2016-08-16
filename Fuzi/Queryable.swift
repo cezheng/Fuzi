@@ -73,23 +73,23 @@ public protocol Queryable {
 }
 
 /// Result for evaluating a XPath expression
-public class XPathFunctionResult {
+open class XPathFunctionResult {
   /// Boolean value
-  public private(set) lazy var boolValue: Bool = {
+  open fileprivate(set) lazy var boolValue: Bool = {
     return self.cXPath.pointee.boolval != 0
   }()
   
   /// Double value
-  public private(set) lazy var doubleValue: Double = {
+  open fileprivate(set) lazy var doubleValue: Double = {
     return self.cXPath.pointee.floatval
   }()
   
   /// String value
-  public private(set) lazy var stringValue: String = {
+  open fileprivate(set) lazy var stringValue: String = {
     return ^-^self.cXPath.pointee.stringval ?? ""
   }()
   
-  private let cXPath: xmlXPathObjectPtr
+  fileprivate let cXPath: xmlXPathObjectPtr
   internal init?(cXPath: xmlXPathObjectPtr?) {
     guard let cXPath = cXPath else {
       return nil
@@ -218,7 +218,7 @@ extension XMLElement: Queryable {
     return XPathFunctionResult(cXPath: cXPath(xpathString: xpath))
   }
   
-  private func cXPath(xpathString: String) -> xmlXPathObjectPtr? {
+  fileprivate func cXPath(xpathString: String) -> xmlXPathObjectPtr? {
     guard let context = xmlXPathNewContext(cNode.pointee.doc) else {
       return nil
     }
@@ -234,7 +234,9 @@ extension XMLElement: Queryable {
           
           if let defaultPrefix = document.defaultNamespaces[href] {
             prefixChars = defaultPrefix.cString(using: String.Encoding.utf8) ?? []
-            prefix = UnsafePointer(prefixChars)
+            prefixChars.withUnsafeBufferPointer {(cArray: UnsafeBufferPointer<CChar>) -> Void in
+                prefix = UnsafeRawPointer(cArray.baseAddress)?.assumingMemoryBound(to: xmlChar.self)
+            }
           }
         }
         if prefix != nil {

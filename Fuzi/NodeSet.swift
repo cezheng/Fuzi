@@ -23,15 +23,15 @@ import Foundation
 import libxml2
 
 /// An enumerable set of XML nodes
-public class NodeSet: Collection {
+open class NodeSet: Collection {
   // Index type for `Indexable` protocol
   public typealias Index = Int
 
   // IndexDistance type for `Indexable` protocol
   public typealias IndexDistance = Int
   
-  private var cursor = 0
-  public func next() -> XMLElement? {
+  fileprivate var cursor = 0
+  open func next() -> XMLElement? {
     defer {
       cursor += 1
     }
@@ -42,27 +42,27 @@ public class NodeSet: Collection {
   }
 
   /// Number of nodes
-  public private(set) lazy var count: Int = {
+  open fileprivate(set) lazy var count: Int = {
     return Int(self.cNodeSet?.pointee.nodeNr ?? 0)
   }()
   
   /// First Element
-  public var first: XMLElement? {
+  open var first: XMLElement? {
     return count > 0 ? self[startIndex] : nil
   }
 
   /// if nodeset is empty
-  public var isEmpty: Bool {
+  open var isEmpty: Bool {
     return (cNodeSet == nil) || (cNodeSet!.pointee.nodeNr == 0) || (cNodeSet!.pointee.nodeTab == nil)
   }
 
   /// Start index
-  public var startIndex: Index {
+  open var startIndex: Index {
     return 0
   }
 
   /// End index
-  public var endIndex: Index {
+  open var endIndex: Index {
     return count
   }
 
@@ -73,7 +73,7 @@ public class NodeSet: Collection {
 
    - returns: the idx'th node, nil if out of range
   */
-  public subscript(_ idx: Index) -> XMLElement {
+  open subscript(_ idx: Index) -> XMLElement {
     _precondition(idx >= startIndex && idx < endIndex, "Index of out bound")
     return XMLElement(cNode: (cNodeSet!.pointee.nodeTab[idx])!, document: document)
   }
@@ -85,7 +85,7 @@ public class NodeSet: Collection {
 
    - returns: the index after `idx`
    */
-  public func index(after idx: Index) -> Index {
+  open func index(after idx: Index) -> Index {
     return idx + 1
   }
   
@@ -99,11 +99,11 @@ public class NodeSet: Collection {
 }
 
 /// XPath selector result node set
-public class XPathNodeSet: NodeSet {
+open class XPathNodeSet: NodeSet {
   /// Empty node set
-  public static let emptySet = XPathNodeSet(cXPath: nil, document: nil)
+  open static let emptySet = XPathNodeSet(cXPath: nil, document: nil)
 
-  private var cXPath: xmlXPathObjectPtr?
+  fileprivate var cXPath: xmlXPathObjectPtr?
   
   internal init(cXPath: xmlXPathObjectPtr?, document: XMLDocument?) {
     self.cXPath = cXPath

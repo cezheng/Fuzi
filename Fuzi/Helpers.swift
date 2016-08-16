@@ -56,23 +56,23 @@ internal extension String {
   subscript (nsrange: NSRange) -> String {
     let start = utf16.index(utf16.startIndex, offsetBy: nsrange.location)
     let end = utf16.index(start, offsetBy: nsrange.length)
-    return String(utf16[start..<end])
+    return String(utf16[start..<end])!
   }
 }
 
 // Just a smiling helper operator making frequent UnsafePointer -> String cast
 
-prefix operator ^-^ {}
+prefix operator ^-^
 internal prefix func ^-^ <T> (ptr: UnsafePointer<T>?) -> String? {
   if let ptr = ptr {
-    return String(validatingUTF8: UnsafePointer(ptr))
+    return String(validatingUTF8: UnsafeRawPointer(ptr).assumingMemoryBound(to: CChar.self))
   }
   return nil
 }
 
 internal prefix func ^-^ <T> (ptr: UnsafeMutablePointer<T>?) -> String? {
   if let ptr = ptr {
-    return String(validatingUTF8: UnsafeMutablePointer(ptr))
+    return String(validatingUTF8: UnsafeMutableRawPointer(ptr).assumingMemoryBound(to: CChar.self))
   }
   return nil
 }
@@ -81,7 +81,7 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
   internal let head: xmlNodePtr?
   internal let types: [xmlElementType]
   
-  private var cursor: xmlNodePtr?
+  fileprivate var cursor: xmlNodePtr?
   mutating func next() -> xmlNodePtr? {
     defer {
       if let ptr = cursor {
