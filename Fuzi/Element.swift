@@ -23,21 +23,21 @@ import Foundation
 import libxml2
 
 /// Represents an element in `XMLDocument` or `HTMLDocument`
-public class XMLElement: XMLNode {
+open class XMLElement: XMLNode {
   
   /// The element's namespace.
-  public private(set) lazy var namespace: String? = {
+  open fileprivate(set) lazy var namespace: String? = {
     return ^-^(self.cNode.pointee.ns != nil ?self.cNode.pointee.ns.pointee.prefix :nil)
   }()
   
   /// The element's tag.
-  public private(set) lazy var tag: String? = {
+  open fileprivate(set) lazy var tag: String? = {
     return ^-^self.cNode.pointee.name
   }()
   
   // MARK: - Accessing Attributes
   /// All attributes for the element.
-  public private(set) lazy var attributes: [String : String] = {
+  open fileprivate(set) lazy var attributes: [String : String] = {
     var attributes = [String: String]()
     var attribute = self.cNode.pointee.properties
     while attribute != nil {
@@ -57,7 +57,7 @@ public class XMLElement: XMLNode {
    
    - returns: The attribute value, or `nil` if the attribute is not defined.
    */
-  public func attr(_ name: String, namespace ns: String? = nil) -> String? {
+  open func attr(_ name: String, namespace ns: String? = nil) -> String? {
     var value: String? = nil
     
     let xmlValue: UnsafeMutablePointer<xmlChar>?
@@ -77,7 +77,7 @@ public class XMLElement: XMLNode {
   // MARK: - Accessing Children
   
   /// The element's children elements.
-  public var children: [XMLElement] {
+  open var children: [XMLElement] {
     return LinkedCNodes(head: cNode.pointee.children).flatMap {
       XMLElement(cNode: $0, document: self.document)
     }
@@ -90,7 +90,7 @@ public class XMLElement: XMLNode {
    
   - returns: all children of specified types
   */
-  public func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
+  open func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
     return LinkedCNodes(head: cNode.pointee.children, types: types).flatMap { node in
       switch node.pointee.type {
       case XMLNodeType.Element:
@@ -109,7 +109,7 @@ public class XMLElement: XMLNode {
   
   - returns: The child element.
   */
-  public func firstChild(tag: String, inNamespace ns: String? = nil) -> XMLElement? {
+  open func firstChild(tag: String, inNamespace ns: String? = nil) -> XMLElement? {
     var nodePtr = cNode.pointee.children
     while let cNode = nodePtr {
       if cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
@@ -128,7 +128,7 @@ public class XMLElement: XMLNode {
   
   - returns: The children elements.
   */
-  public func children(tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
+  open func children(tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
     return LinkedCNodes(head: cNode.pointee.children).flatMap {
       cXMLNode($0, matchesTag: tag, inNamespace: ns)
         ? XMLElement(cNode: $0, document: self.document) : nil
@@ -137,17 +137,17 @@ public class XMLElement: XMLNode {
   
   // MARK: - Accessing Content
   /// Whether the element has a value.
-  public var isBlank: Bool {
+  open var isBlank: Bool {
     return stringValue.isEmpty
   }
   
   /// A number representation of the element's value, which is generated from the document's `numberFormatter` property.
-  public private(set) lazy var numberValue: NSNumber? = {
+  open fileprivate(set) lazy var numberValue: NSNumber? = {
     return self.document.numberFormatter.number(from: self.stringValue)
   }()
   
   /// A date representation of the element's value, which is generated from the document's `dateFormatter` property.
-  public private(set) lazy var dateValue: Date? = {
+  open fileprivate(set) lazy var dateValue: Date? = {
     return self.document.dateFormatter.date(from: self.stringValue)
   }()
   
@@ -158,7 +158,7 @@ public class XMLElement: XMLNode {
   
   - returns: The child element.
   */
-  public subscript (idx: Int) -> XMLElement? {
+  open subscript (idx: Int) -> XMLElement? {
     return children[idx]
   }
   
@@ -169,7 +169,7 @@ public class XMLElement: XMLNode {
   
   - returns: The attribute value, or `nil` if the attribute is not defined.
   */
-  public subscript (name: String) -> String? {
+  open subscript (name: String) -> String? {
     return attr(name)
   }
 }
