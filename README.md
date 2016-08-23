@@ -63,7 +63,7 @@ do {
 - Simple, modern API following standard Swift conventions, no more return types like `AnyObject!` that cause unnecessary type casts
 - Customizable date and number formatters
 - Some bugs fixes
-- More convinience methods for HTML Documents
+- More convenience methods for HTML Documents
 - Access XML nodes of all types (Including text, comment, etc.)
 - Support for more CSS selectors (yet to come)
 
