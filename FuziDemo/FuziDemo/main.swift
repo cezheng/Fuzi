@@ -27,7 +27,7 @@ import Fuzi
 
 let filePath = ((#file as NSString).deletingLastPathComponent as NSString).appendingPathComponent("nutrition.xml")
 do {
-  let data = NSData(contentsOfFile: filePath)!
+  let data = Data(contentsOfFile: filePath)!
   let document = try XMLDocument(data: data)
   
   if let root = document.root {

@@ -26,9 +26,9 @@ class HTMLTests: XCTestCase {
   var document: HTMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = Bundle(for: HTMLTests.self).path(forResource: "web", ofType: "html")!
+    let filePath = Bundle(for: HTMLTests.self).url(forResource: "web", withExtension: "html")!
     do {
-      document = try HTMLDocument(data: NSData(contentsOfFile: filePath)!)
+      document = try HTMLDocument(data: Data(contentsOf: filePath))
     } catch {
       XCTAssertFalse(true, "Error should not be thrown")
     }
