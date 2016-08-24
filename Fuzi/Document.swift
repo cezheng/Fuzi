@@ -90,8 +90,13 @@ open class XMLDocument {
   
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
-  public convenience init(data: NSData) throws {
-    try self.init(cChars: [CChar](UnsafeBufferPointer(start: data.bytes.assumingMemoryBound(to: CChar.self), count: data.length)))
+  public convenience init(data: Data) throws {
+    let cChars = data.withUnsafeBytes { (bytes: UnsafePointer<Int8>) -> [CChar] in
+        let buffer = UnsafeBufferPointer(start: bytes, count: data.count)
+        return [CChar](buffer)
+    }
+    
+    try self.init(cChars: cChars)
   }
   
   /**
