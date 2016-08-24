@@ -91,7 +91,12 @@ open class XMLDocument {
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
   public convenience init(data: Data) throws {
-    try self.init(cChars: data.map({ CChar(bitPattern: $0) }))
+    let cChars = data.withUnsafeBytes { (bytes: UnsafePointer<Int8>) -> [CChar] in
+        let buffer = UnsafeBufferPointer(start: bytes, count: data.count)
+        return [CChar](buffer)
+    }
+    
+    try self.init(cChars: cChars)
   }
   
   /**
