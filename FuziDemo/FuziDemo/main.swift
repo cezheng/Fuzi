@@ -25,7 +25,7 @@
 
 import Fuzi
 
-let filePath = ((__FILE__ as NSString).stringByDeletingLastPathComponent as NSString).stringByAppendingPathComponent("nutrition.xml")
+let filePath = ((#file as NSString).stringByDeletingLastPathComponent as NSString).stringByAppendingPathComponent("nutrition.xml")
 do {
   let data = NSData(contentsOfFile: filePath)!
   let document = try XMLDocument(data: data)

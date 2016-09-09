@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7932B1151BA7EC67008CA6F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932B1131BA7EC67008CA6F5 /* main.swift */; settings = {ASSET_TAGS = (); }; };
-		7932B15E1BA7FAD4008CA6F5 /* nutrition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */; settings = {ASSET_TAGS = (); }; };
+		7932B1151BA7EC67008CA6F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932B1131BA7EC67008CA6F5 /* main.swift */; };
+		7932B15E1BA7FAD4008CA6F5 /* nutrition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */; };
 		7932B1671BA85C9D008CA6F5 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932B1661BA85C9D008CA6F5 /* Fuzi.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ce Zheng";
 				TargetAttributes = {
 					799EB4DC1BA42D4D00E8F920 = {
@@ -149,8 +149,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -177,6 +179,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -193,8 +196,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -213,6 +218,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
