@@ -14,7 +14,7 @@ env:
     - DESTINATION="platform=macOS,arch=x86_64" SCHEME="$OSX_SCHEME" SDK="macosx" ACTION="test"
     - DESTINATION="platform=iOS Simulator,name=iPhone 7" SCHEME="$IOS_SCHEME" SDK="iphonesimulator" ACTION="test"
     - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SCHEME="$TVOS_SCHEME" SDK="appletvsimulator" ACTION="test"
-    - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" SDK="watchos" ACTION="build"
+    - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" SDK="watchsimulator" ACTION="build"
 
 script:
   - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk $SDK $ACTION
