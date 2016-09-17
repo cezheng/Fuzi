@@ -13,13 +13,17 @@ Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt
 
 > Fuzi(斧子) means "axe", in homage to [Ono](https://github.com/mattt/Ono)(斧), which in turn is inspired by [Nokogiri](http://nokogiri.org) (鋸), which means "saw".
 
-[简体中文](https://github.com/cezheng/Fuzi/blob/master/README-zh.md)
-[日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
+[简体中文](README-zh.md)
+[日本語](README-ja.md)
 ## A Quick Look
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -61,7 +65,7 @@ do {
 - Simple, modern API following standard Swift conventions, no more return types like `AnyObject!` that cause unnecessary type casts
 - Customizable date and number formatters
 - Some bugs fixes
-- More convinience methods for HTML Documents
+- More convenience methods for HTML Documents
 - Access XML nodes of all types (Including text, comment, etc.)
 - Support for more CSS selectors (yet to come)
 
@@ -69,7 +73,9 @@ do {
 ## Requirements
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Use version [0.4.0](../../releases/tag/0.4.0) for Swift 2.3.
 
 
 ## Installation
@@ -228,7 +234,7 @@ Looking at example programs is the swiftest way to know the difference. The foll
 
 [Ono Example](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuzi Example](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuzi Example](FuziDemo/FuziDemo/main.swift)
 
 ###Accessing children
 **Ono**
@@ -326,4 +332,4 @@ if let result = doc.eval(xpath: xpath) {
 
 ## License
 
-`Fuzi` is released under the MIT license. See [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) for details.
+`Fuzi` is released under the MIT license. See [LICENSE](LICENSE) for details.

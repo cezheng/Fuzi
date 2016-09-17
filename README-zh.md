@@ -14,14 +14,18 @@ Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平�
 
 > Fuzi(斧子) 大家都懂是啥意思，[Ono](https://github.com/mattt/Ono)(斧)则是`斧`这个汉字的日语读法, 因为Mattt神写出Ono是受了 [Nokogiri](http://nokogiri.org) (鋸)的启发，取了一个同类的名词向其致敬。
 
-[English](https://github.com/cezheng/Fuzi/blob/master/README.md)
-[日本語](https://github.com/cezheng/Fuzi/blob/master/README-ja.md)
+[English](README.md)
+[日本語](README-ja.md)
 
 ## 一个简单的例子
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -70,7 +74,9 @@ do {
 ## 环境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Swift 2.3 请使用[0.4.0](../../releases/tag/0.4.0)版。
 
 
 ## 导入
@@ -226,7 +232,7 @@ document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 
 [Ono示例](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuzi示例](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuzi示例](FuziDemo/FuziDemo/main.swift)
 
 ###访问子节点
 **Ono**
@@ -323,4 +329,4 @@ if let result = doc.eval(xpath: xpath) {
 
 ## 开源协议
 
-`Fuzi` 使用MIT许可协议。详见 [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) 。
+`Fuzi` 使用MIT许可协议。详见 [LICENSE](LICENSE) 。

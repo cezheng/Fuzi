@@ -18,8 +18,12 @@ Fuzi は Mattt Thompson氏の [Ono](https://github.com/mattt/Ono)(斧) に参照
 ## クイックルック
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -70,8 +74,9 @@ do {
 ## 環境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
 
+> Swift 2.3は[0.4.0](../../releases/tag/0.4.0)をご利用ください。
 
 ## インストール
 ### CocoaPodsで
@@ -225,7 +230,7 @@ document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 
 [Onoサンプル](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
-[Fuziサンプル](https://github.com/cezheng/Fuzi/blob/master/FuziDemo/FuziDemo/main.swift)
+[Fuziサンプル](FuziDemo/FuziDemo/main.swift)
 
 ###子要素を取得
 **Ono**
@@ -322,4 +327,4 @@ if let result = doc.eval(xpath: xpath) {
 ```
 ## ライセンス
 
-`Fuzi` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](https://github.com/cezheng/Fuzi/blob/master/LICENSE) 。
+`Fuzi` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](LICENSE) 。
