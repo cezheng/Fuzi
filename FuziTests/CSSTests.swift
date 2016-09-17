@@ -24,58 +24,66 @@ import XCTest
 
 class CSSTests: XCTestCase {
   func testCSSWildcardSelector() {
-    XCTAssertEqual(XPathFromCSS("*"), ".//*")
+    XCTAssertEqual(XPath(fromCSS:"*"), ".//*")
   }
   
   func testCSSElementSelector() {
-    XCTAssertEqual(XPathFromCSS("div"), ".//div")
+    XCTAssertEqual(XPath(fromCSS:"div"), ".//div")
   }
   
   func testCSSClassSelector() {
-    XCTAssertEqual(XPathFromCSS(".highlighted"), ".//*[contains(concat(' ',normalize-space(@class),' '),' highlighted ')]")
+    XCTAssertEqual(XPath(fromCSS:".highlighted"), ".//*[contains(concat(' ',normalize-space(@class),' '),' highlighted ')]")
   }
   
   func testCSSElementAndClassSelector() {
-    XCTAssertEqual(XPathFromCSS("span.highlighted"), ".//span[contains(concat(' ',normalize-space(@class),' '),' highlighted ')]")
+    XCTAssertEqual(XPath(fromCSS:"span.highlighted"), ".//span[contains(concat(' ',normalize-space(@class),' '),' highlighted ')]")
   }
   
   func testCSSElementAndIDSelector() {
-    XCTAssertEqual(XPathFromCSS("h1#logo"), ".//h1[@id = 'logo']")
+    XCTAssertEqual(XPath(fromCSS:"h1#logo"), ".//h1[@id = 'logo']")
   }
   
   func testCSSIDSelector() {
-    XCTAssertEqual(XPathFromCSS("#logo"), ".//*[@id = 'logo']")
+    XCTAssertEqual(XPath(fromCSS:"#logo"), ".//*[@id = 'logo']")
   }
   
   func testCSSWildcardChildSelector() {
-    XCTAssertEqual(XPathFromCSS("html *"), ".//html//*")
+    XCTAssertEqual(XPath(fromCSS:"html *"), ".//html//*")
   }
   
   func testCSSDescendantCombinatorSelector() {
-    XCTAssertEqual(XPathFromCSS("body p"), ".//body/descendant::p")
+    XCTAssertEqual(XPath(fromCSS:"body p"), ".//body/descendant::p")
   }
   
   func testCSSChildCombinatorSelector() {
-    XCTAssertEqual(XPathFromCSS("ul > li"), ".//ul/li")
+    XCTAssertEqual(XPath(fromCSS:"ul > li"), ".//ul/li")
   }
   
   func testCSSAdjacentSiblingCombinatorSelector() {
-    XCTAssertEqual(XPathFromCSS("h1 + p"), ".//h1/following-sibling::*[1]/self::p")
+    XCTAssertEqual(XPath(fromCSS:"h1 + p"), ".//h1/following-sibling::*[1]/self::p")
   }
   
   func testCSSGeneralSiblingCombinatorSelector() {
-    XCTAssertEqual(XPathFromCSS("p ~ p"), ".//p/following-sibling::p")
+    XCTAssertEqual(XPath(fromCSS:"p ~ p"), ".//p/following-sibling::p")
   }
   
   func testCSSMultipleExpressionSelector() {
-    XCTAssertEqual(XPathFromCSS("img[alt]"), ".//img[@alt]")
+    XCTAssertEqual(XPath(fromCSS:"img[alt]"), ".//img[@alt]")
+  }
+  
+  func testCSSAttributeValueSelector() {
+    XCTAssertEqual(XPath(fromCSS:"a[rel='next']"), ".//a[@rel='next']")
+  }
+    
+  func testCSSMultipleAttributesSelector() {
+    XCTAssertEqual(XPath(fromCSS:"a[rel='next'][href='/foo/bar']"), ".//a[@rel='next'][@href='/foo/bar']")
   }
   
   func testCSSAttributeSelector() {
-    XCTAssertEqual(XPathFromCSS("ul, ol"), ".//ul | .//ol")
+    XCTAssertEqual(XPath(fromCSS:"ul, ol"), ".//ul | .//ol")
   }
   
   func testCSSIDCombinatorSelector() {
-    XCTAssertEqual(XPathFromCSS("div#test .note"), ".//div[@id = 'test']/descendant::*[contains(concat(' ',normalize-space(@class),' '),' note ')]")
+    XCTAssertEqual(XPath(fromCSS:"div#test .note"), ".//div[@id = 'test']/descendant::*[contains(concat(' ',normalize-space(@class),' '),' note ')]")
   }
 }

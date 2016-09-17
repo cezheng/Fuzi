@@ -33,7 +33,7 @@ public protocol Queryable {
   
   - returns: An enumerable collection of results.
   */
-  func xpath(xpath: String) -> XPathNodeSet
+  func xpath(_ xpath: String) -> NodeSet
   
   /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
@@ -42,7 +42,7 @@ public protocol Queryable {
   
   - returns: The child element.
   */
-  func firstChild(xpath xpath: String) -> XMLElement?
+  func firstChild(xpath: String) -> XMLElement?
   
   /**
   Returns the results for a CSS selector.
@@ -51,7 +51,7 @@ public protocol Queryable {
   
   - returns: An enumerable collection of results.
   */
-  func css(css: String) -> XPathNodeSet
+  func css(_ css: String) -> NodeSet
   
   /**
   Returns the first elements matching an CSS selector, or `nil` if there are no results.
@@ -60,7 +60,7 @@ public protocol Queryable {
   
   - returns: The child element.
   */
-  func firstChild(css css: String) -> XMLElement?
+  func firstChild(css: String) -> XMLElement?
   
   /**
   Returns the result for evaluating an XPath selector that contains XPath function.
@@ -69,38 +69,36 @@ public protocol Queryable {
   
   - returns: The eval function result.
   */
-  func eval(xpath xpath: String) -> XPathFunctionResult?
+  func eval(xpath: String) -> XPathFunctionResult?
 }
 
 /// Result for evaluating a XPath expression
-public class XPathFunctionResult {
+open class XPathFunctionResult {
   /// Boolean value
-  public private(set) lazy var boolValue: Bool = {
-    return self.cXPath.memory.boolval != 0
+  open fileprivate(set) lazy var boolValue: Bool = {
+    return self.cXPath.pointee.boolval != 0
   }()
   
   /// Double value
-  public private(set) lazy var doubleValue: Double = {
-    return self.cXPath.memory.floatval
+  open fileprivate(set) lazy var doubleValue: Double = {
+    return self.cXPath.pointee.floatval
   }()
   
   /// String value
-  public private(set) lazy var stringValue: String = {
-    return ^-^self.cXPath.memory.stringval ?? ""
+  open fileprivate(set) lazy var stringValue: String = {
+    return ^-^self.cXPath.pointee.stringval ?? ""
   }()
   
-  private let cXPath: xmlXPathObjectPtr
-  internal init?(cXPath: xmlXPathObjectPtr) {
-    self.cXPath = cXPath
-    if cXPath == nil {
+  fileprivate let cXPath: xmlXPathObjectPtr
+  internal init?(cXPath: xmlXPathObjectPtr?) {
+    guard let cXPath = cXPath else {
       return nil
     }
+    self.cXPath = cXPath
   }
   
   deinit {
-    if cXPath != nil {
-      xmlXPathFreeObject(cXPath)
-    }
+    xmlXPathFreeObject(cXPath)
   }
 }
 
@@ -112,7 +110,7 @@ extension XMLDocument: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func xpath(xpath: String) -> XPathNodeSet {
+  public func xpath(_ xpath: String) -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :root!.xpath(xpath)
   }
   
@@ -123,7 +121,7 @@ extension XMLDocument: Queryable {
   
   - returns: The child element.
   */
-  public func firstChild(xpath xpath: String) -> XMLElement? {
+  public func firstChild(xpath: String) -> XMLElement? {
     return root?.firstChild(xpath: xpath)
   }
   
@@ -134,7 +132,7 @@ extension XMLDocument: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func css(css: String) -> XPathNodeSet {
+  public func css(_ css: String) -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :root!.css(css)
   }
   
@@ -145,7 +143,7 @@ extension XMLDocument: Queryable {
   
   - returns: The child element.
   */
-  public func firstChild(css css: String) -> XMLElement? {
+  public func firstChild(css: String) -> XMLElement? {
     return root?.firstChild(css: css)
   }
   
@@ -156,7 +154,7 @@ extension XMLDocument: Queryable {
   
   - returns: The eval function result.
   */
-  public func eval(xpath xpath: String) -> XPathFunctionResult? {
+  public func eval(xpath: String) -> XPathFunctionResult? {
     return root?.eval(xpath: xpath)
   }
 }
@@ -169,12 +167,11 @@ extension XMLElement: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func xpath(xpath: String) -> XPathNodeSet {
-    let cXPath = cXPathWithXPathString(xpath)
-    if cXPath != nil {
-      return XPathNodeSet(cXPath: cXPath, document: document)
+  public func xpath(_ xpath: String) -> NodeSet {
+    guard let cXPath = self.cXPath(xpathString: xpath) else {
+      return XPathNodeSet.emptySet
     }
-    return XPathNodeSet.emptySet
+    return XPathNodeSet(cXPath: cXPath, document: document)
   }
   
   /**
@@ -184,7 +181,7 @@ extension XMLElement: Queryable {
   
   - returns: The child element.
   */
-  public func firstChild(xpath xpath: String) -> XMLElement? {
+  public func firstChild(xpath: String) -> XMLElement? {
     return self.xpath(xpath).first
   }
   
@@ -195,8 +192,8 @@ extension XMLElement: Queryable {
   
   - returns: An enumerable collection of results.
   */
-  public func css(css: String) -> XPathNodeSet {
-    return xpath(XPathFromCSS(css))
+  public func css(_ css: String) -> NodeSet {
+    return xpath(XPath(fromCSS:css))
   }
   
   /**
@@ -206,7 +203,7 @@ extension XMLElement: Queryable {
   
   - returns: The child element.
   */
-  public func firstChild(css css: String) -> XMLElement? {
+  public func firstChild(css: String) -> XMLElement? {
     return self.css(css).first
   }
   
@@ -217,41 +214,42 @@ extension XMLElement: Queryable {
   
   - returns: The eval function result.
   */
-  public func eval(xpath xpath: String) -> XPathFunctionResult? {
-    return XPathFunctionResult(cXPath: cXPathWithXPathString(xpath))
+  public func eval(xpath: String) -> XPathFunctionResult? {
+    return XPathFunctionResult(cXPath: cXPath(xpathString: xpath))
   }
   
-  private func cXPathWithXPathString(xpath: String) -> xmlXPathObjectPtr {
-    let context = xmlXPathNewContext(cNode.memory.doc)
-    if context != nil {
-      context.memory.node = cNode
-      var node = cNode
-      while node.memory.parent != nil {
-        var ns = node.memory.nsDef
-        while ns != nil {
-          var prefix = ns.memory.prefix
-          var prefixChars = [CChar]()
-          if prefix == nil && !document.defaultNamespaces.isEmpty {
-            let href = (^-^ns.memory.href)!
-            
-            if let defaultPrefix = document.defaultNamespaces[href] {
-              prefixChars = defaultPrefix.cStringUsingEncoding(NSUTF8StringEncoding) ?? []
-              prefix = UnsafePointer(prefixChars)
+  fileprivate func cXPath(xpathString: String) -> xmlXPathObjectPtr? {
+    guard let context = xmlXPathNewContext(cNode.pointee.doc) else {
+      return nil
+    }
+    context.pointee.node = cNode
+    var node = cNode
+    while node.pointee.parent != nil {
+      var curNs = node.pointee.nsDef
+      while let ns = curNs {
+        var prefix = ns.pointee.prefix
+        var prefixChars = [CChar]()
+        if prefix == nil && !document.defaultNamespaces.isEmpty {
+          let href = (^-^ns.pointee.href)!
+          
+          if let defaultPrefix = document.defaultNamespaces[href] {
+            prefixChars = defaultPrefix.cString(using: String.Encoding.utf8) ?? []
+            prefixChars.withUnsafeBufferPointer {(cArray: UnsafeBufferPointer<CChar>) -> Void in
+                prefix = UnsafeRawPointer(cArray.baseAddress)?.assumingMemoryBound(to: xmlChar.self)
             }
           }
-          if prefix != nil {
-            xmlXPathRegisterNs(context, prefix, ns.memory.href)
-          }
-          ns = ns.memory.next
         }
-        node = node.memory.parent
+        if prefix != nil {
+          xmlXPathRegisterNs(context, prefix, ns.pointee.href)
+        }
+        curNs = ns.pointee.next
       }
-      let xmlXPath = xmlXPathEvalExpression(xpath, context)
-      
-      xmlXPathFreeContext(context)
-      return xmlXPath
+      node = node.pointee.parent
     }
-    return nil
+    let xmlXPath = xmlXPathEvalExpression(xpathString, context)
+    
+    xmlXPathFreeContext(context)
+    return xmlXPath
   }
 }
 
@@ -260,16 +258,16 @@ private class RegexConstants {
   
   static let classRegex = try! NSRegularExpression(pattern: "\\.([^\\.]+)", options: [])
   
-  static let attributeRegex = try! NSRegularExpression(pattern: "\\[(\\w+)\\]", options: [])
+  static let attributeRegex = try! NSRegularExpression(pattern: "\\[([^\\[\\]]+)\\]", options: [])
 }
 
-internal func XPathFromCSS(css: String) -> String {
+internal func XPath(fromCSS css: String) -> String {
   var xpathExpressions = [String]()
-  for expression in css.componentsSeparatedByString(",") where !expression.isEmpty {
+  for expression in css.components(separatedBy: ",") where !expression.isEmpty {
     var xpathComponents = ["./"]
     var prefix: String? = nil
-    let expressionComponents = expression.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-    for (idx, var token) in expressionComponents.enumerate() {
+    let expressionComponents = expression.trimmingCharacters(in: CharacterSet.whitespaces).components(separatedBy: CharacterSet.whitespaces)
+    for (idx, var token) in expressionComponents.enumerated() {
       switch token {
       case "*" where idx != 0: xpathComponents.append("/*")
       case ">": prefix = ""
@@ -279,21 +277,22 @@ internal func XPathFromCSS(css: String) -> String {
         if prefix == nil && idx != 0 {
           prefix = "descendant::"
         }
-        if let symbolRange = token.rangeOfCharacterFromSet(NSCharacterSet(charactersInString: "#.[]")) {
-          let symbol = symbolRange.startIndex == token.startIndex ?"*" :""
-          var xpathComponent = token.substringToIndex(symbolRange.startIndex)
+
+        if let symbolRange = token.rangeOfCharacter(from: CharacterSet(charactersIn: "#.[]")) {
+          let symbol = symbolRange.lowerBound == token.startIndex ?"*" :""
+          var xpathComponent = token.substring(to: symbolRange.lowerBound)
           let nsrange = NSRange(location: 0, length: token.utf16.count)
           
-          if let result = RegexConstants.idRegex.firstMatchInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-            xpathComponent += "\(symbol)[@id = '\(token[result.rangeAtIndex(1)])']"
+          if let result = RegexConstants.idRegex.firstMatch(in: token, options: [], range: nsrange), result.numberOfRanges > 1 {
+            xpathComponent += "\(symbol)[@id = '\(token[result.rangeAt(1)])']"
           }
           
-          for result in RegexConstants.classRegex.matchesInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-            xpathComponent += "\(symbol)[contains(concat(' ',normalize-space(@class),' '),' \(token[result.rangeAtIndex(1)]) ')]"
+          for result in RegexConstants.classRegex.matches(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
+            xpathComponent += "\(symbol)[contains(concat(' ',normalize-space(@class),' '),' \(token[result.rangeAt(1)]) ')]"
           }
           
-          for result in RegexConstants.attributeRegex.matchesInString(token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-            xpathComponent += "[@\(token[result.rangeAtIndex(1)])]"
+          for result in RegexConstants.attributeRegex.matches(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
+            xpathComponent += "[@\(token[result.rangeAt(1)])]"
           }
           
           token = xpathComponent
@@ -307,7 +306,7 @@ internal func XPathFromCSS(css: String) -> String {
         xpathComponents.append(token)
       }
     }
-    xpathExpressions.append(xpathComponents.joinWithSeparator("/"))
+    xpathExpressions.append(xpathComponents.joined(separator: "/"))
   }
-  return xpathExpressions.joinWithSeparator(" | ")
+  return xpathExpressions.joined(separator: " | ")
 }

@@ -8,8 +8,6 @@
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 [![Weibo](https://img.shields.io/badge/weibo-Real__Adam-red.svg)](http://weibo.com/cezheng)
 
-> 需要支持Swift 3的版本? 请使用 [swift-3](../../tree/swift-3) branch。
-
 **Swift实现的轻量快速的 XML/HTML 解析器。** [[文档]](http://cezheng.github.io/Fuzi/)
 
 Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平台上非常好用的一个XML/HTML 解析库。用ObjectiveC实现的Ono在Swift的应用里虽然可以使用，却有诸多不便。因此鄙人参照了Ono对libxml2的封装方式，对类和方法进行了重新设计弄出了这个小库。同时修正了Ono存在的一些逻辑上和内存管理方面的bug。
@@ -22,8 +20,12 @@ Mattt Thompson大神的 [Ono](https://github.com/mattt/Ono)(斧) 是iOS/OSX平�
 ## 一个简单的例子
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -72,7 +74,9 @@ do {
 ## 环境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Swift 2.3 请使用[0.4.0](../../releases/tag/0.4.0)版。
 
 
 ## 导入

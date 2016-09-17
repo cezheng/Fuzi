@@ -7,8 +7,6 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-> Looking for Swift 3 support? Checkout the [swift-3](../../tree/swift-3) branch.
-
 **A fast & lightweight XML/HTML parser in Swift that makes your life easier.** [[Documentation]](http://cezheng.github.io/Fuzi/)
 
 Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt/Ono)(斧), using most of its low level implementaions with moderate class & interface redesign following standard Swift conventions, along with several bug fixes.
@@ -20,8 +18,12 @@ Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt
 ## A Quick Look
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -71,7 +73,9 @@ do {
 ## Requirements
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Use version [0.4.0](../../releases/tag/0.4.0) for Swift 2.3.
 
 
 ## Installation

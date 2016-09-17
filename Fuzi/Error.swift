@@ -25,24 +25,23 @@ import libxml2
 /**
 *  XMLError enumeration.
 */
-public enum XMLError: ErrorType {
+public enum XMLError: Error {
   /// No error
-  case NoError
+  case noError
   /// Contains a libxml2 error with error code and message
-  case LibXMLError(code: Int, message: String)
+  case libXMLError(code: Int, message: String)
   /// Failed to convert String to bytes using given string encoding
-  case InvalidData
+  case invalidData
   /// XML Parser failed to parse the document
-  case ParserFailure
+  case parserFailure
   
-  internal static func lastError(defaultError: XMLError = .NoError) -> XMLError {
-    let errorPtr = xmlGetLastError()
-    guard errorPtr != nil else {
+  internal static func lastError(defaultError: XMLError = .noError) -> XMLError {
+    guard let errorPtr = xmlGetLastError() else {
       return defaultError
     }
-    let message = String.fromCString(errorPtr.memory.message)?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    let code = Int(errorPtr.memory.code)
+    let message = (^-^errorPtr.pointee.message)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    let code = Int(errorPtr.pointee.code)
     xmlResetError(errorPtr)
-    return .LibXMLError(code: code, message: message ?? "")
+    return .libXMLError(code: code, message: message ?? "")
   }
 }

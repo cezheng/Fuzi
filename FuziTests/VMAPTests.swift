@@ -23,12 +23,12 @@ import XCTest
 import Fuzi
 
 class VMAPTests: XCTestCase {
-  var document: XMLDocument!
+  var document: Fuzi.XMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = NSBundle(forClass: VMAPTests.self).pathForResource("vmap", ofType: "xml")!
+    let filePath = Bundle(for: VMAPTests.self).url(forResource: "vmap", withExtension: "xml")!
     do {
-      document = try XMLDocument(data: NSData(contentsOfFile: filePath)!)
+      document = try XMLDocument(data: Data(contentsOf: filePath))
     } catch {
       XCTAssertFalse(true, "Error should not be thrown")
     }

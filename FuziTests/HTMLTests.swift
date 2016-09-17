@@ -26,9 +26,9 @@ class HTMLTests: XCTestCase {
   var document: HTMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = NSBundle(forClass: HTMLTests.self).pathForResource("web", ofType: "html")!
+    let filePath = Bundle(for: HTMLTests.self).url(forResource: "web", withExtension: "html")!
     do {
-      document = try HTMLDocument(data: NSData(contentsOfFile: filePath)!)
+      document = try HTMLDocument(data: Data(contentsOf: filePath))
     } catch {
       XCTAssertFalse(true, "Error should not be thrown")
     }
@@ -80,7 +80,7 @@ class HTMLTests: XCTestCase {
     do {
       document = try HTMLDocument(cChars: [CChar]())
       XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.ParserFailure {
+    } catch XMLError.parserFailure {
       
     } catch {
       XCTAssertFalse(true, "error type should be ParserFailure")

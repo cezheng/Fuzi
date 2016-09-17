@@ -7,21 +7,23 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-> Swift 3の対応がほしい？[swift-3](../../tree/swift-3) ブランチをチェックアウトしてください。
-
 **軽くて、素早くて、 Swift の XML/HTML パーサー。** [[ドキュメント]](http://cezheng.github.io/Fuzi/)
 
 Fuzi は Mattt Thompson氏の [Ono](https://github.com/mattt/Ono)(斧) に参照し Swift 言語で実装した XML/HTML パーサーである。
 
 > Fuzi は漢字の`斧子`の中国語発音で、 意味は[Ono](https://github.com/mattt/Ono)(斧)と同じ。Onoは、[Nokogiri](http://nokogiri.org)(鋸)を参照し、創ったもの。
 
-[English](README.md)
-[简体中文](README-zh.md)
+[English](https://github.com/cezheng/Fuzi/blob/master/README.md)
+[简体中文](https://github.com/cezheng/Fuzi/blob/master/README-zh.md)
 ## クイックルック
 ```swift
 let xml = "..."
+// or
+// let xmlData = <some NSData or Data>
 do {
   let document = try XMLDocument(string: xml)
+  // or
+  // let document = try XMLDocument(data: xmlData)
   
   if let root = document.root {
     // Accessing all child nodes of root element
@@ -72,8 +74,9 @@ do {
 ## 環境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
 
+> Swift 2.3は[0.4.0](../../releases/tag/0.4.0)をご利用ください。
 
 ## インストール
 ### CocoaPodsで

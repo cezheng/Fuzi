@@ -17,5 +17,4 @@ env:
     - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" SDK="watchsimulator" ACTION="build"
 
 script:
-- xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk $SDK $ACTION
-
+  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk $SDK $ACTION
