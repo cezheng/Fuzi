@@ -87,7 +87,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.3.0'
+	pod 'Fuzi', '~> 1.0.0'
 end
 ```
 
@@ -109,7 +109,7 @@ $ pod install
 プロダクトのディレクトリに`Cartfile` か `Cartfile.private`のファイルを作成し、下記の行を追加してください:
 
 ```
-github "cezheng/Fuzi" ~> 0.3.0
+github "cezheng/Fuzi" ~> 1.0.0
 ```
 そして、下記のコマンドを実行してください:
 
