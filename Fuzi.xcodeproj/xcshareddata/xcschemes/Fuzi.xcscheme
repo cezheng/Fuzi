@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7913917C1B53B09F00BC07C3"
+               BlueprintIdentifier = "792500AA1BA6CF6B0011671B"
                BuildableName = "Fuzi.framework"
-               BlueprintName = "Fuzi-iOS"
+               BlueprintName = "Fuzi"
                ReferencedContainer = "container:Fuzi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "791391861B53B09F00BC07C3"
-               BuildableName = "Fuzi-iOSTests.xctest"
-               BlueprintName = "Fuzi-iOSTests"
+               BlueprintIdentifier = "792500B61BA6CFBB0011671B"
+               BuildableName = "FuziTests.xctest"
+               BlueprintName = "FuziTests"
                ReferencedContainer = "container:Fuzi.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7913917C1B53B09F00BC07C3"
+            BlueprintIdentifier = "792500AA1BA6CF6B0011671B"
             BuildableName = "Fuzi.framework"
-            BlueprintName = "Fuzi-iOS"
+            BlueprintName = "Fuzi"
             ReferencedContainer = "container:Fuzi.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -65,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7913917C1B53B09F00BC07C3"
+            BlueprintIdentifier = "792500AA1BA6CF6B0011671B"
             BuildableName = "Fuzi.framework"
-            BlueprintName = "Fuzi-iOS"
+            BlueprintName = "Fuzi"
             ReferencedContainer = "container:Fuzi.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -83,9 +83,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7913917C1B53B09F00BC07C3"
+            BlueprintIdentifier = "792500AA1BA6CF6B0011671B"
             BuildableName = "Fuzi.framework"
-            BlueprintName = "Fuzi-iOS"
+            BlueprintName = "Fuzi"
             ReferencedContainer = "container:Fuzi.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
