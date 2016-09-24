@@ -151,9 +151,9 @@ do {
   // you can also use CSS selector against XMLDocument when you feels it makes sense
 } catch let error as XMLError {
   switch error {
-  case .NoError: print("wth this should not appear")
-  case .ParserFailure, .InvalidData: print(error)
-  case .LibXMLError(let code, let message):
+  case .noError: print("wth this should not appear")
+  case .parserFailure, .invalidData: print(error)
+  case .libXMLError(let code, let message):
     print("libxml error code: \(code), message: \(message)")
   }
 }
