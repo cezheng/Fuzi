@@ -25,9 +25,9 @@
 
 import Fuzi
 
-let filePath = ((#file as NSString).deletingLastPathComponent as NSString).appendingPathComponent("nutrition.xml")
+let fileUrl = URL(fileURLWithPath: ((#file as NSString).deletingLastPathComponent as NSString).appendingPathComponent("nutrition.xml"))
 do {
-  let data = Data(contentsOfFile: filePath)!
+  let data = try Data(contentsOf: fileUrl)
   let document = try XMLDocument(data: data)
   
   if let root = document.root {
@@ -66,9 +66,9 @@ do {
   }
 } catch let error as XMLError {
   switch error {
-  case .NoError: print("wth this should not appear")
-  case .ParserFailure, .InvalidData: print(error)
-  case .LibXMLError(let code, let message):
+  case .noError: print("wth this should not appear")
+  case .parserFailure, .invalidData: print(error)
+  case .libXMLError(let code, let message):
     print("libxml error code: \(code), message: \(message)")
   }
 }

@@ -232,6 +232,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.FuzeDemo;
 				PRODUCT_NAME = FuziDemo;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -251,6 +252,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.FuzeDemo;
 				PRODUCT_NAME = FuziDemo;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
