@@ -8,7 +8,7 @@
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 [![Weibo](https://img.shields.io/badge/weibo-Real__Adam-red.svg)](http://weibo.com/cezheng)
 
-> 需要支持Swift 3的版本? 请使用 [swift-3](../../tree/swift-3) branch。
+> 需要支持Swift 3的版本? 请使用 [最新的release](../../releases)。
 
 **Swift实现的轻量快速的 XML/HTML 解析器。** [[文档]](http://cezheng.github.io/Fuzi/)
 
@@ -72,7 +72,7 @@ do {
 ## 环境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
 
 
 ## 导入
@@ -84,7 +84,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.3.0'
+	pod 'Fuzi', '~> 0.4.0'
 end
 ```
 
@@ -106,7 +106,7 @@ $ pod install
 在项目的根目录下创建名为 `Cartfile` 或 `Cartfile.private`的文件，并加入如下一行:
 
 ```
-github "cezheng/Fuzi" ~> 0.3.0
+github "cezheng/Fuzi" ~> 0.4.0
 ```
 然后执行如下命令:
 

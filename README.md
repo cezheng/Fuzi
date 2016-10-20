@@ -7,7 +7,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-> Looking for Swift 3 support? Checkout the [swift-3](../../tree/swift-3) branch.
+> Looking for Swift 3 support? Please use [lastest releases](../../releases).
 
 **A fast & lightweight XML/HTML parser in Swift that makes your life easier.** [[Documentation]](http://cezheng.github.io/Fuzi/)
 
@@ -71,7 +71,7 @@ do {
 ## Requirements
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
 
 
 ## Installation
@@ -86,7 +86,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.3.0'
+	pod 'Fuzi', '~> 0.4.0'
 end
 ```
 
@@ -108,7 +108,7 @@ $ pod install
 Create a `Cartfile` or `Cartfile.private` in the root directory of your project, and add the following line:
 
 ```
-github "cezheng/Fuzi" ~> 0.3.0
+github "cezheng/Fuzi" ~> 0.4.0
 ```
 Run the following command:
 

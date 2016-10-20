@@ -7,7 +7,7 @@
 [![Platform](https://img.shields.io/cocoapods/p/Fuzi.svg?style=flat)](http://cezheng.github.io/Fuzi/)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-> Swift 3の対応がほしい？[swift-3](../../tree/swift-3) ブランチをチェックアウトしてください。
+> Swift 3の対応がほしい？[最新のリリース](../../releases) をご利用ください。
 
 **軽くて、素早くて、 Swift の XML/HTML パーサー。** [[ドキュメント]](http://cezheng.github.io/Fuzi/)
 
@@ -72,7 +72,7 @@ do {
 ## 環境
 
 - iOS 8.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
 
 
 ## インストール
@@ -84,7 +84,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 0.3.0'
+	pod 'Fuzi', '~> 0.4.0'
 end
 ```
 
@@ -106,7 +106,7 @@ $ pod install
 プロダクトのディレクトリに`Cartfile` か `Cartfile.private`のファイルを作成し、下記の行を追加してください:
 
 ```
-github "cezheng/Fuzi" ~> 0.3.0
+github "cezheng/Fuzi" ~> 0.4.0
 ```
 そして、下記のコマンドを実行してください:
 
