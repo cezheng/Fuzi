@@ -129,8 +129,9 @@ open class XMLDocument {
   
   fileprivate init(cDocument: xmlDocPtr) {
     self.cDocument = cDocument
-    // cDocument shall not be nil
-    root = XMLElement(cNode: xmlDocGetRootElement(cDocument), document: self)
+    if let cRoot = xmlDocGetRootElement(cDocument) {
+      root = XMLElement(cNode: cRoot, document: self)
+    }
   }
   
   deinit {
