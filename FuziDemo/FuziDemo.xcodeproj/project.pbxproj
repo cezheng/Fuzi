@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		791952EA1DE7312000B4426E /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791952E91DE7312000B4426E /* Fuzi.framework */; };
 		7932B1151BA7EC67008CA6F5 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7932B1131BA7EC67008CA6F5 /* main.swift */; };
 		7932B15E1BA7FAD4008CA6F5 /* nutrition.xml in Resources */ = {isa = PBXBuildFile; fileRef = 7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */; };
-		7932B1671BA85C9D008CA6F5 /* Fuzi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932B1661BA85C9D008CA6F5 /* Fuzi.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		791952E91DE7312000B4426E /* Fuzi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fuzi.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Fuzi-ctderlfqfrliqxaskyhwepgvtqdu/Build/Products/Debug/Fuzi.framework"; sourceTree = "<group>"; };
 		7932B1131BA7EC67008CA6F5 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = FuziDemo/main.swift; sourceTree = SOURCE_ROOT; };
 		7932B1141BA7EC67008CA6F5 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FuziDemo/Info.plist; sourceTree = SOURCE_ROOT; };
 		7932B15D1BA7FAD4008CA6F5 /* nutrition.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = nutrition.xml; path = FuziDemo/nutrition.xml; sourceTree = SOURCE_ROOT; };
@@ -25,19 +26,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7932B1671BA85C9D008CA6F5 /* Fuzi.framework in Frameworks */,
+				791952EA1DE7312000B4426E /* Fuzi.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		791952E81DE7312000B4426E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				791952E91DE7312000B4426E /* Fuzi.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		799EB4D41BA42D4D00E8F920 = {
 			isa = PBXGroup;
 			children = (
 				7932B1661BA85C9D008CA6F5 /* Fuzi.framework */,
 				799EB4DF1BA42D4D00E8F920 /* FuziDemo */,
 				799EB4DE1BA42D4D00E8F920 /* Products */,
+				791952E81DE7312000B4426E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
