@@ -104,7 +104,7 @@ open class XMLNode {
   /// The element's parent element.
   open fileprivate(set) lazy var parent: XMLElement? = {
     guard let parent = self.cNode.pointee.parent else {
-        return nil
+      return nil
     }
     return XMLElement(cNode: parent, document: self.document)
   }()
@@ -112,7 +112,7 @@ open class XMLNode {
   /// The element's previous sibling.
   open fileprivate(set) lazy var previousSibling: XMLElement? = {
     guard let prev = self.cNode.pointee.prev else {
-        return nil
+      return nil
     }
     return XMLElement(cNode: prev, document: self.document)
   }()
@@ -120,7 +120,7 @@ open class XMLNode {
   /// The element's next sibling.
   open fileprivate(set) lazy var nextSibling: XMLElement? = {
     guard let next = self.cNode.pointee.next else {
-        return nil
+      return nil
     }
     return XMLElement(cNode: next, document: self.document)
   }()
