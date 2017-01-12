@@ -62,7 +62,7 @@
 		793BCECE1BA1469D009695D6 /* XPathFunctionResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XPathFunctionResultTests.swift; sourceTree = "<group>"; };
 		799F461B1B90479F00E4CE2C /* AtomTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomTests.swift; sourceTree = "<group>"; };
 		799F46271B904CE500E4CE2C /* XMLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLTests.swift; sourceTree = "<group>"; };
-		799F462F1B9454A100E4CE2C /* HTMLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTMLTests.swift; sourceTree = "<group>"; };
+		799F462F1B9454A100E4CE2C /* HTMLTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = HTMLTests.swift; sourceTree = "<group>"; tabWidth = 2; };
 		799F46321B9543A800E4CE2C /* CSSTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSSTests.swift; sourceTree = "<group>"; };
 		799F46341B95A64700E4CE2C /* DefaultNamespaceXPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNamespaceXPathTests.swift; sourceTree = "<group>"; };
 		799F46361B95B91D00E4CE2C /* VMAPTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMAPTests.swift; sourceTree = "<group>"; };

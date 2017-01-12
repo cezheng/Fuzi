@@ -118,4 +118,11 @@ class HTMLTests: XCTestCase {
     XCTAssertEqual(childNodes?.flatMap { $0.type == .Element ? $0 : nil }.count, 2, "should have 2 element nodes")
     XCTAssertEqual(childNodes?.flatMap { $0.type == .Text ? $0 : nil }.count, 3, "should have 3 text nodes")
   }
+
+  func testNextSiblingDoesNotCrash() {
+    var child = document.root?.children.first
+    while(child != nil) {
+      child = child?.nextSibling
+    }
+  }
 }
