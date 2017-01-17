@@ -119,13 +119,33 @@ open class XMLElement: XMLNode {
     }
     return nil
   }
-  
+
+  /**
+  Returns the first child element with a tag, or `nil` if no such element exists.
+  (StaticString version)
+
+  - parameter tag: The tag name.
+  - parameter ns:  The namespace, or `nil` by default if not using a namespace
+
+  - returns: The child element.
+  */
+  open func firstChild(staticTag tag: StaticString, inNamespace ns: StaticString? = nil) -> XMLElement? {
+    var nodePtr = cNode.pointee.children
+    while let cNode = nodePtr {
+      if cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
+        return XMLElement(cNode: cNode, document: self.document)
+      }
+      nodePtr = cNode.pointee.next
+    }
+    return nil
+  }
+
   /**
   Returns all children elements with the specified tag.
-  
+
   - parameter tag: The tag name.
   - parameter ns:  The namepsace, or `nil` by default if not using a namespace
-  
+
   - returns: The children elements.
   */
   open func children(tag: String, inNamespace ns: String? = nil) -> [XMLElement] {
@@ -134,7 +154,23 @@ open class XMLElement: XMLNode {
         ? XMLElement(cNode: $0, document: self.document) : nil
     }
   }
-  
+
+  /**
+  Returns all children elements with the specified tag.
+  (StaticString version)
+
+  - parameter tag: The tag name.
+  - parameter ns:  The namepsace, or `nil` by default if not using a namespace
+
+  - returns: The children elements.
+  */
+  open func children(staticTag tag: StaticString, inNamespace ns: StaticString? = nil) -> [XMLElement] {
+    return LinkedCNodes(head: cNode.pointee.children).flatMap {
+      cXMLNode($0, matchesTag: tag, inNamespace: ns)
+        ? XMLElement(cNode: $0, document: self.document) : nil
+    }
+  }
+
   // MARK: - Accessing Content
   /// Whether the element has a value.
   open var isBlank: Bool {

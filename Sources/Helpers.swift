@@ -102,16 +102,42 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
 }
 
 internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: String, inNamespace ns: String?) -> Bool {
-  guard let name = ^-^node?.pointee.name else {
+  func f(_ tagCString: UnsafePointer<CChar>, _ nsCString: UnsafePointer<CChar>?) -> Bool {
+    // xmlChar = UInt8, CChar = Int8
+    return cXMLNode(node,
+                    matchesCCharTag: UnsafeRawPointer(tagCString).assumingMemoryBound(to: xmlChar.self),
+                    inNamespace: nsCString.map {UnsafeRawPointer($0).assumingMemoryBound(to: xmlChar.self)})
+  }
+  return tag.withCString { tagCString in
+    return ns?.withCString {
+      f(tagCString, $0)
+      } ?? f(tagCString, nil)
+  }
+}
+
+internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: StaticString, inNamespace ns: StaticString?) -> Bool {
+  // xmlChar = UInt8
+  guard let t = (tag.withUTF8Buffer {$0.baseAddress}.flatMap {UnsafeRawPointer($0).assumingMemoryBound(to: xmlChar.self)}) else {
     return false
   }
-  var matches = name.compare(tag, options: .caseInsensitive) == .orderedSame
-  
+  return cXMLNode(node,
+                  matchesCCharTag: t,
+                  inNamespace: ns?.withUTF8Buffer {$0.baseAddress}.flatMap {UnsafeRawPointer($0).assumingMemoryBound(to: xmlChar.self)})
+}
+
+// compare without copying to Swift.String memory
+internal func cXMLNode(_ node: xmlNodePtr?, matchesCCharTag tag: UnsafePointer<xmlChar>, inNamespace ns: UnsafePointer<xmlChar>?) -> Bool {
+  guard let name = node?.pointee.name else {
+    return false
+  }
+
+  var matches = xmlStrcasecmp(name, tag) == 0
+
   if let ns = ns {
-    guard let prefix = ^-^node?.pointee.ns.pointee.prefix else {
+    guard let prefix = node?.pointee.ns.pointee.prefix else {
       return false
     }
-    matches = matches && (prefix.compare(ns, options: .caseInsensitive) == .orderedSame)
+    matches = matches && xmlStrcasecmp(prefix, ns) == 0
   }
   return matches
 }
