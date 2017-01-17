@@ -103,26 +103,17 @@ open class XMLNode {
   // MARK: - Accessing Parent and Sibling Elements
   /// The element's parent element.
   open fileprivate(set) lazy var parent: XMLElement? = {
-    guard let parent = self.cNode.pointee.parent else {
-      return nil
-    }
-    return XMLElement(cNode: parent, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.parent, document: self.document)
   }()
   
   /// The element's previous sibling.
   open fileprivate(set) lazy var previousSibling: XMLElement? = {
-    guard let prev = self.cNode.pointee.prev else {
-      return nil
-    }
-    return XMLElement(cNode: prev, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.prev, document: self.document)
   }()
 
   /// The element's next sibling.
   open fileprivate(set) lazy var nextSibling: XMLElement? = {
-    guard let next = self.cNode.pointee.next else {
-      return nil
-    }
-    return XMLElement(cNode: next, document: self.document)
+    return XMLElement(cNode: self.cNode.pointee.next, document: self.document)
   }()
   
   // MARK: - Accessing Contents
@@ -162,6 +153,13 @@ open class XMLNode {
   internal init(cNode: xmlNodePtr, document: XMLDocument) {
     self.cNode = cNode
     self.document = document
+  }
+
+  internal convenience init?(cNode: xmlNodePtr?, document: XMLDocument) {
+    guard let cNode = cNode else {
+      return nil
+    }
+    self.init(cNode: cNode, document: document)
   }
 }
 
