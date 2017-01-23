@@ -50,6 +50,36 @@ extension XMLDocument: CustomStringConvertible, CustomDebugStringConvertible {
   }
 }
 
+/// Abstract key type for finding tags or other xml names, as used like element.children(tag: TagNameComparable, ...)
+public protocol XMLCharsComparable {
+  func caseInsensitivelyEqual(to other: UnsafePointer<xmlChar>) -> Bool
+}
+
+/// For finding tags by normal string
+extension String: XMLCharsComparable {
+  public func caseInsensitivelyEqual(to other: UnsafePointer<xmlChar>) -> Bool {
+    return withCString { (cString: UnsafePointer<CChar>) in
+        let xmlChars = UnsafeRawPointer(cString).assumingMemoryBound(to: xmlChar.self)
+        return xmlStrcasecmp(xmlChars, other) == 0
+    }
+  }
+}
+
+/// For finding tags by string literals
+extension StaticString: XMLCharsComparable {
+  // compare without copying to Swift.String memory
+  public func caseInsensitivelyEqual(to other: UnsafePointer<xmlChar>) -> Bool {
+    return withUTF8Buffer { (utf8Buffer: UnsafeBufferPointer<UInt8>) in
+      guard let baseAddress = utf8Buffer.baseAddress else {
+        return false
+      }
+
+      let xmlChars = UnsafeRawPointer(baseAddress).assumingMemoryBound(to: xmlChar.self)
+      return xmlStrcasecmp(xmlChars, other) == 0
+    }
+  }
+}
+
 // Internal Helpers
 
 internal extension String {
@@ -101,17 +131,18 @@ internal struct LinkedCNodes: Sequence, IteratorProtocol {
   }
 }
 
-internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: String, inNamespace ns: String?) -> Bool {
-  guard let name = ^-^node?.pointee.name else {
+internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: XMLCharsComparable, inNamespace ns: XMLCharsComparable?) -> Bool {
+  guard let name = node?.pointee.name else {
     return false
   }
-  var matches = name.compare(tag, options: .caseInsensitive) == .orderedSame
-  
+
+  var matches = tag.caseInsensitivelyEqual(to: name)
+
   if let ns = ns {
-    guard let prefix = ^-^node?.pointee.ns.pointee.prefix else {
+    guard let prefix = node?.pointee.ns.pointee.prefix else {
       return false
     }
-    matches = matches && (prefix.compare(ns, options: .caseInsensitive) == .orderedSame)
+    matches = matches && ns.caseInsensitivelyEqual(to: prefix)
   }
   return matches
 }
