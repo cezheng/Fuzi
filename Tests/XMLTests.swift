@@ -82,4 +82,11 @@ class XMLTests: XCTestCase {
       XCTAssertFalse(true, "error type should be ParserFailure")
     }
   }
+
+  func testAuthorsByStaticTag() {
+    let authlistElement = document.root!.firstChild(staticTag: "header")?.firstChild(staticTag: "authlist")
+    XCTAssertNotNil(authlistElement, "authorlist element should not be nil")
+    let authorElements = authlistElement?.children(staticTag: "author")
+    XCTAssertEqual(authorElements?.count, 5, "should have 5 elements")
+  }
 }
