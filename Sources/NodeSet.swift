@@ -42,7 +42,7 @@ open class NodeSet: Collection {
   }
 
   /// Number of nodes
-  open fileprivate(set) lazy var count: Int = {
+  open fileprivate(set) lazy var count: Int = { [unowned self] in
     return Int(self.cNodeSet?.pointee.nodeNr ?? 0)
   }()
   

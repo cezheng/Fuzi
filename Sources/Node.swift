@@ -96,23 +96,23 @@ open class XMLNode {
   }
   
   /// The element's line number.
-  open fileprivate(set) lazy var lineNumber: Int = {
+  open fileprivate(set) lazy var lineNumber: Int = { [unowned self] in
     return xmlGetLineNo(self.cNode)
   }()
   
   // MARK: - Accessing Parent and Sibling Elements
   /// The element's parent element.
-  open fileprivate(set) lazy var parent: XMLElement? = {
+  open fileprivate(set) lazy var parent: XMLElement? = { [unowned self] in
     return XMLElement(cNode: self.cNode.pointee.parent, document: self.document)
   }()
   
   /// The element's previous sibling.
-  open fileprivate(set) lazy var previousSibling: XMLElement? = {
+  open fileprivate(set) lazy var previousSibling: XMLElement? = { [unowned self] in
     return XMLElement(cNode: self.cNode.pointee.prev, document: self.document)
   }()
 
   /// The element's next sibling.
-  open fileprivate(set) lazy var nextSibling: XMLElement? = {
+  open fileprivate(set) lazy var nextSibling: XMLElement? = { [unowned self] in
     return XMLElement(cNode: self.cNode.pointee.next, document: self.document)
   }()
   
@@ -123,7 +123,7 @@ open class XMLNode {
   }
 
   /// A string representation of the element's value.
-  open fileprivate(set) lazy var stringValue : String = {
+  open fileprivate(set) lazy var stringValue : String = { [unowned self] in
     let key = xmlNodeGetContent(self.cNode)
     let stringValue = ^-^key ?? ""
     xmlFree(key)
@@ -131,7 +131,7 @@ open class XMLNode {
   }()
   
   /// The raw XML string of the element.
-  open fileprivate(set) lazy var rawXML: String = {
+  open fileprivate(set) lazy var rawXML: String = { [unowned self] in
     let buffer = xmlBufferCreate()
     if self.isHTML {
       htmlNodeDump(buffer, self.cNode.pointee.doc, self.cNode)
