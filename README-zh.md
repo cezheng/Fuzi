@@ -123,8 +123,8 @@ $ carthage update
 2. `Build Settings`中，向`Search Paths`的`Header Search Paths`条目下添加`$(SDKROOT)/usr/include/libxml2`。
 
 
-##例子
-###XML
+## 例子
+### XML
 ```swift
 import Fuzi
 
@@ -156,7 +156,7 @@ do {
   }
 }
 ```
-###HTML
+### HTML
 `HTMLDocument` 是 `XMLDocument` 的子类。
 
 ```swift
@@ -199,7 +199,7 @@ do {
 }
 ```
 
-###如果觉得没必要处理异常
+### 如果觉得没必要处理异常
 
 ```swift
 import Fuzi
@@ -218,7 +218,7 @@ let doc2 = try! HTMLDocument(string: html)
 //...
 ```
 
-###我想访问文字节点
+### 我想访问文字节点
 不仅文字节点，你可以指定你想获取的任何类型的节点。
 
 ```swift
@@ -227,14 +227,14 @@ let document = ...
 document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 ```
 
-##从Ono转移到Fuzi
+## 从Ono转移到Fuzi
 下面两个示例程序做的事情是完全一样的，通过比较能很快了解两者的异同。
 
 [Ono示例](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
 [Fuzi示例](FuziDemo/FuziDemo/main.swift)
 
-###访问子节点
+### 访问子节点
 **Ono**
 
 ```objc
@@ -257,7 +257,7 @@ for element in parent.children {
 }
 doc.children(tag: tag, inNamespace:namespace)
 ```
-###迭代查询结果
+### 迭代查询结果
 **Ono**
 
 查询结果实现了`NSFastEnumeration`协议。
@@ -307,7 +307,7 @@ if let nthElement = doc.css(css)[n] {
 // total element count
 let count = doc.xpath(xpath).count
 ```
-###执行XPath函数
+### 执行XPath函数
 **Ono**
 
 ```objc

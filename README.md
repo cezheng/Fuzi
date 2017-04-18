@@ -125,8 +125,8 @@ Then do the followings in Xcode:
 2. In `Build Settings`, find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
 
 
-##Usage
-###XML
+## Usage
+### XML
 ```swift
 import Fuzi
 
@@ -158,7 +158,7 @@ do {
   }
 }
 ```
-###HTML
+### HTML
 `HTMLDocument` is a subclass of `XMLDocument`.
 
 ```swift
@@ -201,7 +201,7 @@ do {
 }
 ```
 
-###I don't care about error handling
+### I don't care about error handling
 
 ```swift
 import Fuzi
@@ -220,7 +220,7 @@ let doc2 = try! HTMLDocument(string: html)
 //...
 ```
 
-###I want to access Text Nodes
+### I want to access Text Nodes
 Not only text nodes, you can specify what types of nodes you would like to access.
 
 ```swift
@@ -229,14 +229,14 @@ let document = ...
 document.root?.childNodes(ofTypes: [.Element, .Text, .Comment])
 ```
 
-##Migrating From Ono?
+## Migrating From Ono?
 Looking at example programs is the swiftest way to know the difference. The following 2 examples do exactly the same thing.
 
 [Ono Example](https://github.com/mattt/Ono/blob/master/Example/main.m)
 
 [Fuzi Example](FuziDemo/FuziDemo/main.swift)
 
-###Accessing children
+### Accessing children
 **Ono**
 
 ```objc
@@ -259,7 +259,7 @@ for element in parent.children {
 }
 doc.children(tag: tag, inNamespace:namespace)
 ```
-###Iterate through query results
+### Iterate through query results
 **Ono**
 
 Conforms to `NSFastEnumeration`.
@@ -310,7 +310,7 @@ if let nthElement = doc.css(css)[n] {
 let count = doc.xpath(xpath).count
 ```
 
-###Evaluating XPath Functions
+### Evaluating XPath Functions
 **Ono**
 
 ```objc
