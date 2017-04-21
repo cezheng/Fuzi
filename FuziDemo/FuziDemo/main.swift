@@ -23,6 +23,7 @@
 // https://github.com/mattt/Ono/blob/master/Example/main.m
 // Comparing the two may help migrating your code from Ono
 
+import Cocoa
 import Fuzi
 
 let fileUrl = URL(fileURLWithPath: ((#file as NSString).deletingLastPathComponent as NSString).appendingPathComponent("nutrition.xml"))
@@ -49,7 +50,7 @@ do {
     
     print("\n")
     let css = "food > serving[units]"
-    var blockElement:XMLElement? = nil
+    var blockElement:Fuzi.XMLElement? = nil
     print("CSS Search: \(css)")
     for (index, element) in document.css(css).enumerated() {
       if index == 1 {

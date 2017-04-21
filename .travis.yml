@@ -6,12 +6,12 @@ osx_image: xcode8
 env:
   global:
     - XCWORKSPACE="Fuzi.xcworkspace"
-    - SCHEME="Fuzi"
   matrix:
-    - DESTINATION="platform=macOS,arch=x86_64" SDK="macosx" ACTION="test"
-    - DESTINATION="platform=iOS Simulator,name=iPhone 7" SDK="iphonesimulator" ACTION="test"
-    - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SDK="appletvsimulator" ACTION="test"
-    - DESTINATION="name=Apple Watch - 38mm" SDK="watchsimulator" ACTION="build"
+    - SCHEME="Fuzi-macOS" DESTINATION="platform=macOS,arch=x86_64" SDK="macosx" ACTION="build"
+    - SCHEME="Fuzi-macOS" DESTINATION="platform=macOS,arch=x86_64" SDK="macosx" ACTION="test"
+    - SCHEME="Fuzi-iOS" DESTINATION="platform=iOS Simulator,name=iPhone 7" SDK="iphonesimulator" ACTION="build"
+    - SCHEME="Fuzi-tvOS" DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SDK="appletvsimulator" ACTION="build"
+    - SCHEME="Fuzi-watchOS" DESTINATION="name=Apple Watch - 38mm" SDK="watchsimulator" ACTION="build"
 
 script:
-  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk $SDK $ACTION
+  - xcodebuild -workspace "$XCWORKSPACE" -scheme "$SCHEME" -destination "$DESTINATION" -sdk $SDK $ACTION | xcpretty
