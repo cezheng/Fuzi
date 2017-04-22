@@ -26,18 +26,18 @@ import libxml2
 open class XMLElement: XMLNode {
   
   /// The element's namespace.
-  open fileprivate(set) lazy var namespace: String? = {
+  open fileprivate(set) lazy var namespace: String? = { [unowned self] in
     return ^-^(self.cNode.pointee.ns != nil ?self.cNode.pointee.ns.pointee.prefix :nil)
   }()
   
   /// The element's tag.
-  open fileprivate(set) lazy var tag: String? = {
+  open fileprivate(set) lazy var tag: String? = { [unowned self] in
     return ^-^self.cNode.pointee.name
   }()
   
   // MARK: - Accessing Attributes
   /// All attributes for the element.
-  open fileprivate(set) lazy var attributes: [String : String] = {
+  open fileprivate(set) lazy var attributes: [String : String] = { [unowned self] in
     var attributes = [String: String]()
     var attribute = self.cNode.pointee.properties
     while attribute != nil {
@@ -152,12 +152,12 @@ open class XMLElement: XMLNode {
   }
   
   /// A number representation of the element's value, which is generated from the document's `numberFormatter` property.
-  open fileprivate(set) lazy var numberValue: NSNumber? = {
+  open fileprivate(set) lazy var numberValue: NSNumber? = { [unowned self] in
     return self.document.numberFormatter.number(from: self.stringValue)
   }()
   
   /// A date representation of the element's value, which is generated from the document's `dateFormatter` property.
-  open fileprivate(set) lazy var dateValue: Date? = {
+  open fileprivate(set) lazy var dateValue: Date? = { [unowned self] in
     return self.document.dateFormatter.date(from: self.stringValue)
   }()
   

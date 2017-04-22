@@ -26,12 +26,12 @@ import libxml2
 open class XMLDocument {
   // MARK: - Document Attributes
   /// The XML version.
-  open fileprivate(set) lazy var version: String? = {
+  open fileprivate(set) lazy var version: String? = { [unowned self] in
     return ^-^self.cDocument.pointee.version
   }()
   
   /// The string encoding for the document. This is NSUTF8StringEncoding if no encoding is set, or it cannot be calculated.
-  open fileprivate(set) lazy var encoding: String.Encoding = {
+  open fileprivate(set) lazy var encoding: String.Encoding = { [unowned self] in
     if let encodingName = ^-^self.cDocument.pointee.encoding {
       let encoding = CFStringConvertIANACharSetNameToEncoding(encodingName as CFString!)
       if encoding != kCFStringEncodingInvalidId {

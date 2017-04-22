@@ -75,17 +75,17 @@ public protocol Queryable {
 /// Result for evaluating a XPath expression
 open class XPathFunctionResult {
   /// Boolean value
-  open fileprivate(set) lazy var boolValue: Bool = {
+  open fileprivate(set) lazy var boolValue: Bool = { [unowned self] in
     return self.cXPath.pointee.boolval != 0
   }()
   
   /// Double value
-  open fileprivate(set) lazy var doubleValue: Double = {
+  open fileprivate(set) lazy var doubleValue: Double = { [unowned self] in
     return self.cXPath.pointee.floatval
   }()
   
   /// String value
-  open fileprivate(set) lazy var stringValue: String = {
+  open fileprivate(set) lazy var stringValue: String = { [unowned self] in
     return ^-^self.cXPath.pointee.stringval ?? ""
   }()
   
