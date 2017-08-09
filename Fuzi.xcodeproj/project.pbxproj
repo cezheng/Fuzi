@@ -12,7 +12,6 @@
 		0C354A9E1D9633720005B0AD /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C354A951D9633720005B0AD /* Error.swift */; };
 		0C354A9F1D9633720005B0AD /* Fuzi.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C354A961D9633720005B0AD /* Fuzi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C354AA01D9633720005B0AD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C354A971D9633720005B0AD /* Helpers.swift */; };
-		0C354AA11D9633720005B0AD /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C354A981D9633720005B0AD /* Info.plist */; };
 		0C354AA21D9633720005B0AD /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C354A991D9633720005B0AD /* Node.swift */; };
 		0C354AA31D9633720005B0AD /* NodeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C354A9A1D9633720005B0AD /* NodeSet.swift */; };
 		0C354AA41D9633720005B0AD /* Queryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C354A9B1D9633720005B0AD /* Queryable.swift */; };
@@ -242,7 +241,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C354AA11D9633720005B0AD /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
