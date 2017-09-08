@@ -31,7 +31,7 @@ do {
   let document = try XMLDocument(data: data)
   
   if let root = document.root {
-    print("Root Element: \(root.tag)")
+    print("Root Element: \(String(describing: root.tag))")
     
     print("\nDaily values:")
     for element in root.firstChild(tag: "daily-values")?.children ?? [] {
