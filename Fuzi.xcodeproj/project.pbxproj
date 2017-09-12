@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -219,7 +219,7 @@
 				};
 			};
 			buildConfigurationList = 791391771B53B09F00BC07C3 /* Build configuration list for PBXProject "Fuzi" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -439,6 +439,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
+				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -459,6 +460,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
+				"VALID_ARCHS[sdk=iphoneos*]" = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
