@@ -280,19 +280,19 @@ internal func XPath(fromCSS css: String) -> String {
 
         if let symbolRange = token.rangeOfCharacter(from: CharacterSet(charactersIn: "#.[]")) {
           let symbol = symbolRange.lowerBound == token.startIndex ?"*" :""
-          var xpathComponent = token.substring(to: symbolRange.lowerBound)
+          var xpathComponent = String(token[..<symbolRange.lowerBound])
           let nsrange = NSRange(location: 0, length: token.utf16.count)
           
           if let result = RegexConstants.idRegex.firstMatch(in: token, options: [], range: nsrange), result.numberOfRanges > 1 {
-            xpathComponent += "\(symbol)[@id = '\(token[result.rangeAt(1)])']"
+            xpathComponent += "\(symbol)[@id = '\(token[result.range(at: 1)])']"
           }
           
           for result in RegexConstants.classRegex.matches(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-            xpathComponent += "\(symbol)[contains(concat(' ',normalize-space(@class),' '),' \(token[result.rangeAt(1)]) ')]"
+            xpathComponent += "\(symbol)[contains(concat(' ',normalize-space(@class),' '),' \(token[result.range(at: 1)]) ')]"
           }
           
           for result in RegexConstants.attributeRegex.matches(in: token, options: [], range: nsrange) where result.numberOfRanges > 1 {
-            xpathComponent += "[@\(token[result.rangeAt(1)])]"
+            xpathComponent += "[@\(token[result.range(at: 1)])]"
           }
           
           token = xpathComponent
