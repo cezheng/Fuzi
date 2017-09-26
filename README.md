@@ -133,7 +133,7 @@ import Fuzi
 let xml = "..."
 do {
   // if encoding is omitted, it defaults to NSUTF8StringEncoding
-  let document = try XMLDocument(string: html, encoding: NSUTF8StringEncoding)
+  let document = try XMLDocument(string: html, encoding: String.Encoding.utf8)
   if let root = document.root {
     print(root.tag)
     
@@ -167,7 +167,7 @@ import Fuzi
 let html = "<html>...</html>"
 do {
   // if encoding is omitted, it defaults to NSUTF8StringEncoding
-  let doc = try HTMLDocument(string: html, encoding: NSUTF8StringEncoding)
+  let doc = try HTMLDocument(string: html, encoding: String.Encoding.utf8)
   
   // CSS queries
   if let elementById = doc.firstChild(css: "#id") {
