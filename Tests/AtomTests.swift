@@ -101,6 +101,16 @@ class AtomTests: XCTestCase {
     XCTAssertNotNil(namespacedElement.namespace, "the namespace shouldn't be nil")
     XCTAssertEqual(namespacedElement.namespace!, "dc", "Namespaces should match")
   }
+
+  func testFirstChildInNameSpace() {
+    let entryElement = document.root!.firstChild(tag: "entry")
+    XCTAssertNotNil(entryElement, "the element shouldn't be nil")
+
+    let namespacedElement = entryElement!.firstChild(tag: "language", inNamespace: "dc")
+    XCTAssertNotNil(namespacedElement?.namespace, "the namespace shouldn't be nil")
+    XCTAssertEqual(namespacedElement!.namespace, "dc", "Namespace should match")
+    XCTAssertEqual(namespacedElement!.stringValue, "en-us", "value should match")
+  }
   
   func testXPathWithNamespaces() {
     var count = 0

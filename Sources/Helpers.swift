@@ -139,7 +139,7 @@ internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: XMLCharsComparable, 
   var matches = tag.caseInsensitivelyEqual(to: name)
 
   if let ns = ns {
-    guard let prefix = node?.pointee.ns.pointee.prefix else {
+    guard let prefix = node?.pointee.ns?.pointee.prefix else {
       return false
     }
     matches = matches && ns.caseInsensitivelyEqual(to: prefix)
