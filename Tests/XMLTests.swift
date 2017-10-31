@@ -89,4 +89,11 @@ class XMLTests: XCTestCase {
     let authorElements = authlistElement?.children(staticTag: "author")
     XCTAssertEqual(authorElements?.count, 5, "should have 5 elements")
   }
+    
+  func testUpdateAttribute() {
+    let loc = document.root!.firstChild(staticTag: "header")!.firstChild(staticTag: "prevlocs")!.firstChild(tag: "loc")!
+    XCTAssertEqual(loc.attr("href"), "http://www.w3.org/TR/2008/PER-xml-20080205/")
+    loc.updateAttr("href", value: "http://www.w3.org/TR/2008/PER-xml-20080277/")
+    XCTAssertEqual(loc.attr("href"), "http://www.w3.org/TR/2008/PER-xml-20080277/")
+  }
 }
