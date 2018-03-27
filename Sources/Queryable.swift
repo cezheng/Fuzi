@@ -32,6 +32,8 @@ public protocol Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
     
   func xpath(_ xpath: String) throws -> NodeSet
@@ -60,6 +62,8 @@ public protocol Queryable {
   - parameter css: The CSS selector.
   
   - returns: The child element.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   func firstChild(css: String) -> XMLElement?
   
@@ -110,6 +114,8 @@ extension XMLDocument: Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   public func xpath(_ xpath: String) throws -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :try root!.xpath(xpath)
@@ -132,6 +138,8 @@ extension XMLDocument: Queryable {
   - parameter css: The CSS selector string.
   
   - returns: An enumerable collection of results.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   public func css(_ css: String) throws -> NodeSet {
     return root == nil ?XPathNodeSet.emptySet :try root!.css(css)
@@ -167,6 +175,8 @@ extension XMLElement: Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   public func xpath(_ xpath: String) throws -> NodeSet {
     guard let cXPath = self.cXPath(xpathString: xpath) else {
@@ -192,6 +202,8 @@ extension XMLElement: Queryable {
   - parameter css: The CSS selector string.
   
   - returns: An enumerable collection of results.
+     
+  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   public func css(_ css: String) throws -> NodeSet {
     return try xpath(XPath(fromCSS:css))
