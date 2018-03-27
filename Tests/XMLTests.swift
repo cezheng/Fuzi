@@ -86,6 +86,28 @@ class XMLTests: XCTestCase {
     }
   }
 
+  func testXpathThrowsError() {
+    do {
+      _ = try document.xpath("////")
+      XCTAssertFalse(true, "error should have been thrown")
+    } catch XMLError.libXMLError(code: 1207, message: "Invalid expression") {
+
+    } catch {
+      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    }
+  }
+    
+  func testXpathFunctionThrowsError() {
+    do {
+      _ = try document.xpath("//*[unknown()]")
+      XCTAssertFalse(true, "error should have been thrown")
+    } catch XMLError.libXMLError(code: 1223, message: "Stack usage error") {
+            
+    } catch {
+      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    }
+  }
+    
   func testAuthorsByStaticTag() {
     let authlistElement = document.root!.firstChild(staticTag: "header")?.firstChild(staticTag: "authlist")
     XCTAssertNotNil(authlistElement, "authorlist element should not be nil")
