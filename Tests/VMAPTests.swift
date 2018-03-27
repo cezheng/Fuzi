@@ -37,7 +37,11 @@ class VMAPTests: XCTestCase {
   func testAbsoluteXPathWithNamespace() {
     let xpath = "/vmap:VMAP/vmap:Extensions/uo:unicornOnce"
     var count = 0
-    for element in document.xpath(xpath) {
+    guard let nodeSet = try? document.xpath(xpath) else {
+      XCTAssert(false, "Can't perform XPath \(xpath)")
+      return
+    }
+    for element in nodeSet {
       XCTAssertEqual("unicornOnce", element.tag, "tag should be `unicornOnce`")
       count += 1
     }
@@ -45,16 +49,23 @@ class VMAPTests: XCTestCase {
   }
   
   func testRelativeXPathWithNamespace() {
-   let absoluteXPath = "/vmap:VMAP/vmap:Extensions"
+    
+    let absoluteXPath = "/vmap:VMAP/vmap:Extensions"
     let relativeXPath = "./uo:unicornOnce"
+    var xpath = absoluteXPath
     var count = 0
-    for absoluteElement in document.xpath(absoluteXPath) {
-      for relativeElement in absoluteElement.xpath(relativeXPath) {
-        XCTAssertEqual("unicornOnce", relativeElement.tag, "tag should be `unicornOnce`")
-        count += 1
+    do {
+      for absoluteElement in try document.xpath(absoluteXPath) {
+        xpath = relativeXPath
+        for relativeElement in try absoluteElement.xpath(relativeXPath) {
+          XCTAssertEqual("unicornOnce", relativeElement.tag, "tag should be `unicornOnce`")
+          count += 1
+        }
       }
+      XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'");
+    } catch {
+        XCTAssert(false, "Error raised \(error) during performing XPath '\(xpath)'")
     }
-    XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'");
   }
   
   func testUnicornOnceIsBlank() {
