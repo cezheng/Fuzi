@@ -21,7 +21,7 @@
 
 
 import Foundation
-import libxml2
+import fuzixml2
 
 /// Define a Swifty typealias for libxml's node type enum
 public typealias XMLNodeType = xmlElementType

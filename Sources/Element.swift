@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import libxml2
+import fuzixml2
 
 /// Represents an element in `XMLDocument` or `HTMLDocument`
 open class XMLElement: XMLNode {
