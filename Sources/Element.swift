@@ -78,7 +78,7 @@ open class XMLElement: XMLNode {
   
   /// The element's children elements.
   open var children: [XMLElement] {
-    return LinkedCNodes(head: cNode.pointee.children).flatMap {
+    return LinkedCNodes(head: cNode.pointee.children).compactMap {
       XMLElement(cNode: $0, document: self.document)
     }
   }
@@ -91,7 +91,7 @@ open class XMLElement: XMLNode {
   - returns: all children of specified types
   */
   open func childNodes(ofTypes types: [XMLNodeType]) -> [XMLNode] {
-    return LinkedCNodes(head: cNode.pointee.children, types: types).flatMap { node in
+    return LinkedCNodes(head: cNode.pointee.children, types: types).compactMap { node in
       switch node.pointee.type {
       case XMLNodeType.Element:
         return XMLElement(cNode: node, document: self.document)
@@ -134,7 +134,7 @@ open class XMLElement: XMLNode {
   - returns: The children elements.
   */
   open func children(tag: XMLCharsComparable, inNamespace ns: XMLCharsComparable? = nil) -> [XMLElement] {
-    return LinkedCNodes(head: cNode.pointee.children).flatMap {
+    return LinkedCNodes(head: cNode.pointee.children).compactMap {
       cXMLNode($0, matchesTag: tag, inNamespace: ns)
         ? XMLElement(cNode: $0, document: self.document) : nil
     }
