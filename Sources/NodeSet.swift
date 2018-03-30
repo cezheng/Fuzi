@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import libxml2
+import libxml2Fuzi
 
 /// An enumerable set of XML nodes
 open class NodeSet: Collection {

@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import libxml2
+import libxml2Fuzi
 
 /// XML document which can be searched and queried.
 open class XMLDocument {
