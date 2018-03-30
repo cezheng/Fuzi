@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 
 import Foundation
-import libxml2
+import libxml2Fuzi
 
 /**
 *  The `Queryable` protocol is adopted by `XMLDocument`, `HTMLDocument` and `XMLElement`, denoting that they can search for elements using XPath or CSS selectors.
