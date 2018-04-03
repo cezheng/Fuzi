@@ -10,7 +10,7 @@ env:
   matrix:
     - DESTINATION="platform=macOS,arch=x86_64" SDK="macosx" ACTION="test"
     - DESTINATION="platform=iOS Simulator,name=iPhone 7" SDK="iphonesimulator" ACTION="test"
-    - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SDK="appletvsimulator" ACTION="test"
+    - DESTINATION="platform=tvOS Simulator,name=Apple TV 4K" SDK="appletvsimulator" ACTION="test"
     - DESTINATION="name=Apple Watch - 38mm" SDK="watchsimulator" ACTION="build"
 
 script:
