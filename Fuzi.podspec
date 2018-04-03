@@ -17,12 +17,8 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "9.0"
 
   s.source_files  = "Sources/*.swift"
-  s.preserve_paths = "libxml2/*"
 
   s.requires_arc = true
   s.library = "xml2"
-  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2', 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/Fuzi/libxml2' }
-
-  # Uncomment for `pob lib lint`
-  # s.prepare_command = 'mkdir -p $TMPDIR/CocoaPods/Lint/Pods/Fuzi && cp -r libxml2 $TMPDIR/CocoaPods/Lint/Pods/Fuzi/libxml2'
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2' }
 end

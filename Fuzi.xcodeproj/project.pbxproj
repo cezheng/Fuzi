@@ -354,7 +354,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.Fuzi;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos iphonesimulator appletvsimulator watchsimulator";
-				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/libxml2";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
@@ -414,7 +413,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.cezheng.Fuzi;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SUPPORTED_PLATFORMS = "macosx iphoneos appletvos watchos iphonesimulator appletvsimulator watchsimulator";
-				SWIFT_INCLUDE_PATHS = "$(inherited) $(SRCROOT)/libxml2";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2,3,4";
