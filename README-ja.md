@@ -99,11 +99,9 @@ $ pod install
 
 ### 手動で
 1. `Fuzi`フォルダの `*.swift` ファイルをプロジェクトに追加してください。
-2. `libxml2`フォルダをプロジェクトのフォルダのどこか（ `/path/to/somewhere`）にコピペしてください。
-3. Xcode プロジェクトの `Build Settings` で:
-   1. `Swift Compiler - Search Paths`の`Import Paths`に`/path/to/somewhere/libxml2`を追加してください。
-   2. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
-   3. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
+2. Xcode プロジェクトの `Build Settings` で:
+   1. `Search Paths`の`Header Search Paths`に`$(SDKROOT)/usr/include/libxml2`を追加してください。
+   2. `Linking`の`Other Linker Flags`に`-lxml2`を追加してください。
 
 ### Carthageで
 プロダクトのディレクトリに`Cartfile` か `Cartfile.private`のファイルを作成し、下記の行を追加してください:

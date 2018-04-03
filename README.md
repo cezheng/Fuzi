@@ -102,11 +102,9 @@ $ pod install
 
 ### Manually
 1. Add all `*.swift` files in `Fuzi` directory into your project.
-2. Copy `libxml2` folder into somewhere in your project's directory, say `/path/to/somewhere`.
-3. In your Xcode project `Build Settings`:
-   1. Find `Swift Compiler - Search Paths`, add `/path/to/somewhere/libxml2` to `Import Paths`.
-   2. Find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
-   3. Find `Linking`, add `-lxml2` to `Other Linker Flags`.
+2. In your Xcode project `Build Settings`:
+   1. Find `Search Paths`, add `$(SDKROOT)/usr/include/libxml2` to `Header Search Paths`.
+   2. Find `Linking`, add `-lxml2` to `Other Linker Flags`.
 
 ### Using [Carthage](https://github.com/Carthage/Carthage)
 Create a `Cartfile` or `Cartfile.private` in the root directory of your project, and add the following line:
