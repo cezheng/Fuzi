@@ -48,12 +48,7 @@ class HTMLTests: XCTestCase {
   
   func testTitleXPath() {
     var idx = 0
-    let xpath = "//head/title"
-    guard let nodeSet = try? document.xpath(xpath) else {
-        XCTAssert(false, "Can't perform XPath \(xpath)")
-        return
-    }
-    for element in nodeSet {
+    for element in document.xpath("//head/title") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element.stringValue, "mattt/Ono", "title mismatch")
       idx += 1
@@ -63,12 +58,7 @@ class HTMLTests: XCTestCase {
   
   func testTitleCSS() {
     var idx = 0
-    let css = "head title"
-    guard let nodes = try? document.css(css) else {
-        XCTAssert(false, "Can't perform XPath generated from css \(css)")
-        return
-    }
-    for element in nodes {
+    for element in document.css("head title") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element.stringValue, "mattt/Ono", "title mismatch")
       idx += 1
@@ -78,12 +68,7 @@ class HTMLTests: XCTestCase {
   
   func testIDCSS() {
     var idx = 0
-    let css = "#account_settings"
-    guard let nodes = try? document.css(css) else {
-        XCTAssert(false, "Can't perform XPath generated from css \(css)")
-        return
-    }
-    for element in nodes {
+    for element in document.css("#account_settings") {
       XCTAssertEqual(idx, 0, "more than one element found")
       XCTAssertEqual(element["href"], "/settings/profile", "href mismatch")
       idx += 1

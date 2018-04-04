@@ -57,10 +57,7 @@ class XMLTests: XCTestCase {
   
   func testXPath() {
     let path = "/spec/header/title"
-    guard let elts = try? document.xpath(path) else {
-      XCTAssert(false, "Can't perform XPath \(path)")
-      return
-    }
+    let elts = document.xpath(path)
     var counter = 0
     for elt in elts {
       XCTAssertEqual("title", elt.tag, "tag should be `title`")

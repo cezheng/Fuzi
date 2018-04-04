@@ -114,12 +114,7 @@ class AtomTests: XCTestCase {
   
   func testXPathWithNamespaces() {
     var count = 0
-    guard let nodeSet = try? document.xpath("//dc:language") else {
-      XCTAssert(false, "Can't perform XPath //dc:language")
-      return
-    }
-    
-    for (offset, element) in nodeSet.enumerated() {
+    for (offset, element) in document.xpath("//dc:language").enumerated() {
       XCTAssertNotNil(element.namespace, "the namespace shouldn't be nil")
       XCTAssertEqual(element.namespace!, "dc", "Namespaces should match")
       count = offset + 1

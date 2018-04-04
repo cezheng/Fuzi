@@ -38,12 +38,7 @@ class DefaultNamespaceXPathTests: XCTestCase {
     document.definePrefix("ocf", defaultNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
     let xpath = "/ocf:container/ocf:rootfiles/ocf:rootfile"
     var count = 0
-    
-    guard let nodeSet = try? document.xpath(xpath) else {
-      XCTAssert(false, "Can't perform XPath \(xpath)")
-      return
-    }
-    for element in nodeSet {
+    for element in document.xpath(xpath) {
       XCTAssertEqual("rootfile", element.tag, "tag should be `rootfile`")
       count += 1
     }
@@ -54,19 +49,13 @@ class DefaultNamespaceXPathTests: XCTestCase {
     document.definePrefix("ocf", defaultNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
     let absoluteXPath = "/ocf:container/ocf:rootfiles"
     let relativeXPath = "./ocf:rootfile"
-    var xpath = absoluteXPath
     var count = 0
-    do {
-      for absoluteElement in try document.xpath(absoluteXPath) {
-        xpath = relativeXPath
-        for relativeElement in try absoluteElement.xpath(relativeXPath) {
-          XCTAssertEqual("rootfile", relativeElement.tag, "tag should be rootfile")
-          count += 1
-        }
+    for absoluteElement in document.xpath(absoluteXPath) {
+      for relativeElement in absoluteElement.xpath(relativeXPath) {
+        XCTAssertEqual("rootfile", relativeElement.tag, "tag should be rootfile")
+        count += 1
       }
-      XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'")
-    } catch {
-        XCTAssert(false, "Error raised \(error) during performing XPath '\(xpath)'")
     }
+    XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'")
   }
 }
