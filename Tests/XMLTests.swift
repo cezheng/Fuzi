@@ -84,24 +84,27 @@ class XMLTests: XCTestCase {
   }
 
   func testXpathThrowsError() {
-    do {
-      _ = try document.xpath("////")
-      XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.libXMLError(code: 1207, message: "Invalid expression") {
-
-    } catch {
-      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    document.resetLastXMLError()
+    _ = document.xpath("////")
+    let error = document.getLastXMLError()
+    switch error {
+    case .libXMLError(code: 1207, message: "Invalid expression"):
+        XCTAssertTrue(true, "correct error have been thrown")
+    default:
+        XCTAssertFalse(true, "error type should be libXMLError \(error)")
     }
   }
     
   func testXpathFunctionThrowsError() {
-    do {
-      _ = try document.xpath("//*[unknown()]")
-      XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.libXMLError(code: 1223, message: "Stack usage error") {
-            
-    } catch {
-      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    
+    document.resetLastXMLError()
+    _ = document.xpath("//*[unknown()]")
+    let error = document.getLastXMLError()
+    switch error {
+    case .libXMLError(code: 1223, message: "Stack usage error"):
+        XCTAssertTrue(true, "correct error have been thrown")
+    default:
+        XCTAssertFalse(true, "error type should be libXMLError \(error)")
     }
   }
     
