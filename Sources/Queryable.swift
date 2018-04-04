@@ -72,11 +72,13 @@ public protocol Queryable {
   func eval(xpath: String) -> XPathFunctionResult?
   
   /**
-  Returns the last generated XMLError
+  Returns the last generated xml error
 
-  returns: XMLError case
+  returns: error representation as XMLError case
   */
   func getLastXMLError() -> XMLError
+    
+  func resetLastXMLError()
 }
 
 /// Result for evaluating a XPath expression
@@ -118,7 +120,6 @@ extension XMLDocument: Queryable {
   - returns: An enumerable collection of results.
   */
   public func xpath(_ xpath: String) -> NodeSet {
-    xmlResetLastError()
     return root == nil ?XPathNodeSet.emptySet :root!.xpath(xpath)
   }
   
@@ -167,12 +168,19 @@ extension XMLDocument: Queryable {
   }
   
   /**
-  Returns the last generated XMLError
+  Returns the last generated xml error
   
-  returns: XMLError case
+  returns: error representation as XMLError case
   */
   public func getLastXMLError() -> XMLError {
     return XMLError.lastError()
+  }
+  
+  /**
+  Reset last generated xml error
+  */
+  public func resetLastXMLError() {
+    xmlResetLastError()
   }
 }
 
@@ -185,7 +193,6 @@ extension XMLElement: Queryable {
   - returns: An enumerable collection of results.
   */
   public func xpath(_ xpath: String) -> NodeSet {
-    xmlResetLastError()
     guard let cXPath = self.cXPath(xpathString: xpath) else {
       return XPathNodeSet.emptySet
     }
@@ -236,14 +243,20 @@ extension XMLElement: Queryable {
     return XPathFunctionResult(cXPath: cXPath(xpathString: xpath))
   }
   
-    
   /**
-  Returns the last generated XMLError
+  Returns the last generated xml error
      
-  returns: XMLError case
+  returns: error representation as XMLError case
   */
   public func getLastXMLError() -> XMLError {
     return XMLError.lastError()
+  }
+
+  /**
+  Reset last generated xml error
+  */
+  public func resetLastXMLError() {
+    xmlResetLastError()
   }
     
   fileprivate func cXPath(xpathString: String) -> xmlXPathObjectPtr? {
