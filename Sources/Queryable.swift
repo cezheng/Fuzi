@@ -32,11 +32,8 @@ public protocol Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
-    
-  func xpath(_ xpath: String) throws -> NodeSet
+  func xpath(_ xpath: String) -> NodeSet
   
   /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
@@ -54,7 +51,7 @@ public protocol Queryable {
   
   - returns: An enumerable collection of results.
   */
-  func css(_ css: String) throws -> NodeSet
+  func css(_ css: String) -> NodeSet
   
   /**
   Returns the first elements matching an CSS selector, or `nil` if there are no results.
@@ -62,8 +59,6 @@ public protocol Queryable {
   - parameter css: The CSS selector.
   
   - returns: The child element.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
   func firstChild(css: String) -> XMLElement?
   
@@ -75,6 +70,13 @@ public protocol Queryable {
   - returns: The eval function result.
   */
   func eval(xpath: String) -> XPathFunctionResult?
+  
+  /**
+  Returns the last generated XMLError
+
+  returns: XMLError case
+  */
+  func getLastXMLError() -> XMLError
 }
 
 /// Result for evaluating a XPath expression
@@ -114,11 +116,10 @@ extension XMLDocument: Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
-  public func xpath(_ xpath: String) throws -> NodeSet {
-    return root == nil ?XPathNodeSet.emptySet :try root!.xpath(xpath)
+  public func xpath(_ xpath: String) -> NodeSet {
+    xmlResetLastError()
+    return root == nil ?XPathNodeSet.emptySet :root!.xpath(xpath)
   }
   
   /**
@@ -138,11 +139,9 @@ extension XMLDocument: Queryable {
   - parameter css: The CSS selector string.
   
   - returns: An enumerable collection of results.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
-  public func css(_ css: String) throws -> NodeSet {
-    return root == nil ?XPathNodeSet.emptySet :try root!.css(css)
+  public func css(_ css: String) -> NodeSet {
+    return root == nil ?XPathNodeSet.emptySet :root!.css(css)
   }
   
   /**
@@ -166,6 +165,15 @@ extension XMLDocument: Queryable {
   public func eval(xpath: String) -> XPathFunctionResult? {
     return root?.eval(xpath: xpath)
   }
+  
+  /**
+  Returns the last generated XMLError
+  
+  returns: XMLError case
+  */
+  public func getLastXMLError() -> XMLError {
+    return XMLError.lastError()
+  }
 }
 
 extension XMLElement: Queryable {
@@ -175,12 +183,11 @@ extension XMLElement: Queryable {
   - parameter xpath: XPath selector string.
   
   - returns: An enumerable collection of results.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
-  public func xpath(_ xpath: String) throws -> NodeSet {
+  public func xpath(_ xpath: String) -> NodeSet {
+    xmlResetLastError()
     guard let cXPath = self.cXPath(xpathString: xpath) else {
-      throw XMLError.lastError(defaultError: .parserFailure)
+      return XPathNodeSet.emptySet
     }
     return XPathNodeSet(cXPath: cXPath, document: document)
   }
@@ -193,7 +200,7 @@ extension XMLElement: Queryable {
   - returns: The child element.
   */
   public func firstChild(xpath: String) -> XMLElement? {
-    return (try? self.xpath(xpath))?.first
+    return self.xpath(xpath).first
   }
   
   /**
@@ -202,11 +209,9 @@ extension XMLElement: Queryable {
   - parameter css: The CSS selector string.
   
   - returns: An enumerable collection of results.
-     
-  - Throws: last registered XMLError, most likely libXMLError with code and message.
   */
-  public func css(_ css: String) throws -> NodeSet {
-    return try xpath(XPath(fromCSS:css))
+  public func css(_ css: String) -> NodeSet {
+    return xpath(XPath(fromCSS:css))
   }
   
   /**
@@ -217,7 +222,7 @@ extension XMLElement: Queryable {
   - returns: The child element.
   */
   public func firstChild(css: String) -> XMLElement? {
-    return (try? self.css(css))?.first
+    return self.css(css).first
   }
   
   /**
@@ -231,6 +236,16 @@ extension XMLElement: Queryable {
     return XPathFunctionResult(cXPath: cXPath(xpathString: xpath))
   }
   
+    
+  /**
+  Returns the last generated XMLError
+     
+  returns: XMLError case
+  */
+  public func getLastXMLError() -> XMLError {
+    return XMLError.lastError()
+  }
+    
   fileprivate func cXPath(xpathString: String) -> xmlXPathObjectPtr? {
     guard let context = xmlXPathNewContext(cNode.pointee.doc) else {
       return nil
