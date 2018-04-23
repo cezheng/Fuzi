@@ -66,6 +66,28 @@ class XMLTests: XCTestCase {
     XCTAssertEqual(1, counter, "at least one element should have been found at element path '\(path)'")
   }
   
+  func testXpathThrowsError() {
+    do {
+      _ = try document.tryXPath("////")
+      XCTAssertFalse(true, "error should have been thrown")
+    } catch XMLError.libXMLError(code: 1207, message: "Invalid expression") {
+      
+    } catch {
+      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    }
+  }
+  
+  func testXpathFunctionThrowsError() {
+    do {
+      _ = try document.tryXPath("//*[unknown()]")
+      XCTAssertFalse(true, "error should have been thrown")
+    } catch XMLError.libXMLError(code: 1223, message: "Stack usage error") {
+      
+    } catch {
+      XCTAssertFalse(true, "error type should be libXMLError \(error)")
+    }
+  }
+  
   func testLineNumber() {
     let headerElement = document.root!.firstChild(tag: "header")
     XCTAssertNotNil(headerElement, "header element should not be nil")
