@@ -36,6 +36,17 @@ public protocol Queryable {
   func xpath(_ xpath: String) -> NodeSet
   
   /**
+   Returns the results for an XPath selector.
+   
+   - parameter xpath: XPath selector string.
+   
+   - returns: An enumerable collection of results.
+   
+   - Throws: last registered XMLError, most likely libXMLError with code and message.
+   */
+  func tryXPath(_ xpath: String) throws -> NodeSet
+  
+  /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
   
   - parameter xpath: The XPath selector.
@@ -115,6 +126,19 @@ extension XMLDocument: Queryable {
   }
   
   /**
+   - parameter xpath: XPath selector string.
+   
+   - returns: An enumerable collection of results.
+   
+   - Throws: last registered XMLError, most likely libXMLError with code and message.
+   */
+  public func tryXPath(_ xpath: String) throws -> NodeSet {
+    guard let xml = root else {
+      return XPathNodeSet.emptySet    }
+    
+    return try xml.tryXPath(xpath)
+  }
+  /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
   
   - parameter xpath: The XPath selector.
@@ -174,6 +198,19 @@ extension XMLElement: Queryable {
     return XPathNodeSet(cXPath: cXPath, document: document)
   }
   
+  /**
+   - parameter xpath: XPath selector string.
+   
+   - returns: An enumerable collection of results.
+   
+   - Throws: last registered XMLError, most likely libXMLError with code and message.
+   */
+  public func tryXPath(_ xpath: String) throws -> NodeSet {
+    guard let cXPath = self.cXPath(xpathString: xpath) else {
+      throw XMLError.lastError(defaultError: .parserFailure)
+    }
+    return XPathNodeSet(cXPath: cXPath, document: document)
+  }
   /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.
   
