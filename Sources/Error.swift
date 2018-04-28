@@ -34,6 +34,8 @@ public enum XMLError: Error {
   case invalidData
   /// XML Parser failed to parse the document
   case parserFailure
+  /// XPath has either syntax error or some unknown/unsupported function
+  case xpathError(code: Int)
   
   internal static func lastError(defaultError: XMLError = .noError) -> XMLError {
     guard let errorPtr = xmlGetLastError() else {
