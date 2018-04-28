@@ -133,10 +133,11 @@ extension XMLDocument: Queryable {
    - Throws: last registered XMLError, most likely libXMLError with code and message.
    */
   public func tryXPath(_ xpath: String) throws -> NodeSet {
-    guard let xml = root else {
-      return XPathNodeSet.emptySet    }
+    guard let rootNode = root else {
+      return XPathNodeSet.emptySet
+    }
     
-    return try xml.tryXPath(xpath)
+    return try rootNode.tryXPath(xpath)
   }
   /**
   Returns the first elements matching an XPath selector, or `nil` if there are no results.

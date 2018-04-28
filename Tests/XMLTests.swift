@@ -66,7 +66,7 @@ class XMLTests: XCTestCase {
     XCTAssertEqual(1, counter, "at least one element should have been found at element path '\(path)'")
   }
   
-  func testXpathThrowsError() {
+  func testTryXpathThrowsError() {
     do {
       _ = try document.tryXPath("////")
       XCTAssertFalse(true, "error should have been thrown")
@@ -77,7 +77,7 @@ class XMLTests: XCTestCase {
     }
   }
   
-  func testXpathFunctionThrowsError() {
+  func testTryXpathFunctionThrowsError() {
     do {
       _ = try document.tryXPath("//*[unknown()]")
       XCTAssertFalse(true, "error should have been thrown")
