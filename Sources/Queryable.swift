@@ -250,13 +250,13 @@ extension XMLElement: Queryable {
   - returns: The eval function result.
   */
   public func eval(xpath: String) -> XPathFunctionResult? {
-    guard let xpathObjPtr = try? cXPath(xpathString: xpath), let cXPath = xpathObjPtr else {
+    guard let cXPath = try? cXPath(xpathString: xpath) else {
       return nil
     }
     return XPathFunctionResult(cXPath: cXPath)
   }
   
-  fileprivate func cXPath(xpathString: String) throws -> xmlXPathObjectPtr? {
+  fileprivate func cXPath(xpathString: String) throws -> xmlXPathObjectPtr {
     guard let context = xmlXPathNewContext(cNode.pointee.doc) else {
       throw XMLError.lastError(defaultError: .xpathError(code: 1207))
     }
