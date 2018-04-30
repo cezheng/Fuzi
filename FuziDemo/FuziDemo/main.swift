@@ -67,7 +67,7 @@ do {
 } catch let error as XMLError {
   switch error {
   case .noError: print("wth this should not appear")
-  case .parserFailure, .invalidData: print(error)
+  case .parserFailure, .invalidData, .xpathError: print(error)
   case .libXMLError(let code, let message):
     print("libxml error code: \(code), message: \(message)")
   }
