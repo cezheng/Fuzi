@@ -88,7 +88,7 @@ public func ~=(lhs: XMLNodeType, rhs: XMLNodeType) -> Bool {
 /// Base class for all XML nodes
 open class XMLNode {
   /// The document containing the element.
-  open unowned let document: XMLDocument
+  public unowned let document: XMLDocument
   
   /// The type of the XMLNode
   open var type: XMLNodeType {
