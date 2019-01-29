@@ -74,7 +74,7 @@ open class NodeSet: Collection {
    - returns: the idx'th node, nil if out of range
   */
   open subscript(_ idx: Index) -> XMLElement {
-    _precondition(idx >= startIndex && idx < endIndex, "Index of out bound")
+    precondition(idx >= startIndex && idx < endIndex, "Index of out bound")
     return XMLElement(cNode: (cNodeSet!.pointee.nodeTab[idx])!, document: document)
   }
   
