@@ -24,25 +24,25 @@ do {
   let document = try XMLDocument(string: xml)
   // or
   // let document = try XMLDocument(data: xmlData)
-  
+
   if let root = document.root {
     // Accessing all child nodes of root element
     for element in root.children {
       print("\(element.tag): \(element.attributes)")
     }
-    
+
     // Getting child element by tag & accessing attributes
     if let length = root.firstChild(tag:"Length", inNamespace: "dc") {
       print(length["unit"])     // `unit` attribute
       print(length.attributes)  // all attributes
     }
   }
-  
+
   // XPath & CSS queries
   for element in document.xpath("//element") {
     print("\(element.tag): \(element.attributes)")
   }
-  
+
   if let firstLink = document.firstChild(css: "a, link") {
     print(firstLink["href"])
   }
@@ -90,7 +90,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'Fuzi', '~> 1.0.0'
+	pod 'Fuzi', '~> 3.0.0'
 end
 ```
 
@@ -110,7 +110,7 @@ $ pod install
 Create a `Cartfile` or `Cartfile.private` in the root directory of your project, and add the following line:
 
 ```
-github "cezheng/Fuzi" ~> 1.0.0
+github "cezheng/Fuzi" ~> 3.0.0
 ```
 Run the following command:
 
@@ -134,10 +134,10 @@ do {
   let document = try XMLDocument(string: html, encoding: String.Encoding.utf8)
   if let root = document.root {
     print(root.tag)
-    
+
     // define a prefix for a namespace
     document.definePrefix("atom", defaultNamespace: "http://www.w3.org/2005/Atom")
-    
+
     // get first child element with given tag in namespace(optional)
     print(root.firstChild(tag: "title", inNamespace: "atom"))
 
@@ -166,7 +166,7 @@ let html = "<html>...</html>"
 do {
   // if encoding is omitted, it defaults to NSUTF8StringEncoding
   let doc = try HTMLDocument(string: html, encoding: String.Encoding.utf8)
-  
+
   // CSS queries
   if let elementById = doc.firstChild(css: "#id") {
     print(elementById.stringValue)
@@ -175,7 +175,7 @@ do {
       print(link.rawXML)
       print(link["href"])
   }
-  
+
   // XPath queries
   if let firstAnchor = doc.firstChild(xpath: "//body/a") {
     print(firstAnchor["href"])
@@ -183,17 +183,17 @@ do {
   for script in doc.xpath("//head/script") {
     print(script["src"])
   }
-  
+
   // Evaluate XPath functions
   if let result = doc.eval(xpath: "count(/*/a)") {
     print("anchor count : \(result.doubleValue)")
   }
-  
+
   // Convenient HTML methods
   print(doc.title) // gets <title>'s innerHTML in <head>
   print(doc.head)  // gets <head> element
   print(doc.body)  // gets <body> element
-  
+
 } catch let error {
   print(error)
 }
@@ -274,7 +274,7 @@ Conforms to `NSFastEnumeration`.
   *stop = (idx == 1);
 }];
 
-// getting element by index 
+// getting element by index
 ONOXMLDocument *nthElement = [(NSEnumerator*)[doc CSS:css] allObjects][n];
 
 // total element count
@@ -299,7 +299,7 @@ for (index, element) in doc.xpath(xpath).enumerate() {
   }
 }
 
-// getting element by index 
+// getting element by index
 if let nthElement = doc.css(css)[n] {
   //...
 }
