@@ -91,12 +91,8 @@ open class XMLDocument {
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
   public convenience init(data: Data) throws {
-    let cChars = data.withUnsafeBytes { (bytes: UnsafePointer<Int8>) -> [CChar] in
-        let buffer = UnsafeBufferPointer(start: bytes, count: data.count)
-        return [CChar](buffer)
-    }
-    
-    try self.init(cChars: cChars)
+    let buffer = data.withUnsafeBytes { $0.bindMemory(to: Int8.self) }
+    try self.init(buffer: buffer)
   }
   
   /**
@@ -109,20 +105,34 @@ open class XMLDocument {
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
   public convenience init(cChars: [CChar]) throws {
-    let options = Int32(XML_PARSE_NOWARNING.rawValue | XML_PARSE_NOERROR.rawValue | XML_PARSE_RECOVER.rawValue)
-    try self.init(cChars: cChars, options: options)
+    try self.init(buffer: UnsafeBufferPointer(start: UnsafePointer(cChars), count: cChars.count))
   }
 
-  fileprivate convenience init(cChars: [CChar], options: Int32) throws {
-    guard let document = type(of: self).parse(cChars: cChars, size: cChars.count, options: options) else {
+  /**
+   Creates and returns an instance of XMLDocument from C char buffer, throwing XMLError if an error occured while parsing the XML.
+   
+   - parameter buffer: The XML data as C char buffer
+   
+   - throws: `XMLError` instance if an error occurred
+   
+   - returns: An `XMLDocument` with the contents of the specified XML string.
+   */
+
+  public convenience init(buffer: UnsafeBufferPointer<Int8>) throws {
+    let options = Int32(XML_PARSE_NOWARNING.rawValue | XML_PARSE_NOERROR.rawValue | XML_PARSE_RECOVER.rawValue)
+    try self.init(buffer: buffer, options: options)
+  }
+
+  fileprivate convenience init(buffer: UnsafeBufferPointer<Int8>, options: Int32) throws {
+    guard let document = type(of: self).parse(buffer: buffer, options: options) else {
       throw XMLError.lastError(defaultError: .parserFailure)
     }
     xmlResetLastError()
     self.init(cDocument: document)
   }
 
-  fileprivate class func parse(cChars: [CChar], size: Int, options: Int32) -> xmlDocPtr? {
-    return xmlReadMemory(UnsafePointer(cChars), Int32(size), "", nil, options)
+  fileprivate class func parse(buffer: UnsafeBufferPointer<Int8>, options: Int32) -> xmlDocPtr? {
+    return xmlReadMemory(buffer.baseAddress, Int32(buffer.count), "", nil, options)
   }
   
   fileprivate init(cDocument: xmlDocPtr) {
@@ -183,7 +193,7 @@ open class HTMLDocument: XMLDocument {
     return root?.firstChild(tag: "body")
   }
 
-  fileprivate override class func parse(cChars: [CChar], size: Int, options: Int32) -> xmlDocPtr? {
-    return htmlReadMemory(UnsafePointer(cChars), Int32(size), "", nil, options)
+  fileprivate override class func parse(buffer: UnsafeBufferPointer<Int8>, options: Int32) -> xmlDocPtr? {
+    return htmlReadMemory(buffer.baseAddress, Int32(buffer.count), "", nil, options)
   }
 }
