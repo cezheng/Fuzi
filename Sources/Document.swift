@@ -112,19 +112,17 @@ open class XMLDocument {
     let options = Int32(XML_PARSE_NOWARNING.rawValue | XML_PARSE_NOERROR.rawValue | XML_PARSE_RECOVER.rawValue)
     try self.init(cChars: cChars, options: options)
   }
-  
-  fileprivate typealias ParseFunction = (UnsafePointer<Int8>?, Int32, UnsafePointer<Int8>?, UnsafePointer<Int8>?, Int32) -> xmlDocPtr?
-  
+
   fileprivate convenience init(cChars: [CChar], options: Int32) throws {
-    try self.init(parseFunction: { xmlReadMemory($0, $1, $2, $3, $4) }, cChars: cChars, options: options)
-  }
-  
-  fileprivate convenience init(parseFunction: ParseFunction, cChars: [CChar], options: Int32) throws {
-    guard let document = parseFunction(UnsafePointer(cChars), Int32(cChars.count), "", nil, options) else {
+    guard let document = type(of: self).parse(cChars: cChars, size: cChars.count, options: options) else {
       throw XMLError.lastError(defaultError: .parserFailure)
     }
     xmlResetLastError()
     self.init(cDocument: document)
+  }
+
+  fileprivate class func parse(cChars: [CChar], size: Int, options: Int32) -> xmlDocPtr? {
+    return xmlReadMemory(UnsafePointer(cChars), Int32(size), "", nil, options)
   }
   
   fileprivate init(cDocument: xmlDocPtr) {
@@ -184,23 +182,8 @@ open class HTMLDocument: XMLDocument {
   open var body: XMLElement? {
     return root?.firstChild(tag: "body")
   }
-  
-  // MARK: - Creating HTML Documents
-  /**
-  Creates and returns an instance of HTMLDocument from C char array, throwing XMLError if an error occured while parsing the HTML.
-  
-  - parameter cChars: cChars The HTML data as C char array
-  
-  - throws: `XMLError` instance if an error occurred
-  
-  - returns: An `HTMLDocument` with the contents of the specified HTML string.
-  */
-  public convenience init(cChars: [CChar]) throws {
-    let options = Int32(HTML_PARSE_NOWARNING.rawValue | HTML_PARSE_NOERROR.rawValue | HTML_PARSE_RECOVER.rawValue)
-    try self.init(cChars: cChars, options: options)
-  }
-  
-  fileprivate convenience init(cChars: [CChar], options: Int32) throws {
-    try self.init(parseFunction: { htmlReadMemory($0, $1, $2, $3, $4) }, cChars: cChars, options: options)
+
+  fileprivate override class func parse(cChars: [CChar], size: Int, options: Int32) -> xmlDocPtr? {
+    return htmlReadMemory(UnsafePointer(cChars), Int32(size), "", nil, options)
   }
 }
