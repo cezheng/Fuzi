@@ -32,7 +32,7 @@ class XPathFunctionResultTests: XCTestCase {
     } catch {
       XCTAssertFalse(true, "Error should not be thrown")
     }
-    document.definePrefix("atom", defaultNamespace: "http://www.w3.org/2005/Atom")
+    document.definePrefix("atom", forNamespace: "http://www.w3.org/2005/Atom")
   }
   
   func testFunctionResultBoolValue() {

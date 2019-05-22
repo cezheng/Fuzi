@@ -35,7 +35,7 @@ class DefaultNamespaceXPathTests: XCTestCase {
   }
   
   func testAbsoluteXPathWithDefaultNamespace() {
-    document.definePrefix("ocf", defaultNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
+    document.definePrefix("ocf", forNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
     let xpath = "/ocf:container/ocf:rootfiles/ocf:rootfile"
     var count = 0
     for element in document.xpath(xpath) {
@@ -46,7 +46,7 @@ class DefaultNamespaceXPathTests: XCTestCase {
   }
   
   func testRelativeXPathWithDefaultNamespace() {
-    document.definePrefix("ocf", defaultNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
+    document.definePrefix("ocf", forNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
     let absoluteXPath = "/ocf:container/ocf:rootfiles"
     let relativeXPath = "./ocf:rootfile"
     var count = 0
