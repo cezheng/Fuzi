@@ -261,30 +261,39 @@ extension XMLElement: Queryable {
       throw XMLError.lastError(defaultError: .xpathError(code: 1207))
     }
     
+    func withXMLChar(_ string: String, _ handler: (UnsafePointer<xmlChar>) -> Void) {
+        string.utf8CString
+            .map { xmlChar(bitPattern: $0) }
+            .withUnsafeBufferPointer {
+                handler($0.baseAddress!)
+        }
+    }
+    
     context.pointee.node = cNode
+    
+    // Registers namespace prefixes declared in the document.
     var node = cNode
     while node.pointee.parent != nil {
-      var curNs = node.pointee.nsDef
-      while let ns = curNs {
-        var prefix = ns.pointee.prefix
-        var prefixChars = [CChar]()
-        if prefix == nil && !document.defaultNamespaces.isEmpty {
-          let href = (^-^ns.pointee.href)!
-          
-          if let defaultPrefix = document.defaultNamespaces[href] {
-            prefixChars = defaultPrefix.cString(using: String.Encoding.utf8) ?? []
-            prefixChars.withUnsafeBufferPointer {(cArray: UnsafeBufferPointer<CChar>) -> Void in
-              prefix = UnsafeRawPointer(cArray.baseAddress)?.assumingMemoryBound(to: xmlChar.self)
+        var curNs = node.pointee.nsDef
+        while let ns = curNs {
+            var prefixChars = [CChar]()
+            if let prefix = ns.pointee.prefix {
+                xmlXPathRegisterNs(context, prefix, ns.pointee.href)
             }
-          }
+            curNs = ns.pointee.next
         }
-        if prefix != nil {
-          xmlXPathRegisterNs(context, prefix, ns.pointee.href)
-        }
-        curNs = ns.pointee.next
-      }
-      node = node.pointee.parent
+        node = node.pointee.parent
     }
+
+    // Registers additional namespace prefixes.
+    for (prefix, uri) in document.namespaces {
+        withXMLChar(prefix) { prefix in
+            withXMLChar(uri) { uri in
+                xmlXPathRegisterNs(context, prefix, uri)
+            }
+        }
+    }
+    
     defer {
       xmlXPathFreeContext(context)
     }
