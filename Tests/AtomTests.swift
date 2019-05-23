@@ -121,4 +121,16 @@ class AtomTests: XCTestCase {
     }
     XCTAssertEqual(count, 1, "should be 1 entry element")
   }
+  
+  func testXPathWithNamespacesAliases() {
+    document.definePrefix("atom-alias", forNamespace: "http://www.w3.org/2005/Atom")
+    document.definePrefix("dc-alias", forNamespace: "http://purl.org/dc/elements/1.1/")
+    
+    var results = document.xpath("//atom-alias:entry/dc-alias:language")
+    XCTAssertEqual(results.map { $0.rawXML }, ["<dc:language>en-us</dc:language>"])
+    XCTAssertEqual(results.first?.namespace, "dc", "The namespace should be the one declared in the document")
+    
+    results = document.xpath("//atom:entry/dc:language")
+    XCTAssertEqual(results.map { $0.rawXML }, ["<dc:language>en-us</dc:language>"], "The default prefixes should still work")
+  }
 }
