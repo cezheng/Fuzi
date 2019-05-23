@@ -58,4 +58,12 @@ class DefaultNamespaceXPathTests: XCTestCase {
     }
     XCTAssertEqual(count, 1, "Element should be found at XPath '\(relativeXPath)' relative to XPath '\(absoluteXPath)'")
   }
+  
+  func testDefaultNamespaceInChildNode() {
+    document.definePrefix("ocf", forNamespace: "urn:oasis:names:tc:opendocument:xmlns:container")
+    document.definePrefix("dc", forNamespace: "http://purl.org/dc/elements/1.1/")
+    let results = document.xpath("/ocf:container/dc:metadata/dc:identifier")
+    XCTAssertEqual(results.map { $0.rawXML }, ["<identifier id=\"pub-id\">urn:uuid:pubid</identifier>"])
+    XCTAssertNil(results.first?.namespace, "The namespace should be empty because none is declared in the document")
+  }
 }

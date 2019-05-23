@@ -3,4 +3,8 @@
   <rootfiles>
     <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
   </rootfiles>
+  
+  <metadata xmlns="http://purl.org/dc/elements/1.1/">
+    <identifier id="pub-id">urn:uuid:pubid</identifier>
+  </metadata>
 </container>

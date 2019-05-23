@@ -262,10 +262,10 @@ extension XMLElement: Queryable {
     }
     
     func withXMLChar(_ string: String, _ handler: (UnsafePointer<xmlChar>) -> Void) {
-        string.utf8CString
-            .map { xmlChar(bitPattern: $0) }
-            .withUnsafeBufferPointer {
-                handler($0.baseAddress!)
+      string.utf8CString
+        .map { xmlChar(bitPattern: $0) }
+        .withUnsafeBufferPointer {
+          handler($0.baseAddress!)
         }
     }
     
@@ -274,24 +274,24 @@ extension XMLElement: Queryable {
     // Registers namespace prefixes declared in the document.
     var node = cNode
     while node.pointee.parent != nil {
-        var curNs = node.pointee.nsDef
-        while let ns = curNs {
-            var prefixChars = [CChar]()
-            if let prefix = ns.pointee.prefix {
-                xmlXPathRegisterNs(context, prefix, ns.pointee.href)
-            }
-            curNs = ns.pointee.next
+      var curNs = node.pointee.nsDef
+      while let ns = curNs {
+        var prefixChars = [CChar]()
+        if let prefix = ns.pointee.prefix {
+          xmlXPathRegisterNs(context, prefix, ns.pointee.href)
         }
-        node = node.pointee.parent
+        curNs = ns.pointee.next
+      }
+      node = node.pointee.parent
     }
-
+    
     // Registers additional namespace prefixes.
     for (prefix, uri) in document.namespaces {
-        withXMLChar(prefix) { prefix in
-            withXMLChar(uri) { uri in
-                xmlXPathRegisterNs(context, prefix, uri)
-            }
+      withXMLChar(prefix) { prefix in
+        withXMLChar(uri) { uri in
+          xmlXPathRegisterNs(context, prefix, uri)
         }
+      }
     }
     
     defer {
