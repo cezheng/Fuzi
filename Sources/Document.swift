@@ -158,6 +158,17 @@ open class XMLDocument {
   open func definePrefix(_ prefix: String, forNamespace ns: String) {
     namespaces[prefix] = ns
   }
+
+  /**
+   Define a prefix for a default namespace.
+   
+   - parameter prefix: The prefix name
+   - parameter ns:     The default namespace URI that declared in XML Document
+   */
+  @available(*, deprecated, renamed: "definePrefix(_:forNamespace:)", message: "This API will be removed in version 4.")
+  open func definePrefix(_ prefix: String, defaultNamespace ns: String) {
+    definePrefix(prefix, forNamespace: ns)
+  }
 }
 
 extension XMLDocument: Equatable {}
