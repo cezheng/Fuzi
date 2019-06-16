@@ -80,7 +80,7 @@ do {
 
 ## Installation
 
-There are 3 ways you can install Fuzi to your project.
+There are 4 ways you can install Fuzi to your project.
 
 ### Using [CocoaPods](http://cocoapods.org/)
 You can use [CocoaPods](http://cocoapods.org/) to install `Fuzi` by adding it to your to your `Podfile`:
@@ -99,6 +99,10 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+### Using Swift Package Manager
+The Swift Package Manager is now built-in with Xcode 11 (currently in beta). You can easily add Fuzi as a dependency by choosing `File > Swift Packages > Add Package Dependency...` or in the Swift Packages tab of your project file and clicking on `+`.
+Simply use `https://github.com/cezheng/Fuzi` as repository and Xcode should automatically resolve the current version.
 
 ### Manually
 1. Add all `*.swift` files in `Fuzi` directory into your project.
