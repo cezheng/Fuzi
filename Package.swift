@@ -11,9 +11,10 @@ let package = Package(
     targets: [
         .target(name: "Fuzi",
             path: "Sources",
+            //publicHeadersPath: "/usr/include/libxml2",
             cSettings: [
-                //.headerSearchPath("$(SDKROOT)/usr/include/libxml2"),
-                .unsafeFlags(["-I$(SDKROOT)/usr/include/libxml2"])
+                .headerSearchPath("$(SDKROOT)/usr/include/libxml2"),
+                //.unsafeFlags(["-I$(SDKROOT)/usr/include/libxml2"])
             ],
             /*swiftSettings: [
                 .unsafeFlags(["-I$(SDKROOT)/usr/include/libxml2"])
