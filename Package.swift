@@ -1,5 +1,6 @@
 // swift-tools-version:5.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
+
 import PackageDescription
 
 let package = Package(
@@ -8,23 +9,9 @@ let package = Package(
         .library(name: "Fuzi", targets: ["Fuzi"]),
     ],
     targets: [
-        /*.systemLibrary(
-         name: "libxmlFuzi",
-         path: "Module",
-         pkgConfig: "libxml-2.0",
-         providers: [
-         .brew(["libxml2"]),
-         .apt(["libxml2-dev"])
-         ]),*/
         .target(name: "Fuzi",
-                //dependencies: ["libxmlFuzi"],
             path: "Sources",
-            /*cSettings: [
-             .headerSearchPath("$(SDKROOT)/usr/include/libxml2")
-             ],*/
-            linkerSettings: [
-                .linkedLibrary("xml2")
-            ]
+            linkerSettings: [.linkedLibrary("xml2")]
         ),
         .testTarget(name: "FuziTests",
                     dependencies: ["Fuzi"],
