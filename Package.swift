@@ -8,17 +8,23 @@ let package = Package(
         .library(name: "Fuzi", targets: ["Fuzi"]),
     ],
     targets: [
-        .systemLibrary(
-            name: "libxmlFuzi",
-            path: "Module",
-            pkgConfig: "libxml-2.0",
-            providers: [
-                .brew(["libxml2"]),
-                .apt(["libxml2-dev"])
-            ]),
+        /*.systemLibrary(
+         name: "libxmlFuzi",
+         path: "Module",
+         pkgConfig: "libxml-2.0",
+         providers: [
+         .brew(["libxml2"]),
+         .apt(["libxml2-dev"])
+         ]),*/
         .target(name: "Fuzi",
-                dependencies: ["libxmlFuzi"],
-                path: "Sources"
+                //dependencies: ["libxmlFuzi"],
+            path: "Sources",
+            /*cSettings: [
+             .headerSearchPath("$(SDKROOT)/usr/include/libxml2")
+             ],*/
+            linkerSettings: [
+                .linkedLibrary("xml2")
+            ]
         ),
         .testTarget(name: "FuziTests",
                     dependencies: ["Fuzi"],
