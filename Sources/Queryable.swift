@@ -276,7 +276,6 @@ extension XMLElement: Queryable {
     while node.pointee.parent != nil {
       var curNs = node.pointee.nsDef
       while let ns = curNs {
-        var prefixChars = [CChar]()
         if let prefix = ns.pointee.prefix {
           xmlXPathRegisterNs(context, prefix, ns.pointee.href)
         }
