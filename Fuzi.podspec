@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Fuzi"
-  s.version      = "3.1.2"
+  s.version      = "3.1.3"
   s.license      = "MIT"
   s.summary      = "A fast & lightweight XML & HTML parser in Swift with XPath & CSS support"
   s.homepage     = "https://github.com/cezheng/Fuzi"
