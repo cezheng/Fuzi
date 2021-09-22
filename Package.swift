@@ -3,19 +3,42 @@
 
 import PackageDescription
 
+#if os(Windows)
+let systemLibraries: [Target] = [
+  .systemLibrary(
+      name: "libxml2",
+      path: "Modules"
+  ),
+]
+#else
+var providers: [SystemPackageProvider] = [.apt(["libxml2-dev"])]
+#if swift(<5.2)
+providers += [.brew(["libxml2"])]
+#endif
+let systemLibraries: [Target] = [
+    .systemLibrary(
+        name: "libxml2",
+        path: "Modules",
+        pkgConfig: "libxml-2.0",
+        providers: providers
+    )
+]
+#endif
+
 let package = Package(
-    name: "Fuzi",
-    products: [
-        .library(name: "Fuzi", targets: ["Fuzi"]),
-    ],
-    targets: [
-        .target(name: "Fuzi",
-            path: "Sources",
-            linkerSettings: [.linkedLibrary("xml2")]
-        ),
-        .testTarget(name: "FuziTests",
-                    dependencies: ["Fuzi"],
-                    path: "Tests"
-        )
-    ]
+  name: "Fuzi",
+  products: [
+    .library(name: "Fuzi", targets: ["Fuzi"]),
+  ],
+  targets: systemLibraries + [
+    .target(
+      name: "Fuzi",
+      dependencies: ["libxml2"],
+      path: "Sources"),
+    .testTarget(
+      name: "FuziTests",
+      dependencies: ["Fuzi"],
+      path: "Tests"
+    )
+  ]
 )
