@@ -109,7 +109,9 @@
 				7913918B1B53B09F00BC07C3 /* Tests */,
 				7913917E1B53B09F00BC07C3 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		7913917E1B53B09F00BC07C3 /* Products */ = {
 			isa = PBXGroup;
