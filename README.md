@@ -9,7 +9,7 @@
 
 **A fast & lightweight XML/HTML parser in Swift that makes your life easier.** [[Documentation]](http://cezheng.github.io/Fuzi/)
 
-Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt/Ono)(斧), using most of its low level implementaions with moderate class & interface redesign following standard Swift conventions, along with several bug fixes.
+Fuzi is based on a Swift port of Mattt Thompson's [Ono](https://github.com/mattt/Ono)(斧), using most of its low level implementations with moderate class & interface redesign following standard Swift conventions, along with several bug fixes.
 
 > Fuzi(斧子) means "axe", in homage to [Ono](https://github.com/mattt/Ono)(斧), which in turn is inspired by [Nokogiri](http://nokogiri.org) (鋸), which means "saw".
 
