@@ -3,25 +3,27 @@
 
 import PackageDescription
 
-#if os(Windows)
-let systemLibraries: [Target] = [
-  .systemLibrary(
-      name: "libxml2",
-      path: "Modules"
-  ),
+// Starting with Xcode 12, we don't need to depend on our own libxml2 target
+#if swift(>=5.3) && !os(Linux)
+let dependencies: [Target.Dependency] = []
+#else
+let dependencies: [Target.Dependency] = ["libxml2"]
+#endif
+
+#if swift(>=5.2) && !os(Linux)
+let pkgConfig: String? = nil
+#else
+let pkgConfig = "libxml-2.0"
+#endif
+
+#if swift(>=5.2)
+let provider: [SystemPackageProvider] = [
+    .apt(["libxml2-dev"])
 ]
 #else
-var providers: [SystemPackageProvider] = [.apt(["libxml2-dev"])]
-#if swift(<5.2)
-providers += [.brew(["libxml2"])]
-#endif
-let systemLibraries: [Target] = [
-    .systemLibrary(
-        name: "libxml2",
-        path: "Modules",
-        pkgConfig: "libxml-2.0",
-        providers: providers
-    )
+let provider: [SystemPackageProvider] = [
+    .apt(["libxml2-dev"]),
+    .brew(["libxml2"])
 ]
 #endif
 
@@ -30,15 +32,19 @@ let package = Package(
   products: [
     .library(name: "Fuzi", targets: ["Fuzi"]),
   ],
-  targets: systemLibraries + [
+  targets: [
+    .systemLibrary(
+      name: "libxml2",
+      path: "Modules",
+      pkgConfig: pkgConfig,
+      providers: provider),
     .target(
       name: "Fuzi",
-      dependencies: ["libxml2"],
+      dependencies: dependencies,
       path: "Sources"),
     .testTarget(
       name: "FuziTests",
       dependencies: ["Fuzi"],
-      path: "Tests"
-    )
+      path: "Tests")
   ]
 )
