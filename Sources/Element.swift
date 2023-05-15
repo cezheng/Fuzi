@@ -73,6 +73,10 @@ open class XMLElement: XMLNode {
     }
     return value
   }
+    
+  open func updateAttr(_ name: String, value: String) {
+    _ = xmlSetProp(cNode, name, value)
+  }
   
   // MARK: - Accessing Children
   
