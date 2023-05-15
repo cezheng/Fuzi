@@ -182,4 +182,35 @@ open class XMLElement: XMLNode {
   open subscript (name: String) -> String? {
     return attr(name)
   }
+  
+  
+  /*
+  Basic functions to edit the Dom tree
+  */
+  open func addPrevSibling(_ node: XMLElement) {
+         xmlAddPrevSibling(self.cNode, node.cNode)
+    }
+
+  open func addNextSibling(_ node: XMLElement) {
+        xmlAddNextSibling(self.cNode, node.cNode)
+    }
+
+  open func addChild(_ node: XMLElement) {
+        for child in self.children {
+            if child.cNode == node.cNode { return }
+        }
+        xmlUnlinkNode(node.cNode)
+        xmlAddChild(self.cNode, node.cNode)
+    
+    }
+    
+  open func removeChild(_ node: XMLElement) {
+        for child in self.children {
+            if child.cNode == node.cNode {
+                xmlUnlinkNode(node.cNode)
+                xmlFree(node.cNode)
+                break
+            }
+        }
+  }
 }
