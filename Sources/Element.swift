@@ -112,7 +112,7 @@ open class XMLElement: XMLNode {
   open func firstChild(tag: XMLCharsComparable, inNamespace ns: XMLCharsComparable? = nil) -> XMLElement? {
     var nodePtr = cNode.pointee.children
     while let cNode = nodePtr {
-      if cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
+      if cNode.pointee.type == XML_ELEMENT_NODE && cXMLNode(nodePtr, matchesTag: tag, inNamespace: ns) {
         return XMLElement(cNode: cNode, document: self.document)
       }
       nodePtr = cNode.pointee.next
