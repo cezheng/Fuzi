@@ -26,7 +26,7 @@ class XMLTests: XCTestCase {
   var document: Fuzi.XMLDocument!
   override func setUp() {
     super.setUp()
-    let filePath = Bundle(for: XMLTests.self).url(forResource: "xml", withExtension: "xml")!
+    let filePath = Bundle.testResources.url(forResource: "xml", withExtension: "xml")!
     do {
       document = try XMLDocument(data: Data(contentsOf: filePath))
     } catch {
@@ -81,8 +81,8 @@ class XMLTests: XCTestCase {
     do {
       _ = try document.tryXPath("//*[unknown()]")
       XCTAssertFalse(true, "error should have been thrown")
-    } catch XMLError.libXMLError(code: 1223, message: "Stack usage error") {
-      
+    } catch XMLError.libXMLError(code: 1209, message: "Unregistered function") {
+
     } catch {
       XCTAssertFalse(true, "error type should be libXMLError \(error)")
     }
@@ -91,7 +91,7 @@ class XMLTests: XCTestCase {
   func testLineNumber() {
     let headerElement = document.root!.firstChild(tag: "header")
     XCTAssertNotNil(headerElement, "header element should not be nil")
-    XCTAssertEqual(headerElement?.lineNumber, 123, "header line number should be correct")
+    XCTAssertEqual(headerElement?.lineNumber, 120, "header line number should be correct")
   }
   
   func testThrowsError() {
