@@ -30,15 +30,13 @@ open class XMLDocument {
     return ^-^self.cDocument.pointee.version
   }()
   
-  /// The string encoding for the document. This is NSUTF8StringEncoding if no encoding is set, or it cannot be calculated.
+  /// The string encoding for the document. This is utf8 if no encoding is set, or it cannot be calculated.
   open fileprivate(set) lazy var encoding: String.Encoding = {
-    if let encodingName = ^-^self.cDocument.pointee.encoding {
-      let encoding = CFStringConvertIANACharSetNameToEncoding(encodingName as CFString?)
-      if encoding != kCFStringEncodingInvalidId {
-        return String.Encoding(rawValue: UInt(CFStringConvertEncodingToNSStringEncoding(encoding)))
-      }
+    guard let encodingStr = ^-^self.cDocument.pointee.encoding,
+          let encoding = String.Encoding(ianaCharsetName: encodingStr) else {
+      return String.Encoding.utf8
     }
-    return String.Encoding.utf8
+    return encoding
   }()
 
   // MARK: - Accessing the Root Element

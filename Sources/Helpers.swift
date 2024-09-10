@@ -146,3 +146,48 @@ internal func cXMLNode(_ node: xmlNodePtr?, matchesTag tag: XMLCharsComparable, 
   }
   return matches
 }
+
+internal extension String.Encoding {
+  // CoreFoundation is not available on Windows, so mimic the functionality
+  // of CFStringConvertIANACharSetNameToEncoding() and
+  // CFStringConvertEncodingToNSStringEncoding() here. See the IANA charset
+  // name registry at https://www.iana.org/assignments/character-sets/character-sets.xhtml
+  init?(ianaCharsetName name: String) {
+    switch name.lowercased() {
+    case "iso-2022-jp":
+      self = .iso2022JP
+    case "iso-8859-1":
+      self = .isoLatin1
+    case "iso-8859-2":
+      self = .isoLatin2
+    case "unicode-1-1", "iso-10646-ucs-2", "utf-16":
+      self = .utf16
+    case "utf-8":
+      self = .utf8
+    case "utf-16be":
+      self = .utf16BigEndian
+    case "utf-16le":
+      self = .utf16LittleEndian
+    case "utf-32":
+      self = .utf32
+    case "utf-32be":
+      self = .utf32BigEndian
+    case "utf-32le":
+      self = .utf32LittleEndian
+    case "windows-1250":
+      self = .windowsCP1250
+    case "windows-1251":
+      self = .windowsCP1251
+    case "windows-1252":
+      self = .windowsCP1252
+    case "windows-1253":
+      self = .windowsCP1253
+    case "windows-1254":
+      self = .windowsCP1254
+    case "us-ascii":
+      self = .ascii
+    default:
+      return nil
+    }
+  }
+}

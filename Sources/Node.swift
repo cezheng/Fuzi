@@ -69,7 +69,15 @@ extension XMLNodeType {
   /// XInclude End
   public static var XIncludeEnd: xmlElementType   { return XML_XINCLUDE_END }
   /// DocbDocument
-  public static var DocbDocument: xmlElementType  { return XML_DOCB_DOCUMENT_NODE }
+  public static var DocbDocument: xmlElementType  {
+    #if os(Windows)
+    // The DOCB type is not part of the enum in libxml2, it's a #define. On 
+    // Windows it gets imported as an incompatible type, so explicitly cast it.
+    return xmlElementType(XML_DOCB_DOCUMENT_NODE) 
+    #else
+    return XML_DOCB_DOCUMENT_NODE
+    #endif
+  }
 }
 
 infix operator ~=
@@ -97,7 +105,8 @@ open class XMLNode {
   
   /// The element's line number.
   open fileprivate(set) lazy var lineNumber: Int = {
-    return xmlGetLineNo(self.cNode)
+    // On Windows `long` is a 32 bit value so explicitly cast to Int.
+    return Int(xmlGetLineNo(self.cNode))
   }()
   
   // MARK: - Accessing Parent and Sibling Elements
@@ -119,7 +128,9 @@ open class XMLNode {
   // MARK: - Accessing Contents
   /// Whether this is a HTML node
   open var isHTML: Bool {
-    return UInt32(self.cNode.pointee.doc.pointee.properties) & XML_DOC_HTML.rawValue == XML_DOC_HTML.rawValue
+    // On Windows the bitset is imported as an incompatible type, so explicitly cast it.
+    let xmlDocHtmlBit = UInt32(XML_DOC_HTML.rawValue)
+    return UInt32(self.cNode.pointee.doc.pointee.properties) & xmlDocHtmlBit == xmlDocHtmlBit
   }
 
   /// A string representation of the element's value.

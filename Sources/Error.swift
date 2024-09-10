@@ -43,7 +43,7 @@ public enum XMLError: Error {
     }
     let message = (^-^errorPtr.pointee.message)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     let code = Int(errorPtr.pointee.code)
-    xmlResetError(errorPtr)
+    xmlResetError(UnsafeMutablePointer(mutating: errorPtr))
     return .libXMLError(code: code, message: message ?? "")
   }
 }
