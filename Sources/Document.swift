@@ -74,11 +74,15 @@ open class XMLDocument {
   
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
-  public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
+  public class func parse(string: String, encoding: String.Encoding = String.Encoding.utf8) throws -> Self {
     guard let cChars = string.cString(using: encoding) else {
       throw XMLError.invalidData
     }
-    try self.init(cChars: cChars)
+    return try Self.parse(cChars: cChars)
+  }
+  @available(*, unavailable, renamed: "parse")
+  public convenience init(string: String, encoding: String.Encoding = String.Encoding.utf8) throws {
+    preconditionFailure()
   }
   
   /**
@@ -90,9 +94,14 @@ open class XMLDocument {
   
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
+  public class func parse(data: Data) throws -> Self {
+    try data.withUnsafeBytes {
+      try Self(buffer: $0.bindMemory(to: Int8.self))
+    }
+  }
+  @available(*, unavailable, renamed: "parse")
   public convenience init(data: Data) throws {
-    let buffer = data.withUnsafeBytes { $0.bindMemory(to: Int8.self) }
-    try self.init(buffer: buffer)
+    preconditionFailure()
   }
   
   /**
@@ -104,11 +113,14 @@ open class XMLDocument {
   
   - returns: An `XMLDocument` with the contents of the specified XML string.
   */
-  public convenience init(cChars: [CChar]) throws {
-    let buffer = cChars.withUnsafeBufferPointer { buffer in
-        UnsafeBufferPointer(rebasing: buffer[0..<buffer.count])
+  public class func parse(cChars: [CChar]) throws -> Self {
+    return try cChars.withUnsafeBytes {
+      return try Self(buffer: $0.bindMemory(to: Int8.self))
     }
-    try self.init(buffer: buffer)
+  }
+  @available(*, unavailable, renamed: "parse")
+  public convenience init(cChars: [CChar]) throws {
+    preconditionFailure()
   }
 
   /**
@@ -121,7 +133,7 @@ open class XMLDocument {
    - returns: An `XMLDocument` with the contents of the specified XML string.
    */
 
-  public convenience init(buffer: UnsafeBufferPointer<Int8>) throws {
+  public convenience required init(buffer: UnsafeBufferPointer<Int8>) throws {
     let options = Int32(XML_PARSE_NOWARNING.rawValue | XML_PARSE_NOERROR.rawValue | XML_PARSE_RECOVER.rawValue)
     try self.init(buffer: buffer, options: options)
   }
