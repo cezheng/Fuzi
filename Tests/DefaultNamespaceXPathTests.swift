@@ -24,14 +24,11 @@ import Fuzi
 
 class DefaultNamespaceXPathTests: XCTestCase {
   var document: Fuzi.XMLDocument!
-  override func setUp() {
-    super.setUp()
-    let filePath = Bundle(for: DefaultNamespaceXPathTests.self).url(forResource: "ocf", withExtension: "xml")!
-    do {
-      document = try XMLDocument(data: Data(contentsOf: filePath))
-    } catch {
-      XCTAssertFalse(true, "Error should not be thrown")
-    }
+  
+  override func setUpWithError() throws {
+    try super.setUpWithError()
+    let data = try loadData(filename: "ocf", extension: "xml")
+    document = try XMLDocument(data: data)
   }
   
   func testAbsoluteXPathWithDefaultNamespace() {

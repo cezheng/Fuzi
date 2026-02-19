@@ -68,8 +68,6 @@ extension XMLNodeType {
   public static var XIncludeStart: xmlElementType { return XML_XINCLUDE_START }
   /// XInclude End
   public static var XIncludeEnd: xmlElementType   { return XML_XINCLUDE_END }
-  /// DocbDocument
-  public static var DocbDocument: xmlElementType  { return XML_DOCB_DOCUMENT_NODE }
 }
 
 infix operator ~=
